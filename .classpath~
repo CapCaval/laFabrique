@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry excluding="org/capcaval/c3/application/objectfactory/EnumFromStringValue.java|org/capcaval/c3/componentmanager/_impl/tools/_test/ProxyTest.java" kind="src" path="01_src"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="lib" path="lib/junit-4.8.2.jar"/>
+	<classpathentry kind="output" path="10_bin"/>
+</classpath>
