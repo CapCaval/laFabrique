@@ -1,0 +1,18 @@
+Maître {ACTOR_1}, sur un arbre perché,
+        Tenait en son bec un fromage.
+Maître {ACTOR_2} par l'odeur alléché ,
+        Lui tint à peu près ce langage :
+        «Et bonjour Monsieur du {ACTOR_1}.
+Que vous êtes joli! que vous me semblez beau!
+        Sans mentir, si votre ramage
+        Se rapporte à votre plumage,
+Vous êtes le phénix des hôtes de ces bois»
+A ces mots le {ACTOR_1} ne se sent pas de joie;
+        Et pour montrer sa belle voix,
+Il ouvre un large bec laisse tomber sa proie.
+Le {ACTOR_2} s'en saisit et dit: "Mon bon Monsieur,
+            Apprenez que tout flatteur
+Vit aux dépens de celui qui l'écoute:
+Cette leçon vaut bien un fromage sans doute."
+        Le {ACTOR_1} honteux et confus
+Jura mais un peu tard , qu'on ne l'y prendrait plus.
