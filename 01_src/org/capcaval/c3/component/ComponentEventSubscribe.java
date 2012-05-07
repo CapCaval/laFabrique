@@ -22,6 +22,8 @@ THE SOFTWARE.
 package org.capcaval.c3.component;
 
 public interface ComponentEventSubscribe<T extends ComponentEvent> {
-	public void subscribe(T observer);
+//	public void subscribe(T observer);
+	// TODO This is only a workaround as far as what we want is that observer type is T, not another class that extends ComponentEvent
+	public <S extends ComponentEvent> void subscribe(S observer);
 	public void unsubscribe(T observer);
 }
