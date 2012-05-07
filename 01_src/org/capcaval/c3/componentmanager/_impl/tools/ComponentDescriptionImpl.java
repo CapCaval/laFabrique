@@ -217,7 +217,7 @@ public class ComponentDescriptionImpl implements ComponentDescription {
 		}
 		str.append("CONSUMED EVENT: \n");
 		for(Method method : this.consumedEventMethodList){
-			str.append("\t "+method.getDeclaringClass()+"\n");
+			str.append("\t "+method.getReturnType()+"\n");
 		}
 		str.append("USED EVENT SUBSCRIBE: \n");
 		for(UsedEventSubscribeDescription desc : this.usedEventSubscribeList){
