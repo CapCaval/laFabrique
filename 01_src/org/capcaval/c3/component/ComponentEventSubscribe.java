@@ -22,6 +22,6 @@ THE SOFTWARE.
 package org.capcaval.c3.component;
 
 public interface ComponentEventSubscribe<T extends ComponentEvent> {
-	public void subscribe(T observer);
+	public <S extends ComponentEvent> void subscribe(S observer);
 	public void unsubscribe(T observer);
 }
