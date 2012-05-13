@@ -24,4 +24,6 @@ C³ is a new kind of API which provides you a new abstraction to Java language :
 
 C³ is 100% java, because it is simpler and more efficient. Futhermore java compiler does checks component types and help writting correct code. 
 
+C³ required jdk 1.7 or above to be compiled and executed.
+
 
