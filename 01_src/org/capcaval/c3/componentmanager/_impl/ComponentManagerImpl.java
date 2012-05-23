@@ -287,7 +287,7 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 			
 			// subscribe the event
 			// MLB event
-			eventSubscribe.subscribe(eventInstance);  // (? extends ComponentEvent)
+			//eventSubscribe.subscribe(eventInstance);  // (? extends ComponentEvent)
 		}
 		
 	}
