@@ -32,9 +32,9 @@ public class ComponentEventSubscribeImpl <T extends ComponentEvent> implements C
 	public List<T> observerList = new ArrayList<T>();
 	
 	@Override
-	public void subscribe(T observer) {
+	public <S extends ComponentEvent> void subscribe(S observer) {
 		// add a new observer in order to receive T events
-		this.observerList.add(observer);
+		this.observerList.add((T) observer);
 	}
 
 	@Override
