@@ -476,7 +476,7 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 				// register the instance for all provided events
 				for (Class<? extends ComponentEvent> eventType : cDesc.getProvidedEventList()) {
 					// inject the subscriber to the component
-					ComponentEventSubscribe<?> ces = this.injectEventSubscribe(instance, eventType);
+					ComponentEventSubscribe<?> ces = this.injectEventSubscribe(cdc, instance, eventType);
 					
 					// register it to componentManager
 					cdc.registerEventSubscribe(eventType, ces);
@@ -524,15 +524,12 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 	}
 
 	private <T extends ComponentEvent> ComponentEventSubscribe<T> injectEventSubscribe(
-			Component instance, Class<T> eventType) {
+			ComponentDescriptionContainer cdc, Component instance, Class<T> eventType) {
 
 		Field field = this.getEventField(instance, eventType);
 
 		// get the event subscribe, create one if none already existing
-		//ComponentEventSubscribeImpl<T> ces = this.retrieveComponentEventSubscribe(eventType);
-		
-		// allocate one subscribe per event
-		ComponentEventSubscribeImpl<T>ces = new ComponentEventSubscribeImpl<T>();
+		ComponentEventSubscribeImpl<T> ces = this.retrieveComponentEventSubscribe(cdc, eventType);
 		
 		// allocate the proxy
 		ComponentEventSubscribe<T> cesProxy = (ComponentEventSubscribe<T>) Proxy
@@ -554,15 +551,14 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 
 	}
 
-	// TODO to be removed
 	private <T extends ComponentEvent> ComponentEventSubscribeImpl<T> retrieveComponentEventSubscribe(
-			Class<T> eventType) {
+			ComponentDescriptionContainer cdc, Class<T> eventType) {
 		
 		ComponentEventSubscribeImpl<T> ces = null;
 		
-		if(this.cdc != null){
+		if(cdc != null){
 			// TODO Cast à revoir !!!!!!!!!!!!!
-			ces = (ComponentEventSubscribeImpl<T>) this.cdc.getEventSubscribeInstance(eventType);}
+			ces = (ComponentEventSubscribeImpl<T>) cdc.getEventSubscribeInstance(eventType);}
 
 		// Lazy pattern on ComponentEventSubscribe
 		if (ces == null) {
