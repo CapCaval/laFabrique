@@ -30,9 +30,9 @@ import org.capcaval.c3.component.ComponentEvent;
 import org.capcaval.c3.component.ComponentService;
 import org.capcaval.c3.component.ComponentState;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription;
-import org.capcaval.tools.pair.Pair;
-import org.capcaval.tools.pair.PairFactory;
-import org.capcaval.tools.pair.PairImpl;
+import org.capcaval.cctools.pair.Pair;
+import org.capcaval.cctools.pair.PairFactory;
+import org.capcaval.cctools.pair.PairImpl;
 
 
 public class ComponentDescriptionImpl implements ComponentDescription {

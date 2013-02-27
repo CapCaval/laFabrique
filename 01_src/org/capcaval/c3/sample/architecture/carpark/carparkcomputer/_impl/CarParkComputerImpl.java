@@ -29,7 +29,7 @@ import org.capcaval.c3.component.annotation.ProducedEvent;
 import org.capcaval.c3.sample.architecture.carpark.carparkcomputer.CarParkComputer;
 import org.capcaval.c3.sample.architecture.carpark.carparkcomputer.CarParkComputerServices;
 import org.capcaval.c3.sample.architecture.carpark.carparkcomputer.CarparkComputerEvent;
-import org.capcaval.tools.thread.SchedulerFactory;
+import org.capcaval.cctools.thread.SchedulerFactory;
 
 
 public class CarParkComputerImpl implements CarParkComputer, ComponentState, CarParkComputerServices{

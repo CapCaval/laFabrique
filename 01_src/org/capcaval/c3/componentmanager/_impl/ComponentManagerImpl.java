@@ -47,7 +47,7 @@ import org.capcaval.c3.componentmanager._impl.tools.UsedServicesDescription;
 import org.capcaval.c3.componentmanager.tools.ComponentAnalyserTool;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription.ComponentDescriptionFactory;
-import org.capcaval.tools.pair.Pair;
+import org.capcaval.cctools.pair.Pair;
 
 public class ComponentManagerImpl implements ComponentManager, ComponentManagerController {
 	// List<Component> componentList = new ArrayList<Component>();
@@ -65,10 +65,13 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 
 	@Override
 	public String startApplication(Class<? extends Component>... componentType) {
-		// first register component
+		// first clean up the CM instance
+		this.componentImplTypeList.clear();
+		
+		// secondly register component
 		this.registerComponent(componentType);
 
-		// secondly let's start
+		// thirdly let's start
 		String desc = this.startApplication();
 		
 		return desc;
@@ -633,4 +636,9 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 		this.cdc = cdc;
 	}
 
+	@Override
+	public void reset() {
+		// clean the list
+		this.componentImplTypeList.clear();
+	}
 }

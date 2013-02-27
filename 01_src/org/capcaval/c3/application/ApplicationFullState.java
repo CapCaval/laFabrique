@@ -23,6 +23,8 @@ package org.capcaval.c3.application;
 
 import org.capcaval.c3.application.objectfactory.ObjectFactoryFromStringValue;
 import org.capcaval.c3.component.Component;
+import org.capcaval.c3.componentmanager.ComponentManager;
+import org.capcaval.c3.componentmanager._impl.ComponentManagerImpl;
 
 public abstract class ApplicationFullState implements ApplicationState{
 	
@@ -34,6 +36,9 @@ public abstract class ApplicationFullState implements ApplicationState{
 	}
 	
 	public String launchApplication(String[] args, Class<? extends Component>... componentTypeList) {
+		//clean up component manager
+		ComponentManager.componentManager.reset();
+		
 		// create the application tool
 		this.applicationTool = new ApplicationTool(this, args);
 		
@@ -47,9 +52,16 @@ public abstract class ApplicationFullState implements ApplicationState{
 		
 		if( this.isHelpRequested(args) == true){
 			this.applicationTool.displayHelpToSysOut(appDesc);
+		}else if(this.isGHelpRequested(args) == true){
+			this.applicationTool.displayGHelpToSysOut(appDesc);
 		}else{
-			appDescription = this.applicationTool.launchApplication(this, appDesc, componentTypeList);}
-			
+			appDescription = this.applicationTool.launchApplication(this, appDesc, componentTypeList);
+		}
+		// get all the used services and consumed events
+		ApplicationDescription ad = this.applicationTool.seekAllUsedServicesAndConsummedEvents(this);
+		// set them all
+		this.applicationTool.setAllUsedServciesAndConsumedEvents(ad, this, ComponentManager.componentManager);
+		
 		return appDescription;
 	}
 	
@@ -70,6 +82,24 @@ public abstract class ApplicationFullState implements ApplicationState{
 		return isHelpRequested;
 	}
 
+	protected boolean isGHelpRequested(String[] args) {
+		boolean isGHelpRequested = false;
+		
+		// check out if graphical help is requested
+		if ((args != null) && (args.length > 0)) {
+			String param = args[0];
+			if (	param.equals("-ghelp") || 
+					param.equals("--ghelp")||
+					param.equals("-gh") ||
+					param.equals("--gh")) {
+						// ok help is asked
+				isGHelpRequested = true;
+					}
+				}
+		return isGHelpRequested;
+	}
+
+	
 	public void addNewObjectFactory(Class<?> objectFactoryType, ObjectFactoryFromStringValue<?> factory ){
 		// add a new factory
 		this.applicationTool.addNewObjectFactory( objectFactoryType, factory);

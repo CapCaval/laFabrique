@@ -68,5 +68,7 @@ public interface ComponentManager {
 	public void stopApplication();
 	
 	public ComponentManagerController getController();
+	
+	public void reset();
 
 }

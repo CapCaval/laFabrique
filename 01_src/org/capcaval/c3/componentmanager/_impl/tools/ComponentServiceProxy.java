@@ -22,12 +22,9 @@ THE SOFTWARE.
 package org.capcaval.c3.componentmanager._impl.tools;
 
 import java.lang.reflect.InvocationHandler;
-import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.concurrent.ScheduledExecutorService;
 
-import org.capcaval.c3.component.ComponentEvent;
 import org.capcaval.c3.component.ComponentService;
 
 public class ComponentServiceProxy <T extends ComponentService> implements InvocationHandler{

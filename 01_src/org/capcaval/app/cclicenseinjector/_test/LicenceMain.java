@@ -27,10 +27,10 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import org.capcaval.tools.file.FileTool;
-import org.capcaval.tools.file.FileSeeker.FileSeekerResult;
-import org.capcaval.tools.file.FileTool.FilePosition;
-import org.capcaval.tools.lang.ArrayUtil;
+import org.capcaval.cctools.file.FileTool;
+import org.capcaval.cctools.file.FileSeeker.FileSeekerResult;
+import org.capcaval.cctools.file.FileTool.FilePosition;
+import org.capcaval.cctools.lang.ArrayTools;
 
 public class LicenceMain {
 
@@ -43,7 +43,7 @@ public class LicenceMain {
 		Path templateFile = Paths.get("01_src/org/capcaval/app/cclicenseinjector/templates/MIT.txt");
 		Path outputfile = Paths.get("licence.txt");
 		
-		Map<String, String> map = ArrayUtil.newMap("YEAR","2012","COPYRIGHT_HOLDERS","CapCaval.org");
+		Map<String, String> map = ArrayTools.newMap("YEAR","2012","COPYRIGHT_HOLDERS","CapCaval.org");
 		FileTool.replaceTokenInFile(templateFile, outputfile, map, '<', '>');
 		String licence = FileTool.readStringfromFile(outputfile) + "\n";
 		

@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<project default="javadoc">
+    <target name="javadoc">
+        <javadoc access="public" author="true" classpath="02_lib/junit-4.8.2.jar" destdir="03_doc" doctitle="ccTools - Library for Java Hancraft coders" nodeprecated="false" nodeprecatedlist="false" noindex="false" nonavbar="false" notree="false" packagenames="org.capcaval.cctools.factory" source="1.6" sourcepath="01_src" splitindex="true" use="true" version="true"/>
+    </target>
+</project>

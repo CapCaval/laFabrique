@@ -27,6 +27,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
+import java.lang.reflect.ParameterizedType;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -46,6 +47,8 @@ import org.capcaval.c3.application.objectfactory.ObjectFactoryFromStringValue;
 import org.capcaval.c3.application.objectfactory.PathFromStringValue;
 import org.capcaval.c3.application.objectfactory.StringFromStringValue;
 import org.capcaval.c3.component.Component;
+import org.capcaval.c3.component.ComponentEvent;
+import org.capcaval.c3.component.ComponentEventSubscribe;
 import org.capcaval.c3.component.ComponentService;
 import org.capcaval.c3.componentmanager.ComponentManager;
 import org.capcaval.c3.componentmanager.ComponentManagerController;
@@ -321,7 +324,7 @@ public class ApplicationTool {
 		application.notifyApplicationToBeRun(appDescription, cdc.toString());
 		
 	
-		// FIFTH STATE -- the application is closing notify the appliciation and stop all components
+		// FIFTH STATE -- the application is closing notify the application and stop all components
 		// register for detecting application stop
 		Runtime.getRuntime().addShutdownHook(new Thread() {
 			@Override
@@ -416,9 +419,21 @@ public class ApplicationTool {
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+		// do the events
+		for(UsedEventSubscribeDescription uesd : ad.usedEventSubscribeFieldList){
+			Field field = uesd.getField();
+			ParameterizedType pType = (ParameterizedType)field.getGenericType();
+
+			Class<? extends ComponentEvent> eventType = (Class<? extends ComponentEvent>)pType.getActualTypeArguments()[0];
+			ComponentEventSubscribe<?> ces = cdc.getEventSubscribeInstance(eventType);
 			
-			
-			
+			field.setAccessible(true);
+			try {
+				field.set(applicationInstance, ces);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -436,6 +451,23 @@ public class ApplicationTool {
 		ad.addUsedComponentEventSubscribeFieldList(cmpEventSubscribeList);
 		
 		return ad;
+	}
+	
+	public void setAllUsedServciesAndConsumedEvents(ApplicationDescription ad, ApplicationFullState app, ComponentManager cm){
+		// for all used services set them
+		for(UsedServicesDescription usd : ad.usedServiceFieldList){
+			// get the needed instance of service
+			ComponentService cs = cm.getComponentService((Class<ComponentService>)usd.getField().getType());
+			// set the value
+			try {
+				usd.getField().setAccessible(true);
+				usd.getField().set(app, cs);
+			} catch (IllegalArgumentException | IllegalAccessException e) {
+				e.printStackTrace();
+			}
+		}
+		// for all consumed event set them
+		
 	}
 
 	public void displayHelpToSysOut(ApplicationDescription appDesc) {
@@ -500,5 +532,9 @@ public class ApplicationTool {
 		
 	
 		return appDesc;
+	}
+
+	public void displayGHelpToSysOut(ApplicationDescription appDesc) {
+		new GHelpApplication(appDesc);
 	}
 }

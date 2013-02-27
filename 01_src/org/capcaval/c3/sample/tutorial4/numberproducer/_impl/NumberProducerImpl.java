@@ -21,9 +21,8 @@ THE SOFTWARE.
 */
 package org.capcaval.c3.sample.tutorial4.numberproducer._impl;
 
-import org.capcaval.c3.component.ComponentEventSubscribe;
 import org.capcaval.c3.component.ComponentState;
-import org.capcaval.c3.component.annotation.ConsumedEvent;
+import org.capcaval.c3.component.annotation.EventValue;
 import org.capcaval.c3.component.annotation.ProducedEvent;
 import org.capcaval.c3.sample.tutorial4.numberproducer.NumberProducer;
 import org.capcaval.c3.sample.tutorial4.numberproducer.NumberProducerEvent;
@@ -33,6 +32,7 @@ public class NumberProducerImpl implements NumberProducer, ComponentState{
 	@ProducedEvent
 	NumberProducerEvent notifyNumberProducerEvent;
 	
+	@EventValue(eventType=NumberProducerEvent.class)
 	int value;
 
 	@Override

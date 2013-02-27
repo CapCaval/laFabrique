@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="ccTools/11_prod/ccTools.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/C3/ccTools_jar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="/C3/ccToolsJar" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.cctools.unittest"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.cctools.file"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.cctools.factory"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.cctools.pair"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.cctools.thread"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.cctools.recycling"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.cctools.lang"/>
+    </selectedElements>
+</jardesc>

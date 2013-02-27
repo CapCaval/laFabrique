@@ -59,14 +59,14 @@ public class ApplicationTest {
 		CoolApplication app = new CoolApplication();
 		
 		System.setProperty("value", "value981");
-		System.setProperty("intValue1", "AAA");
+		System.setProperty("intValue1", "AAA"); // 
 		System.setProperty("doubleValue1", "6.789");
 		System.setProperty("doubleValue2", "2.789");
 		System.setProperty("floatValue1", "-2.789");
 		app.launchApplication(null);
 		
 		Assert.assertEquals(MyEnum.value1, app.value);
-		Assert.assertEquals(6, app.intValue1);
+		Assert.assertEquals(5, app.intValue1);
 		Assert.assertEquals(6.789, app.doubleValue1);
 //		Assert.assertEquals(2.789, app.doubleValue2);
 //		Assert.assertEquals(-2.789f, app.floatValue1);
