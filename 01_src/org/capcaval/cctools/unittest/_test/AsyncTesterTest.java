@@ -9,7 +9,7 @@ public class AsyncTesterTest {
 	@org.junit.Test
 	public void asyncTestNoError(){
 		// allocate the AsyncTester
-		final AsyncTester asyncTester = AsyncTester.factory.newAsyncTester();
+		final AsyncTester asyncTester = AsyncTester.factory.newInstance();
 		
 		AsyncGreeter greeter = new AsyncGreeter();
 		greeter.greet("world", new GreeterCallback() {
@@ -28,7 +28,7 @@ public class AsyncTesterTest {
 		try {
 			// allocate the AsyncTester
 			final AsyncTester asyncTester = AsyncTester.factory
-					.newAsyncTester();
+					.newInstance();
 
 			AsyncGreeter greeter = new AsyncGreeter();
 			greeter.greet("world", new GreeterCallback() {
@@ -53,7 +53,7 @@ public class AsyncTesterTest {
 		try {
 			// allocate the AsyncTester
 			final AsyncTester asyncTester = AsyncTester.factory
-					.newAsyncTester();
+					.newInstance();
 			// wait 5s to raise the 1s timeout
 			AsyncGreeter greeter = new AsyncGreeter(5000);
 			greeter.greet("world", new GreeterCallback() {

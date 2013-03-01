@@ -1,7 +1,12 @@
 package org.capcaval.cctools.unittest;
 
+import org.capcaval.cctools.factory.FactoryTools;
+import org.capcaval.cctools.factory.GenericFactory;
+
 public interface AsyncTester {
-	static MultiThreadTesterFactory factory = new AsyncTesterFactoryImpl();
+	static GenericFactory<AsyncTester> factory = FactoryTools.newGenericFactory(AsyncTesterImpl.class); 
+			//new AsyncTesterFactoryImpl();
+	
 	public void assertTrue(boolean value);
 	public void finalAssertTrue(boolean value);
 	public void finalAssertTrueXTimes(int xTime, boolean value);
