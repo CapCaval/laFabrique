@@ -5,7 +5,6 @@ import org.capcaval.cctools.factory.GenericFactory;
 
 public interface AsyncTester {
 	static GenericFactory<AsyncTester> factory = FactoryTools.newGenericFactory(AsyncTesterImpl.class); 
-			//new AsyncTesterFactoryImpl();
 	
 	public void assertTrue(boolean value);
 	public void finalAssertTrue(boolean value);
