@@ -117,7 +117,7 @@ public class FileTool {
 	}
 	
 	
-	public static FileSeekerResult seekFiles(String pattern, Path startingDir) throws IOException{
+	static public FileSeekerResult seekFiles(String pattern, Path startingDir) throws IOException{
 		FileSeeker fileSeeker = new FileSeeker(pattern);
 		FileSeekerResult result = fileSeeker.seek(startingDir);
 		return result;

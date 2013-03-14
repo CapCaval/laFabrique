@@ -66,7 +66,17 @@ public class FileSeeker extends SimpleFileVisitor<Path> {
 		public Path[] getFileList(){
 			return this.fileList;
 		}
-		
+
+		public String[] getStringFileList(){
+			List<String> stringList = new ArrayList<>();
+			
+			for(Path p : this.fileList){
+				stringList.add(p.toString());
+			}
+			
+			return stringList.toArray(new String[0]);
+		}
+
 		public FileSeekerResult(Path[] fileList){
 			this.fileList = fileList;
 		}

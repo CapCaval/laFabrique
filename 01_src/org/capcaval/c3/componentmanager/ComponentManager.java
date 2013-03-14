@@ -26,7 +26,6 @@ import org.capcaval.c3.component.ComponentEvent;
 import org.capcaval.c3.component.ComponentEventSubscribe;
 import org.capcaval.c3.component.ComponentService;
 import org.capcaval.c3.componentmanager._impl.ComponentManagerImpl;
-import org.capcaval.c3.sample.tutorial1.hellomachine._impl.HelloMachineImpl;
 
 
 /**
@@ -41,8 +40,7 @@ public interface ComponentManager {
 	/**
 	 * @param componentType
 	 */
-	@SuppressWarnings("unchecked")
-	public void registerComponent(Class<? extends Component>... componentType);
+	public void registerComponent( Class<? extends Component>... componentType);
 	
 	/**
 	 * @param <T>
@@ -60,6 +58,7 @@ public interface ComponentManager {
 	 * @param componentTypeList
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public String startApplication(Class<? extends Component>... componentTypeList);
 
 	/**

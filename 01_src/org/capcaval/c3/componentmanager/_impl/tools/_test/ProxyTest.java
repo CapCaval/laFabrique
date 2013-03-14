@@ -1,3 +1,5 @@
+package org.capcaval.c3.componentmanager._impl.tools._test;
+
 /*
 Copyright (C) 2012 by CapCaval.org
 
@@ -19,7 +21,7 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
-package org.capcaval.c3.componentmanager._impl.tools._test;
+
 
 import java.lang.reflect.Proxy;
 
@@ -49,10 +51,10 @@ public class ProxyTest {
 		
 		app.launchApplication(null, AsyncCompImpl.class);
 		
-		ComponentServiceProxy proxy = new ComponentServiceProxy<ComponentService>(componentService, executor);
+		//ComponentServiceProxy<ComponentService> proxy = new ComponentServiceProxy<ComponentService>(componentService, executor);
 		
-		ComponentServiceProxy<ComponentService> proxy = Proxy.newProxyInstance(
-				loader, interfaces, h)
+//		ComponentServiceProxy<ComponentService> proxy = Proxy.newProxyInstance(
+//				loader, interfaces, h)
 		
 	}
 
