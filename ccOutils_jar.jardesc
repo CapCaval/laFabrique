@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jardesc>
+    <jar path="C3/11_prod/ccOutils.jar"/>
+    <options buildIfNeeded="true" compress="true" descriptionLocation="/C3/ccOutils_jar.jardesc" exportErrors="true" exportWarnings="true" includeDirectoryEntries="false" overwrite="false" saveDescription="true" storeRefactorings="false" useSourceFolders="false"/>
+    <storedRefactorings deprecationInfo="true" structuralOnly="false"/>
+    <selectedProjects/>
+    <manifest generateManifest="true" manifestLocation="/C3/ccOutilsJar.manifest" manifestVersion="1.0" reuseManifest="false" saveManifest="true" usesManifest="true">
+        <sealing sealJar="false">
+            <packagesToSeal/>
+            <packagesToUnSeal/>
+        </sealing>
+    </manifest>
+    <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.commandline"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.converter"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.unittest"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.file"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.factory"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.pair"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.lang"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.thread"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.recycling"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.lang"/>
+    </selectedElements>
+</jardesc>

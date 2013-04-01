@@ -32,7 +32,7 @@ import org.capcaval.c3.componentmanager._impl.tools.ComponentItemDescription;
 import org.capcaval.c3.componentmanager._impl.tools.SubComponentDescription;
 import org.capcaval.c3.componentmanager._impl.tools.UsedEventSubscribeDescription;
 import org.capcaval.c3.componentmanager._impl.tools.UsedServicesDescription;
-import org.capcaval.cctools.pair.Pair;
+import org.capcaval.ccoutils.pair.Pair;
 
 
 public interface ComponentDescription {

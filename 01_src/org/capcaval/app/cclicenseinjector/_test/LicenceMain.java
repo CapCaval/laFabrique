@@ -21,16 +21,13 @@ THE SOFTWARE.
 */
 package org.capcaval.app.cclicenseinjector._test;
 
-import java.io.IOException;
-import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Map;
 
-import org.capcaval.cctools.file.FileTool;
-import org.capcaval.cctools.file.FileSeeker.FileSeekerResult;
-import org.capcaval.cctools.file.FileTool.FilePosition;
-import org.capcaval.cctools.lang.ArrayTools;
+import org.capcaval.ccoutils.file.FileSeekerResult;
+import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.lang.ArrayTools;
 
 public class LicenceMain {
 

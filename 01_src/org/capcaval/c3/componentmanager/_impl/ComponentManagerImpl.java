@@ -47,7 +47,7 @@ import org.capcaval.c3.componentmanager._impl.tools.UsedServicesDescription;
 import org.capcaval.c3.componentmanager.tools.ComponentAnalyserTool;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription.ComponentDescriptionFactory;
-import org.capcaval.cctools.pair.Pair;
+import org.capcaval.ccoutils.pair.Pair;
 
 public class ComponentManagerImpl implements ComponentManager, ComponentManagerController {
 	// List<Component> componentList = new ArrayList<Component>();
