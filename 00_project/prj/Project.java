@@ -2,7 +2,7 @@ package prj;
 
 import org.capcaval.ccproject.AbstractProject;
 
-public class C3Project extends AbstractProject{
+public class Project extends AbstractProject{
 	
 	@Override
 	public void defineProject(){

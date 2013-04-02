@@ -11,15 +11,20 @@
         </sealing>
     </manifest>
     <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.commandline"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.converter"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.unittest"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.file"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.factory"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.pair"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.lang"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.thread"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.recycling"/>
-        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccOutils.lang"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.thread"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.converter"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.file"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.commandline"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.thread._impl"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.file.command"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.pair"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.lang"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccproject.command"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.factory._impl"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccproject"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.factory"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.converter.basicconverters"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.recycling"/>
+        <javaElement handleIdentifier="=C3/01_src&lt;org.capcaval.ccoutils.unittest"/>
     </selectedElements>
 </jardesc>

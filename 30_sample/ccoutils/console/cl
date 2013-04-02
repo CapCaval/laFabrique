@@ -1,3 +1,0 @@
-#!/bin/bash
-
-java -cp ~/temp/C3/10_bin sample.cctools.console.CL $*
