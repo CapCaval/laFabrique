@@ -45,7 +45,7 @@ public class FileSeeker extends SimpleFileVisitor<Path> {
 		this.matcher = FileSystems.getDefault()
                     .getPathMatcher("glob:" + pattern);
 		
-	}
+	} 
 	
 	@Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {

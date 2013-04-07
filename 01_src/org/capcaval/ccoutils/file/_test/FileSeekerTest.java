@@ -30,11 +30,7 @@ import junit.framework.Assert;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTool;
 
-
-
 public class FileSeekerTest {
-
-
 	@org.junit.Test
 	public void testFileSeeker() throws IOException {
 		FileSeekerResult result = FileTool.seekFiles("*.java", Paths.get("01_src"));

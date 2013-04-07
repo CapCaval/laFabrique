@@ -1,6 +1,7 @@
 package org.capcaval.ccoutils.lang;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.GenericArrayType;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -21,6 +22,13 @@ public class ReflectionTools {
 		    Type rawType = ptype.getRawType();
 		    Type[] typeArgumentList = ptype.getActualTypeArguments();
 		    classType = (Class<?>) typeArgumentList[0];
+		}else if (type instanceof GenericArrayType) {
+			GenericArrayType gtype = (GenericArrayType)type;
+			try{
+			classType = (Class<?>) gtype.getGenericComponentType()[0];
+			}catch (Exception e) {
+				e.printStackTrace();
+			}
 		}else if (type instanceof Class) {
 			classType = (Class<?>) type;
 		}

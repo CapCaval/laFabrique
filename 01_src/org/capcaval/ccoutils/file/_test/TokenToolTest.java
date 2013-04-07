@@ -51,7 +51,6 @@ public class TokenToolTest {
 		
 		Assert.assertEquals("Hello how are you Mr Joe, I do hope that {everything }is going ok for you.\n Bye Mr Joe.", 
 				output.toString());
-
 	}
 
 	@org.junit.Test
@@ -67,7 +66,6 @@ public class TokenToolTest {
 		
 		Assert.assertEquals("éî. Hello how are you Mr Joe, I do hope that {everything }is going ok for you.\n Bye Mr Joe.", 
 				output.toString());
-
 	}
 
 	
@@ -83,7 +81,5 @@ public class TokenToolTest {
 		System.out.println("#testGetAllTokenFromReader : \n" + output);
 		
 		Assert.assertEquals(list, output);
-
 	}
-	
 }

@@ -1,9 +1,10 @@
 package org.capcaval.c3.commandline.command;
 
+import org.capcaval.ccproject.AbstractProject;
 import org.capcaval.ccproject.command.CommandResult;
 
 public class CommandJar {
-	public CommandResult makeJar(){
+	public CommandResult makeJar(AbstractProject proj){
 		
 		
 		

@@ -2,6 +2,7 @@ package org.capcaval.ccoutils.lang;
 
 import java.io.IOException;
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -11,6 +12,7 @@ import java.util.List;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTool;
 import org.capcaval.ccoutils.lang.SystemTools.OSType;
+import org.junit.Test;
 
 
 public class ClassTools {
@@ -102,4 +104,19 @@ public class ClassTools {
 		}
 		return returnedClass;
 	}
+	public static boolean isClassContainsJUnitTest(Class<?> type){
+		boolean returnValue = false;
+		
+		for(Method m : type.getMethods()){
+			Test t = m.getAnnotation(Test.class);
+			
+			if(t!=null){
+				returnValue = true;
+				break;
+			}
+		}
+		
+		return returnValue;
+	}
+	
 }

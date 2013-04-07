@@ -21,15 +21,9 @@ THE SOFTWARE.
 */
 package org.capcaval.ccoutils.file;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.Writer;
@@ -123,27 +117,6 @@ public class FileTool {
 		}
 		return result;
 	}
-//	static public byte[] readFileAsByteArray(Path path)
-//			throws java.io.IOException {
-//		// get file from path
-//		File file = path.toFile();
-//		// allocate the buffer to be read
-//		byte[] buffer = new byte[(int) file.length()];
-//		BufferedInputStream bis = null;
-//		try {
-//			// create BufferedInputStream to read file
-//			bis = new BufferedInputStream(
-//					new FileInputStream(file));
-//			// copy the file data
-//			bis.read(buffer);
-//		} finally {
-//			if (bis != null){
-//				bis.close(); 
-//			}
-//		}
-//		// return the filled buffer
-//		return buffer;
-//	}
 
 	static public void replaceTokenInFile(Path templateFile, Path outputfile, Map<String, String> map, char startTokenChar, char endTokenChar) throws IOException {
 		FileReader input = new FileReader(templateFile.toFile());

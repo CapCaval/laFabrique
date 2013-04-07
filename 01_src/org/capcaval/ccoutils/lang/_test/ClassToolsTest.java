@@ -78,4 +78,13 @@ public class ClassToolsTest {
 		Assert.assertEquals(InnerClazzTest.class, type);
 	}
 
+	@org.junit.Test
+	public void testIsJunitCLass(){
+		// verify class containing JUnit test
+		boolean containsJUnitTest = ClassTools.isClassContainsJUnitTest(ClassToolsTest.class);
+		Assert.assertTrue(containsJUnitTest);
+		// verify class containing JUnit test
+		containsJUnitTest = ClassTools.isClassContainsJUnitTest(MixParameterCtorClass.class);
+		Assert.assertFalse(containsJUnitTest);
+	}
 }
