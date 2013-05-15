@@ -22,6 +22,7 @@ THE SOFTWARE.
 package org.capcaval.ccoutils.file;
 
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
@@ -103,8 +104,40 @@ public class FileTool {
 	static public void deleteFile(String pathStr) throws IOException{
 		// use a path 
 		Path path = Paths.get(pathStr);
-		// delete it
-		Files.delete(path);
+		FileTool.deleteFile(path);
+	}
+
+	static public void deleteFile(Path path) throws IOException{
+		FileTool.deleteFile(path.toFile());
+	}
+
+	
+	static public void deleteFile(File file) throws IOException{
+		if(file.exists() == false){
+			// do nothing bye bye
+			return;
+		}
+		
+		if(file.isDirectory()){
+			File[] fileList = file.listFiles();
+			
+			for(File f : fileList){
+				if(f.isDirectory()){
+					// recursive method call
+					FileTool.deleteFile(f);
+					// delete the directory
+					f.delete();
+				}else{
+					f.delete();
+				}
+			}
+			// delete t
+			file.delete();
+		}
+		else{
+			// delete it
+			file.delete();
+		}
 	}
 	
 	

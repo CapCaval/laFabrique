@@ -1,4 +1,4 @@
-package org.capcaval.ccoutils.commandline.test;
+package org.capcaval.ccoutils.commandline._test;
 
 import org.capcaval.ccoutils.commandline.CommandLineAbstractMain;
 

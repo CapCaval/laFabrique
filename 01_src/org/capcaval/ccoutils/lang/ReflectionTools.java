@@ -11,11 +11,28 @@ import java.util.List;
 
 public class ReflectionTools {
 
+		//TODO rewrite
+	  static Type getActualTypeForFirstTypeVariable(Type type) {
+		    if (type instanceof Class) {
+		      return Object.class;
+		    } else if (type instanceof ParameterizedType) {
+		      return ((ParameterizedType)type).getActualTypeArguments()[0];
+		    } else if (type instanceof GenericArrayType) {
+		      return getActualTypeForFirstTypeVariable(((GenericArrayType)type).getGenericComponentType());
+		    } else {
+		      throw new IllegalArgumentException("Type \'" + type + "\' is not a Class, "
+		          + "ParameterizedType, or GenericArrayType. Can't extract class.");
+		    }
+		  }
+	
+	
 	public static Class<?> getGenericReturnedType(Method method){
 
 		Class<?> classType = null;
 		
 		Type type = method.getGenericReturnType();
+		
+		type = getActualTypeForFirstTypeVariable(type);
 
 		if(type instanceof ParameterizedType){
 		    ParameterizedType ptype = (ParameterizedType) type;
@@ -25,7 +42,7 @@ public class ReflectionTools {
 		}else if (type instanceof GenericArrayType) {
 			GenericArrayType gtype = (GenericArrayType)type;
 			try{
-			classType = (Class<?>) gtype.getGenericComponentType()[0];
+			classType = (Class<?>) gtype.getGenericComponentType();
 			}catch (Exception e) {
 				e.printStackTrace();
 			}

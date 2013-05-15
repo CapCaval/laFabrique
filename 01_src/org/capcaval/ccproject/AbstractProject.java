@@ -12,6 +12,7 @@ import java.util.List;
 public abstract class AbstractProject implements Project{
 
 	public Path[] sourceList;
+
 	public List<Path> excludeSourceList;
 	public Jar jar = new Jar();
 	public Test test;
@@ -20,10 +21,28 @@ public abstract class AbstractProject implements Project{
 	public String licence;
 	public String[] authorList;
 	public String copyright;
-	public Path outputPathBin;
+	public Path outputBinPath;
+	public Path productionDirPath;
+	public String[] libList;
 	
 	public AbstractProject(){
+		// retrieve the project settings
 		this.defineProject();
+
+		// if no specific outputBinPath defined get the one
+		if(this.outputBinPath == null){
+			this.outputBinPath = Paths.get(this.productionDirPath.toString() + "/bin"); 
+		}
+		// if no specific jar bin output defined get the one 
+		if(this.jar.outputBinPath == null){
+			// by default link the jar output same as the project
+			this.jar.outputBinPath = this.outputBinPath;
+			}
+		if(this.jar.outputJar == null){
+			// by default link the jar output same as the project
+			this.jar.outputJar = this.productionDirPath;
+			}
+
 	}
 
 	
@@ -46,7 +65,7 @@ public abstract class AbstractProject implements Project{
 	}
 
 	public void outputBinPath(String pathStr){
-		this.outputPathBin = Paths.get(pathStr);
+		this.outputBinPath = Paths.get(pathStr);
 	}
 	
 	protected void exclude(String...stringPathList){
@@ -80,6 +99,12 @@ public abstract class AbstractProject implements Project{
 	
 	public void licence(String licence) {
 		this.licence= licence;
+	}
+	public void lib(String... libList) {
+		this.libList = libList;
+	}
+	public void prodDirPath(String pathStr) {
+		this.productionDirPath = Paths.get(pathStr);
 	}
 
 

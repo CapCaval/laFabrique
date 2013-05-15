@@ -85,7 +85,7 @@ public class ClassTools {
 			}
 
 			if (result != null) {
-				Path p = result.getFileList()[0];
+				Path p = result.getPathList()[0];
 				String fileStr = p.toFile().toString();
 				// remove the root path
 				String str = fileStr.replace(pathStr, "");

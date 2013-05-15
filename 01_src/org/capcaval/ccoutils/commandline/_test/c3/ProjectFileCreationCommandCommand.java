@@ -1,4 +1,4 @@
-package org.capcaval.ccoutils.commandline.test.c3;
+package org.capcaval.ccoutils.commandline._test.c3;
 
 import java.io.IOException;
 import java.nio.file.Files;

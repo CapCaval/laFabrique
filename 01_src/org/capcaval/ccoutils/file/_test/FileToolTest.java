@@ -45,7 +45,7 @@ public class FileToolTest {
 	public void testGetAllTokenFromReader() throws IOException {
 				
 		List<String> list = ArrayTools.newArrayList("ACTOR_1", "ACTOR_2");
-		Path templateFile = Paths.get("01_src/org/capcaval/tools/file/_test/lafontaine.txt");
+		Path templateFile = Paths.get("01_src/org/capcaval/ccoutils/file/_test/lafontaine.txt");
 		
 		List<String> output = FileTool.getAllTokenFromFile(templateFile, '{', '}', 32);
 		
@@ -58,9 +58,9 @@ public class FileToolTest {
 	@org.junit.Test
 	public void testReplaceTokenFromFile() throws IOException {
 				
-		Path templateFile = Paths.get("01_src/org/capcaval/tools/file/_test/lafontaine.txt");
-		Path outputfile = Paths.get("01_src/org/capcaval/tools/file/_test/lafontaine_output.txt");
-		Path referencefile = Paths.get("01_src/org/capcaval/tools/file/_test/lafontaine_reference.txt");
+		Path templateFile = Paths.get("01_src/org/capcaval/ccoutils/file/_test/lafontaine.txt");
+		Path outputfile = Paths.get("01_src/org/capcaval/ccoutils/file/_test/lafontaine_output.txt");
+		Path referencefile = Paths.get("01_src/org/capcaval/ccoutils/file/_test/lafontaine_reference.txt");
 		
 		// first delete the reference file if existing
 		Files.deleteIfExists(outputfile);
@@ -119,6 +119,38 @@ public class FileToolTest {
 		
 		// delete it 
 		FileTool.deleteFile(pathStr);
+		
+	}
+	
+	@org.junit.Test
+	public void  deleteFileTest(){
+		// create some file
+		try {
+			
+			Path rootDir = Paths.get("testDir");
+			Path secondDir = Paths.get("testDir/testDir2");
+			Path file = Paths.get("testDir/testDir2/file.txt");
+			
+			
+			if(Files.exists(rootDir) == false){
+				Files.createDirectory(rootDir);}
+			if(Files.exists(secondDir) == false){
+				Files.createDirectory(secondDir);}
+			if(Files.exists(file) == false){
+				Files.write(file, 
+					new byte[]{'a','b','c','d','e','f','g','h','i'});}
+		
+			FileTool.deleteFile("testDir");
+			
+			Assert.assertEquals(false, Files.exists(rootDir));
+			Assert.assertEquals(false, Files.exists(secondDir));
+			Assert.assertEquals(false, Files.exists(file));
+		
+		} catch (IOException e) {
+			e.printStackTrace();
+			Assert.fail();
+		}
+		
 		
 	}
 	

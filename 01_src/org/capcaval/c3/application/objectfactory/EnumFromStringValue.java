@@ -25,22 +25,29 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
-public class EnumFromStringValue implements ObjectFactoryFromStringValue <Enum>{
+//import java.nio.file.FileSystems;
+//import java.nio.file.Files;
+//import java.nio.file.Path;
+
+public class EnumFromStringValue implements ObjectFactoryFromStringValue <Enum<?>>{
 
 	@Override
-	public Enum newObjectFromStringValue(String stringValue,
+	public Enum<?> newObjectFromStringValue(String stringValue,
 			StringBuffer errorMessage) {
 		Path p = FileSystems.getDefault().getPath( stringValue);
 		if(Files.exists(p) == false){
 			errorMessage.append("the following Property Path does not exist : " + p.toAbsolutePath());
 		}
-		return p;
+		
+		
+		
+		return null;
 	}
 
 	@Override
 	public String newStringFromObjectValue(Enum object,
 			StringBuffer errorMessage) {
-		return object.toString();
+		return null;
 	}
 
 }

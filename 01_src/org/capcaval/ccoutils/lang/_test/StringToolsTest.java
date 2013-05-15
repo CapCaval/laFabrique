@@ -35,4 +35,28 @@ public class StringToolsTest {
 		Assert.assertEquals("HelloWorld", result);
 	}
 
+	@org.junit.Test
+	public void testDeleteChars(){
+		String result = StringTools.deleteCharacters("1234567890eeee", 5, 10);
+		Assert.assertEquals("12345eeee", result);
+	}
+
+	@org.junit.Test
+	public void testInsertChars(){
+		String result = StringTools.insertCharacters("123456789", "toto", 4);
+		Assert.assertEquals("1234toto56789", result);
+	}
+
+	@org.junit.Test
+	public void testMultiLine(){
+		String result = StringTools.multiLineString(
+				"ligne1",
+				"ligne2",
+				"ligne3",
+				"ligne4",
+				"ligne5");
+		Assert.assertEquals("ligne1\nligne2\nligne3\nligne4\nligne5\n", result);
+	}
+
+	
 }

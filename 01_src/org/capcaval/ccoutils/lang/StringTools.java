@@ -34,4 +34,34 @@ public class StringTools {
 		}
 		return result;
 	}
+	
+	public static String deleteCharacters(String str, int indexStart, int startEnd) {
+		// get the string before and after the two indexes
+		String beforeString = str.substring(0, indexStart);
+		String afterString = str.substring(startEnd, str.length());
+		
+		// concat the two string to do the job
+		return beforeString + afterString;
+	}
+
+	public static String insertCharacters(String str, String strToBeInserted, int index) {
+		// get the string before and after the two indexes
+		StringBuffer buf = new StringBuffer(str);
+		
+		buf.insert(index, strToBeInserted);
+		
+		// concat the two string to do the job
+		return buf.toString();
+	}
+	
+	public static String multiLineString(String...stringlist){
+		String returnedValue = new String();
+		for(String str : stringlist){
+			returnedValue = returnedValue + str + "\n";
+		}
+		
+		return returnedValue;
+	}
+
+	
 }

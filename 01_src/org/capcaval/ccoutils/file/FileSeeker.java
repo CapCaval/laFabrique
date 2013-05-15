@@ -32,18 +32,26 @@ import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.ArrayList;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 
 public class FileSeeker extends SimpleFileVisitor<Path> {
 	private PathMatcher matcher;
 	public List<Path> fileList = new ArrayList<Path>();
+	public Map<String, Path> excludeFileMap = new HashMap<String, Path>();
+	private Path startingDir;
 	
 	
-	public FileSeeker(String pattern) throws IOException{
+	public FileSeeker(String pattern, Path... excludeList) throws IOException{
 		this.matcher = FileSystems.getDefault()
                     .getPathMatcher("glob:" + pattern);
+		
+		for(Path path : excludeList){
+			this.excludeFileMap.put(path.toFile().getName(), path);
+		}
 		
 	} 
 	
@@ -60,8 +68,7 @@ public class FileSeeker extends SimpleFileVisitor<Path> {
 					this.find(Paths.get(name));
 				}
 			} catch (Exception e) {
-				System.out.println(file.toFile());
-				e.printStackTrace();
+				System.out.println("[ccOutils.FileSeeker] WARNING : Cannot not read the following file : " + file.toFile());
 			}
 		}
         find(file);
@@ -70,8 +77,16 @@ public class FileSeeker extends SimpleFileVisitor<Path> {
 	
 	void find(Path file) {
         Path name = file.getFileName();
-        if (name != null && this.matcher.matches(name)) {
-            this.fileList.add(file);
+        
+        Path p = this.excludeFileMap.get(name.toFile().getName());
+        if(p != null){
+        	if(p.equals(file)){
+        		// do nothing do not add this file
+        	}
+        }
+        else if(name != null && this.matcher.matches(name)) {
+        	//Path relPath = Paths.get(file.toString().substring(this.startingDir.toString().length()+1));
+            this.fileList.add(file); // MLB 
             }
     }
 	
@@ -81,6 +96,9 @@ public class FileSeeker extends SimpleFileVisitor<Path> {
 	}
 
 	public FileSeekerResult seek(Path startingDir, FileSeekerResult result) throws IOException {
+		// keep a ref on the starting directory
+		this.startingDir = startingDir;
+		// Go 
 		Files.walkFileTree(startingDir, this);
 		
 		if(result == null){

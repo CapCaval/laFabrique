@@ -32,7 +32,7 @@ public class DataListTest {
 	}
 	@Test
 	public void dataListTestAdd2(){
-		DataList<Integer> dlist = new DataListImpl<>();
+		DataList<Integer> dlist = new DataListImpl<Integer>();
 
 		Integer[] list = new Integer[]{1,2,3,4,5};
 		dlist.addObject(list);

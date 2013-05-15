@@ -27,8 +27,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.org.apache.xerces.internal.xs.datatypes.ObjectList;
-
 public class ArrayTools {
 	static public boolean contains(char[] charList, char cSearch){
 		boolean isFound = false;

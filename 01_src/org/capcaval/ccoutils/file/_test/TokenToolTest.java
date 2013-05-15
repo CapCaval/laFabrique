@@ -25,11 +25,16 @@ import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.Writer;
+import java.net.URISyntaxException;
+import java.net.URL;
+import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
+import org.capcaval.ccoutils.file.FileTool;
 import org.capcaval.ccoutils.file.TokenTool;
 import org.capcaval.ccoutils.lang.ArrayTools;
+import org.capcaval.ccoutils.lang.StringTools;
 
 import junit.framework.Assert;
 
@@ -82,4 +87,45 @@ public class TokenToolTest {
 		
 		Assert.assertEquals(list, output);
 	}
+
+	@org.junit.Test
+	public void testMultiLine() throws IOException {
+				
+		String sourceStr = StringTools.multiLineString(
+				"This is the header",
+				"",
+				"	Name :  Jack",
+				"	Age : 36",
+				"",
+				"	Name :  Joe",
+				"	Age : 10",
+				"",
+				"this is the footer",				
+				"",
+				"Z1 joe 12 bob 24");
+		
+		
+		URL fileUrl = this.getClass().getResource("TestMultiLines.txt");
+
+		Reader source = new StringReader(sourceStr);
+				
+		List<Map<String, String>> list = ArrayTools.newArrayList(
+				ArrayTools.newMap("NAME", "Joe", "AGE", "10"),
+				ArrayTools.newMap("NAME", "Jack", "AGE", "36"));
+		
+		
+		String output = TokenTool.replaceBlocks(
+				fileUrl.getFile().toString(), 
+				list, 
+				"#Z1 start#","#Z1 end#",
+				'{', '}');
+		
+		System.out.println("#testGetAllTokenFromReader : \n" + output);
+		
+		System.out.println(sourceStr);
+		
+		Assert.assertEquals(sourceStr, output);
+	}
+	
+
 }

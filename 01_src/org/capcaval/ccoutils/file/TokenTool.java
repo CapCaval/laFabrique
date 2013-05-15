@@ -24,11 +24,17 @@ package org.capcaval.ccoutils.file;
 import java.io.IOException;
 import java.io.PushbackReader;
 import java.io.Reader;
+import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.regex.Pattern;
+
+import org.capcaval.ccoutils.lang.StringTools;
 
 enum TokenSeekState { seekStart, seekEnd}
 
@@ -98,7 +104,7 @@ public class TokenTool {
 		StringBuilder  tokenName  = new StringBuilder();
 		
 		TokenSeekState state = TokenSeekState.seekStart;
-		
+
 		while (state != TokenSeekState.seekEnd) {
 			int value = pbreader.read();
 			
@@ -134,6 +140,50 @@ public class TokenTool {
 		} 
 
 		return output;
+	}
+
+	public static String replaceBlocks(String file,
+			List<Map<String, String>> list, 
+			String startBlock, String stopBlock,
+			char startTokenChar, char stopTokenChar) {
+		
+		String templateStr = "";
+		try {
+			templateStr = FileTool.readStringfromFile(file);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		int startBlockIndex = templateStr.indexOf(startBlock);
+		int endBlockIndex = templateStr.indexOf(stopBlock) + stopBlock.length();
+		
+		int startIndex = startBlockIndex + startBlock.length();
+		int endIndex = templateStr.indexOf(stopBlock);
+		// Get the block
+		String blockStr = templateStr.substring(startIndex, endIndex);
+		
+		// clean the template
+		templateStr = StringTools.deleteCharacters(templateStr, startBlockIndex, endBlockIndex);
+		
+		for(Map<String, String> map : list){
+			//map.
+			Set<String> keyList = map.keySet();
+			String newBlock = new String(blockStr);
+			
+			for(String key : keyList){
+				// get the value to insert the string
+				String val = map.get(key);
+				// build the key
+				String keyStr = startTokenChar + key + stopTokenChar;
+				//replace the key
+				//newBlock.replaceAll( Pattern.quote(keyStr), val);
+				newBlock = newBlock.replace( keyStr, val);
+			}
+			// insert the new block
+			templateStr = StringTools.insertCharacters(templateStr, newBlock, startBlockIndex);
+		}
+		
+		return templateStr;
 	}
 
 
