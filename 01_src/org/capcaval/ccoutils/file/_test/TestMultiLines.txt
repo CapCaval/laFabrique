@@ -1,0 +1,8 @@
+This is the header
+#Z1 start#
+	Name :  {NAME}
+	Age : {AGE}
+#Z1 end#
+this is the footer
+
+Z1 joe 12 bob 24

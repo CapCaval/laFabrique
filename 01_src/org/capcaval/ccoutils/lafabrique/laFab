@@ -1,0 +1,4 @@
+#!/bin/bash
+
+java -version
+java -cp .:./02_lib/C3.jar org.capcaval.ccoutils.lafabrique.LaFabrique $*
