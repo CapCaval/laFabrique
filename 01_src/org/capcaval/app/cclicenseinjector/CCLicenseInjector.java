@@ -25,9 +25,9 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 import java.util.Calendar;
 
-import org.capcaval.c3.application.Application;
-import org.capcaval.c3.application.annotations.AppInformation;
-import org.capcaval.c3.application.annotations.AppProperty;
+import org.capcaval.c3.c3application.C3Application;
+import org.capcaval.c3.c3application.annotations.AppInformation;
+import org.capcaval.c3.c3application.annotations.AppProperty;
 
 enum LicenseType {
 	MIT, BSD
@@ -36,7 +36,7 @@ enum LicenseType {
 @AppInformation(
 		version = "0.0.1", 
 		about = "This application is made for inserting license inside source file.")
-public class CCLicenseInjector extends Application {
+public class CCLicenseInjector extends C3Application {
 
 	@AppProperty(comment = "Type of the license")
 	LicenseType licenseType = LicenseType.MIT;

@@ -21,15 +21,15 @@ THE SOFTWARE.
 */
 package org.capcaval.c3.sample.tutorial2;
 
-import org.capcaval.c3.application.Application;
-import org.capcaval.c3.application.annotations.AppInformation;
-import org.capcaval.c3.application.annotations.AppProperty;
+import org.capcaval.c3.c3application.C3Application;
+import org.capcaval.c3.c3application.annotations.AppInformation;
+import org.capcaval.c3.c3application.annotations.AppProperty;
 import org.capcaval.c3.component.annotation.UsedService;
 import org.capcaval.c3.sample.tutorial1.hellomachine.HelloMachineServices;
 import org.capcaval.c3.sample.tutorial1.hellomachine._impl.HelloMachineImpl;
 
 @AppInformation (version="1.0", about = "This a Hello world application with C³")
-public class HelloWorldApplication extends Application {
+public class HelloWorldApplication extends C3Application {
 	@AppProperty(comment="Define who you want to salute")
 	String name = "World";
 	@UsedService

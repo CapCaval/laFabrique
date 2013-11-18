@@ -21,9 +21,9 @@ THE SOFTWARE.
 */
 package org.capcaval.c3.componentmanager._test.application;
 
-import org.capcaval.c3.application.Application;
+import org.capcaval.c3.c3application.C3Application;
 
-public class TestApplication extends Application {
+public class TestApplication extends C3Application {
 
 	@Override
 	public void notifyApplicationToBeRun(String applicationDescrition,

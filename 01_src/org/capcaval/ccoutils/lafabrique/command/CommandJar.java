@@ -11,7 +11,7 @@ import java.util.jar.Manifest;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTool;
 import org.capcaval.ccoutils.file.JarTool;
-import org.capcaval.ccproject.AbstractProject;
+import org.capcaval.ccoutils.lafabrique.AbstractProject;
 
 public class CommandJar {
 	public static CommandResult makeJar(AbstractProject proj){

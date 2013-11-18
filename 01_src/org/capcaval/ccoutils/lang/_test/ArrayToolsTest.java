@@ -27,8 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.capcaval.ccoutils.lang.ArrayTools;
-
-import junit.framework.Assert;
+import org.junit.Assert;
 
 public class ArrayToolsTest {
 	
@@ -93,6 +92,27 @@ public class ArrayToolsTest {
 		map2.put("trois", "3");
 		
 		Assert.assertEquals(map, map2);
+	}
+	
+	@org.junit.Test
+	public void testMultiLine(){
+		String multiLine = ArrayTools.toMultiLine("line1", "line2");
+		
+		System.out.println(multiLine);
+		Assert.assertEquals("line1\nline2\n", multiLine);
+		
+	}
+
+	@org.junit.Test
+	public void testPrefix(){
+		String[] result = ArrayTools.toStringWithPrefix("A", new Integer[]{1,2,3,4});
+		Assert.assertArrayEquals(new String[]{"A1","A2","A3","A4"}, result);
+	}
+
+	@org.junit.Test
+	public void testPosfix(){
+		String[] result = ArrayTools.toStringWithPosfix("B", new Integer[]{1,2,3,4});
+		Assert.assertArrayEquals(new String[]{"1B","2B","3B","4B"}, result);
 	}
 
 	

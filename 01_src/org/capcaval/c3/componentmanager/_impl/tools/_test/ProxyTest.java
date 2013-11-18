@@ -25,7 +25,7 @@ THE SOFTWARE.
 
 import java.lang.reflect.Proxy;
 
-import org.capcaval.c3.application.Application;
+import org.capcaval.c3.c3application.C3Application;
 import org.capcaval.c3.component.ComponentService;
 import org.capcaval.c3.componentmanager._impl.tools.ComponentServiceProxy;
 import org.capcaval.c3.componentmanager._impl.tools._test.asyncomp.impl.AsyncCompImpl;
@@ -35,7 +35,7 @@ public class ProxyTest {
 	@org.junit.Test
 	public void ServiceAsyncProxyTest(){
 		
-		Application app = new Application() {
+		C3Application app = new C3Application() {
 			
 			@Override
 			public void notifyApplicationToBeRun(String applicationDescrition,

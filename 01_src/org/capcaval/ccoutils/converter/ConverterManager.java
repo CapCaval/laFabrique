@@ -47,6 +47,12 @@ public class ConverterManager {
 		m.put(converter.getOutputType(), converter);
 	}
 
+	public void addConverter(Converter<?,?>[] converterList) {
+		for(Converter<?,?> converter : converterList){
+			this.addConverter(converter);
+		}
+	}
+
 	public <I,O> Converter<I,O> getConverter(Class<I> fromType, Class<O> outType){
 		Converter<I,O> converter = null;
 		
@@ -58,4 +64,30 @@ public class ConverterManager {
 		
 		return converter;
 	}
+
+	@SuppressWarnings("unchecked")
+	public <I,O> Converter<I,Object> getGenericInConverter(Class<I> fromType, Class<O> outType){
+		Converter<I,Object> converter = null;
+		
+		Map<Class<?>, Converter<?,?>> m = map.get(fromType);
+		// find the inType try to find the out one, if none return null
+		if(m != null){
+			converter = (Converter<I,Object>)m.get(outType);
+		}
+		
+		return converter;
+	}
+
+	@SuppressWarnings("unchecked")
+	public <I,O> Converter<Object,O> getGenericOutConverter(Class<I> fromType, Class<O> outType){
+		Converter<Object,O> converter = null;
+		
+		Map<Class<?>, Converter<?,?>> m = map.get(fromType);
+		// find the inType try to find the out one, if none return null
+		if(m != null){
+			converter = (Converter<Object,O>)m.get(outType);
+		}
+		
+		return converter;
+	}	
 }

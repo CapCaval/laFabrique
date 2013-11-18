@@ -25,7 +25,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import junit.framework.Assert;
 
-import org.capcaval.c3.application.Application;
+import org.capcaval.c3.c3application.C3Application;
 import org.capcaval.c3.component.ComponentEventSubscribe;
 import org.capcaval.c3.component.annotation.ConsumedEvent;
 import org.capcaval.c3.component.annotation.EventSubcribe;
@@ -42,7 +42,7 @@ import com.sun.prism.es2.ES2Graphics;
 
 public class ComponentServiceTest {
 
-	class ApplicationTest extends Application{
+	class ApplicationTest extends C3Application{
 		
 		@UsedService
 		public TestConsummerService tcs;

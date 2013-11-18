@@ -22,11 +22,14 @@ THE SOFTWARE.
 package org.capcaval.ccoutils.file;
 
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.PushbackReader;
 import java.io.Reader;
 import java.io.StringReader;
 import java.io.StringWriter;
 import java.io.Writer;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
@@ -34,6 +37,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.regex.Pattern;
 
+import org.capcaval.ccoutils.lafabrique.command.CommandEclipseProject;
 import org.capcaval.ccoutils.lang.StringTools;
 
 enum TokenSeekState { seekStart, seekEnd}
@@ -43,8 +47,19 @@ public class TokenTool {
 	static public Writer replaceTokenFromReader(Reader input, Map<String, String> map, char startTokenChar, char endTokenChar) throws IOException {
 		return replaceTokenFromReader(input, map, startTokenChar, endTokenChar, 32);
 	}
+
+	static public String replaceTokenFromReader(String input, Map<String, String> map, char startTokenChar, char endTokenChar){
+		return replaceTokenFromReader( input, map, startTokenChar, endTokenChar, 32);
+	}
+
 	
-	static public Writer replaceTokenFromReader(Reader input, Map<String, String> map, char startTokenChar, char endTokenChar, int maxTokenCharSize) throws IOException {
+	static public String replaceTokenFromReader(String input, Map<String, String> map, char startTokenChar, char endTokenChar, int maxTokenCharSize){
+		Reader source = new StringReader(input);
+		Writer w = replaceTokenFromReader(source, map, startTokenChar, endTokenChar, maxTokenCharSize);
+		
+		return w.toString();
+	}
+	static public Writer replaceTokenFromReader(Reader input, Map<String, String> map, char startTokenChar, char endTokenChar, int maxTokenCharSize){
 		PushbackReader pbreader = new PushbackReader(input);
 		Writer output =  new StringWriter();
 		
@@ -53,7 +68,12 @@ public class TokenTool {
 		TokenSeekState state = TokenSeekState.seekStart;
 		
 		while (state != TokenSeekState.seekEnd) {
-			int value = pbreader.read();
+			int value = -1;
+			try {
+				value = pbreader.read();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 			
 			if(value == -1){
 				state=TokenSeekState.seekEnd;
@@ -69,7 +89,11 @@ public class TokenTool {
 					tokenName.append((char)(value));
 					counter++;
 					// still read the token until the end char
-					value = pbreader.read();
+					try {
+						value = pbreader.read();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 					
 					if((value == '\n')||(value == '\t')||(value == ' ')){
 						tokenValid = false;
@@ -79,18 +103,30 @@ public class TokenTool {
 				String tokenValue = map.get(tokenName.substring(1));
 				
 				if(tokenValue != null){
-					output.append(tokenValue);
+					try {
+						output.append(tokenValue);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}else{
-					// this is not a real token copy it normally
-					output.append(tokenName);
-					output.append(new String(Character.toChars(value))); // Character is used to keep unicode information
+					try {
+						// this is not a real token copy it normally
+						output.append(tokenName);
+						output.append(new String(Character.toChars(value))); // Character is used to keep unicode information
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
 				}
 				//reset all
 				tokenName.delete(0, tokenName.length());
 				counter = 0;
 			}
 			else{
-				output.append((char)(value));
+				try {
+					output.append((char)(value));
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 		}
 
@@ -142,18 +178,11 @@ public class TokenTool {
 		return output;
 	}
 
-	public static String replaceBlocks(String file,
+	public static String replaceBlocks(String templateStr,
 			List<Map<String, String>> list, 
 			String startBlock, String stopBlock,
 			char startTokenChar, char stopTokenChar) {
 		
-		String templateStr = "";
-		try {
-			templateStr = FileTool.readStringfromFile(file);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
 		int startBlockIndex = templateStr.indexOf(startBlock);
 		int endBlockIndex = templateStr.indexOf(stopBlock) + stopBlock.length();
 		
@@ -185,6 +214,29 @@ public class TokenTool {
 		
 		return templateStr;
 	}
-
-
+	
+	public static String replaceBlocksInsideFile(String file,
+			List<Map<String, String>> list, 
+			String startBlock, String stopBlock,
+			char startTokenChar, char stopTokenChar) {
+		
+		StringBuilder templateStr = new StringBuilder();
+		try {
+			// old templateStr = FileTool.readStringfromFile(file);
+			InputStream stream = CommandEclipseProject.class.getResourceAsStream(file);
+			InputStreamReader reader = new InputStreamReader(stream);
+			int val = reader.read();
+			while( val != -1){
+				// add the last read value
+				templateStr.append((char)val);
+				// check out for a new character
+				val = reader.read();
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return replaceBlocks(templateStr.toString(), list, startBlock, stopBlock, startTokenChar, stopTokenChar);
+	}
 }

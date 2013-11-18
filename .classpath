@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="00_project"/>
-	<classpathentry excluding="org/capcaval/tools/pair/misc/TestTool.java|org/capcaval/tools/pair/misc/Tool.java|org/capcaval/tools/factory/|org/capcaval/cctools/factory/RootFactory.java|org/capcaval/cctools/factory/RootFactoryImpl.java|org/capcaval/cctools/factory/Factory.java|org/capcaval/cctools/factory/FactoryImpl.java|org/capcaval/cctools/factory/_sample/generic/GreeterFactoryImpl.java|org/capcaval/cctools/compiler/test/ClassThatDoesNotCompile.java|org/capcaval/cctools_old/|org/capcaval/ccoutils/data/DataProcessing.java" kind="src" path="01_src"/>
+	<classpathentry kind="src" path="00_prj"/>
+	<classpathentry excluding="org/capcaval/tools/pair/misc/TestTool.java|org/capcaval/tools/pair/misc/Tool.java|org/capcaval/tools/factory/|org/capcaval/cctools/factory/RootFactory.java|org/capcaval/cctools/factory/RootFactoryImpl.java|org/capcaval/cctools/factory/Factory.java|org/capcaval/cctools/factory/FactoryImpl.java|org/capcaval/cctools/factory/_sample/generic/GreeterFactoryImpl.java|org/capcaval/cctools/compiler/test/ClassThatDoesNotCompile.java|org/capcaval/cctools_old/|org/capcaval/ccoutils/data/DataProcessing.java|org/capcaval/ccproject/|org/capcaval/ccoutils/commandline/_test/c3/|org/capcaval/ccoutils/application/objectfactory/|org/capcaval/ccoutils/application/AppContainer.java" kind="src" path="01_src"/>
 	<classpathentry kind="lib" path="02_lib/junit-4.8.2.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_09"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="10_bin"/>
 </classpath>

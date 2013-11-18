@@ -5,7 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 
 import org.capcaval.ccoutils.lang.ReflectionTools;
 import org.junit.Assert;
@@ -25,7 +24,7 @@ public class ReflectionToolsTest {
 		@Test
 		public void GenricReturningMethod() throws NoSuchMethodException,
 				SecurityException {
-			Method method = TestClass.class.getMethod("getValueList", null);
+			Method method = TestClass.class.getMethod("getValueList");
 
 			Class<?> type = ReflectionTools.getGenericReturnedType(method);
 

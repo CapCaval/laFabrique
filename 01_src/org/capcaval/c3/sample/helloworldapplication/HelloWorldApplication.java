@@ -21,16 +21,16 @@ THE SOFTWARE.
 */
 package org.capcaval.c3.sample.helloworldapplication;
 
-import org.capcaval.c3.application.Application;
-import org.capcaval.c3.application.annotations.AppInformation;
-import org.capcaval.c3.application.annotations.AppProperty;
+import org.capcaval.c3.c3application.C3Application;
+import org.capcaval.c3.c3application.annotations.AppInformation;
+import org.capcaval.c3.c3application.annotations.AppProperty;
 
 
 @AppInformation (
 		version="1.0", 
 		about = "This a Hello world application with C³",
 		propertyFile = "MyConfig.properties")
-public class HelloWorldApplication extends Application {
+public class HelloWorldApplication extends C3Application {
 	
 	@AppProperty(comment="name to be greeted", persistence=true)
 	String name = "World";

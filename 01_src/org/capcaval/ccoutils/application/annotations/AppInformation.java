@@ -31,6 +31,10 @@ import java.lang.annotation.Target;
 public @interface AppInformation {
 	String name() default "";
 	String version() default "";
-	String about() default "";
+	String[] about() default "";
 	String propertyFile() default "";
+	boolean asciiLogo()default true;
+	String asciiLogoGradient()default "@. ";
+	int helpWidthInChar() default 80;
+	String author();
 }

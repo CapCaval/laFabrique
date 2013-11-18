@@ -55,6 +55,12 @@ public class ArrayTools {
 		return list;
 	}
 
+
+	static public <T> T[] newArray(T... objectList){
+		// this is it bye
+		return objectList;
+	}
+
 	
 	static public <T> Map<T,T> newMap(T... objectList){
 		//allocate the array at the correct size
@@ -175,7 +181,7 @@ public class ArrayTools {
 		}
 		return str.toString();
 	}
-
+	
 	public static String toStringWithDelimiter(char separator, Object[] objectList){
 		StringBuilder str = new StringBuilder();
 		
@@ -184,6 +190,49 @@ public class ArrayTools {
 			if(o == objectList[objectList.length-1]){
 				str.append(separator);
 			}
+		}
+		return str.toString();
+	}
+
+	public static String toMultiLine(Object... objectList){
+		StringBuilder str = new StringBuilder();
+		String endLine = "\n";
+		
+		for(Object o : objectList){
+			str.append(o.toString());
+			str.append(endLine);
+		}
+		return str.toString();
+	}
+
+	public static String[] toStringWithPrefix(String prefix, Object[] objectList){
+		List<String> strList = new ArrayList<>();
+		
+		for(Object o : objectList){
+			strList.add(prefix + o.toString());
+			
+		}
+		return strList.toArray(new String[0]);
+	}
+
+	public static String[] toStringWithPosfix(String postfix, Object[] objectList){
+		List<String> strList = new ArrayList<>();
+		
+		for(Object o : objectList){
+			strList.add(o.toString() + postfix);
+			
+		}
+		return strList.toArray(new String[0]);
+	}
+	
+	
+	public static String toMultiLine(List<?> objectList){
+		StringBuilder str = new StringBuilder();
+		String endLine = "\n";
+		
+		for(Object o : objectList){
+			str.append(o.toString());
+			str.append(endLine);
 		}
 		return str.toString();
 	}

@@ -1,6 +1,7 @@
 package org.capcaval.ccoutils.lafabrique.command;
 
-import org.capcaval.ccproject.AbstractProject;
+import org.capcaval.ccoutils.lafabrique.AbstractProject;
+
 
 public class CommandBuild {
 

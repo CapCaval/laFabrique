@@ -21,7 +21,7 @@ THE SOFTWARE.
 */
 package org.capcaval.c3.sample.tutorial2;
 
-import org.capcaval.c3.application.Application;
+import org.capcaval.c3.c3application.C3Application;
 import org.capcaval.c3.component.annotation.ConsumedEvent;
 import org.capcaval.c3.component.annotation.UsedService;
 import org.capcaval.c3.componentmanager.ComponentManager;
@@ -29,7 +29,7 @@ import org.capcaval.c3.sample.tutorial1.hellomachine.HelloMachineServices;
 import org.capcaval.c3.sample.tutorial1.hellomachine._impl.HelloMachineImpl;
 import org.capcaval.c3.sample.tutorial2.hellomachine._impl.HelloMachineEvent;
 
-public class HelloMachineMain extends Application{
+public class HelloMachineMain extends C3Application{
 
 	@UsedService
 	HelloMachineServices hms;

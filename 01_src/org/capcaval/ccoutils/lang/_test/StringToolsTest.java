@@ -58,5 +58,39 @@ public class StringToolsTest {
 		Assert.assertEquals("ligne1\nligne2\nligne3\nligne4\nligne5\n", result);
 	}
 
+	@org.junit.Test
+	public void isExclusiveMadeOfTest(){
+		// assert that all characters are made of the exclusive one
+		Assert.assertTrue(StringTools.isExclusiveMadeOf("abcdabcdabcd", "abcd"));
+		// assert that all characters are NOT made of the exclusive one
+		Assert.assertFalse(StringTools.isExclusiveMadeOf("abcdabcdabcEd", "abcd"));
+	}
 	
+	@org.junit.Test
+	public void formatToCharWidthTest(){
+		String formattedStr = StringTools.formatToCharWidth("1234567890123456", 5);
+		Assert.assertEquals("12345\n67890\n12345\n6", formattedStr);
+	}
+
+	@org.junit.Test
+	public void formatToCharWidthAndParamTest(){
+		String formattedStr = StringTools.formatToCharWidth("1234567890123456", 5, "A\n");
+		Assert.assertEquals("12345A\n67890A\n12345A\n6", formattedStr);
+	}
+
+	
+	@org.junit.Test
+	public void formatToMultLineCharWidthTest(){
+		String[] ml = new String[]{"abcd", "1234567890123456"};
+		String formattedStr = StringTools.formatMultiLineToCharWidth(ml, 5);
+		Assert.assertEquals("abcd\n12345\n67890\n12345\n6\n", formattedStr);
+	}
+
+	@org.junit.Test
+	public void repeatStringTest(){
+		String repeatedStr = StringTools.repeatString("123", 3);
+		Assert.assertEquals("123123123", repeatedStr);
+	}
+
+
 }

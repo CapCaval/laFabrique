@@ -42,5 +42,4 @@ public class HelpCommand {
 		}
 		return buf.toString();
 	}
-
 }

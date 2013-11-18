@@ -15,10 +15,10 @@ public class CommandLineAbstractMain {
 		
 		// add all the registered command
 		for(Object object : commandList){
-			clc.addCommandClass(object);
+			clc.addCommandInstance(object);
 		}
 		
-		String resultStr = clc.computeCommandLine(args);
+		String resultStr = clc.computeCommandLine(args).returnMessage;
 		System.out.println(resultStr);
 	}
 

@@ -22,6 +22,7 @@ THE SOFTWARE.
 package org.capcaval.ccoutils.file._test;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -150,8 +151,20 @@ public class FileToolTest {
 			e.printStackTrace();
 			Assert.fail();
 		}
-		
-		
 	}
 	
+	@org.junit.Test
+	public void getFileSFromNamesAndRootDirsTest(){
+		Path dir1 = Paths.get(FileToolTest.class.getResource("dir1").getPath());
+		Path dir2 = Paths.get(FileToolTest.class.getResource("dir2").getPath());
+		
+		Path[] pathArray = FileTool.getFileSFromNamesAndRootDirs(new Path[]{dir1, dir2}, new String[]{"File1.txt","File2.txt"});
+		
+		Path result1 = Paths.get(FileToolTest.class.getResource("dir1/File1.txt").getPath());
+		Path result2 = Paths.get(FileToolTest.class.getResource("dir2/File2.txt").getPath());
+		
+		Assert.assertEquals(result1, pathArray[0]);
+		Assert.assertEquals(result2, pathArray[1]);
+		
+	}
 }
