@@ -1,0 +1,23 @@
+package prj;
+
+import org.capcaval.ccoutils.lafabrique.AbstractProject;
+
+public class Project extends AbstractProject{
+	
+	@Override
+	public void defineProject(){
+		name("{projectName}");
+		version("0.0.1");
+
+		source("01_src");
+		lib(	"junit-4.8.2.jar",
+				"C3.jar");
+		
+		jdkVersion("jdk1.7.0_09");
+		
+		prodDirPath("20_prod");
+
+		jar.name("{projectName}.jar");
+		jar.excludeDirectoryName("_test");
+	}
+}
