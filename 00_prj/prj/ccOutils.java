@@ -1,28 +1,34 @@
 package prj;
 
-import org.capcaval.ccproject.AbstractProject;
+import org.capcaval.ccoutils.lafabrique.AbstractProject;
 
-public class Project extends AbstractProject{
+public class ccOutils extends AbstractProject{
 	
+
 	@Override
 	public void defineProject(){
-		version("1.3");
+		name("ccOutils");
+		version("0.0.1");
 		author("CapCaval.org");
 		copyright("CapCaval.org");
-		this.licence("MIT");
+		licence("MIT");
+		url("http://ccoutils.capcaval.org");
 
-		
+		projectDir("00_prj");
 		source("01_src");
-		exclude("_test");
-		excludeDirectoryShortname("_test");
+		packageName("org.capcaval.ccoutils");
+		libDir("02_lib");
+		
+		lib("junit-4.8.2.jar");
+		
+		jdkVersion("jdk1.7.0_09");
 		
 		librairiePath("04_lib");
 		librairiesForCompiling("ccTools");
-		outputClass("06_bin");
+		prodDirPath("20_prod");
 
-		
-		jar.name("C3.jar");
-		jar.outputDirectory("20_prod");
+		jar.name("ccOutils.jar");
+		jar.excludeDirectoryName("_test");
 		
 		// tout compiler dans bin
 		// copier la compil sans les rep _test dans temp/jar
@@ -32,14 +38,14 @@ public class Project extends AbstractProject{
 		// passer les tests avec le jar
 		// rapport de test
 		
-		
 		// java -jar c3.jar GUI
 		// java -jar c3.jar newProject d:/workspace/
 		// java -jar c3.jar build
 		// java _jar C3.jar performTest
-		
-		
 	}
+
+
+
 
 
 }

@@ -125,7 +125,7 @@ public class CommandLineComputer {
 						type, 
 						paramObjList, 
 						arrayError, 
-						this.computeCommandForList(i, commandList),
+						this.computeCommandForList(i++, commandList),
 						cm);
 			}
 			if(arrayError == null){

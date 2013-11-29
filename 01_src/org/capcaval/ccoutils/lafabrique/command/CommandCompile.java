@@ -18,11 +18,14 @@ import org.capcaval.ccoutils.file.FileTool;
 import org.capcaval.ccoutils.file.command.FileCmd;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 import org.capcaval.ccoutils.lang.ArrayTools;
+import org.capcaval.ccoutils.lang.StringMultiLine;
 
 
 public class CommandCompile {
 	
 	public static CommandResult compile(AbstractProject proj){
+		StringMultiLine returnedMessage = new StringMultiLine();
+		
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 
 		cleanProductionDirectory(proj.productionDirPath);
@@ -34,12 +37,12 @@ public class CommandCompile {
 			Path[] sourcePathArray = computeAllSourcePath(proj.sourceList, proj.packageNameList);
 			// get all teh source file from the given directories
 			result = FileTool.seekFiles("*.java", sourcePathArray);
+			
+			returnedMessage.addLine("[laFabrique] INFO  : Found " + result.getFileList().length + " classes");
 	
 	        String classpath=System.getProperty("java.class.path");
 	        Path[] libPathArray = FileTool.getFileSFromNamesAndRootDirs(proj.libDirList.toArray(new Path[0]), proj.libList);
 	        String fullpath= classpath + ":.:" + ArrayTools.toStringWithDelimiter(':', libPathArray);
-	        System.out.println("  ******** compile path " + fullpath);
-	        
 	        
 	        FileCmd.makeDir.name(proj.outputBinPath.toString()).execute();
 	        
@@ -75,11 +78,11 @@ public class CommandCompile {
 		copyAllNonJavaSource(proj);
 		
 		if (isSuccessFull == true) {
-			String message = Arrays.toString(result.getFileList());
-			message = message + "\nCompilation is successful";
-			commandResult = new CommandResult(true, message);
+			returnedMessage.addLine("[laFabrique] INFO  : Compilation is successful");
+			commandResult = new CommandResult(true, returnedMessage.toString());
 		}else{
-			commandResult = new CommandResult(false, "Fail");
+			returnedMessage.addLine("[laFabrique] ERROR  : Compilation failed");
+			commandResult = new CommandResult(false, returnedMessage.toString());
 		}
 		
 		return commandResult;

@@ -1,4 +1,4 @@
-package org.capcaval.ccoutils.jbitascii;
+package org.capcaval.ccoutils.askii;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;

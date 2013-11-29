@@ -14,6 +14,7 @@ import org.capcaval.ccoutils.commandline.CommandParam;
 import org.capcaval.ccoutils.file.FileTool;
 import org.capcaval.ccoutils.file.FileTool.FilePropertyEnum;
 import org.capcaval.ccoutils.lafabrique.command.CommandBuild;
+import org.capcaval.ccoutils.lafabrique.command.CommandCompile;
 import org.capcaval.ccoutils.lafabrique.command.CommandEclipseProject;
 import org.capcaval.ccoutils.lafabrique.command.CommandJar;
 import org.capcaval.ccoutils.lafabrique.command.CommandResult;
@@ -195,36 +196,64 @@ public class LaFabriqueCommands {
 	public String build(
 			@CommandParam(name="project name", desc="Name of the project to be built.")
 			String projectStr) {
-		System.out.println("!!!!!!!!!!!!!!!!!!!!!!!!start");
 		StringMultiLine returnedMessage = new StringMultiLine("[laFabrique] INFO  : Build start " + projectStr  + " project.");
 
-		String filePath = "prj/" + projectStr + ".java";
-		if(FileTool.isFileExist("00_prj/" + filePath) == false){
+		// compile the project first
+		AbstractProject proj = this.retrieveProject(projectStr);
+
+		if(proj == null){
 			returnedMessage.addLine("[laFabrique] ERROR : Error project " + projectStr + " can not be found.");
-			returnedMessage.addLine("                     the file 00_prj/" + filePath + " can not be found.");
+			returnedMessage.addLine("                     the file 00_prj/prj/" + projectStr + ".java can not be found.");
 			return returnedMessage.toString();
 		}
 		
-		// compile the project first
-		AbstractProject proj = null;
 		try {
-			System.out.println("+++++++++++++++++++++++++++++++++++++ start compile");
-			proj = Compiler.compile(AbstractProject.class, "00_prj", filePath, "10_bin");
-			System.out.println("+++++++++++++++++++++++++++++++++++++ end compile");
-
+			returnedMessage.addLine("[laFabrique] INFO  : Compile all classes");
 			// Now that the project is there let's build it
-			CommandResult cr = CommandBuild.build(proj);
-			//returnedMessage.addLine(cr.getMessage());
+			CommandResult cr = CommandCompile.compile(proj);
+			returnedMessage.addLine( cr.getMessage());
 
-			returnedMessage.addLine("[laFabrique] Info : Build the jar");
-			cr = CommandJar.makeJar(proj);
-			//returnedMessage.addLine(cr.getMessage());
+			if (proj.jar.name != null) {
+				returnedMessage.addLine("[laFabrique] INFO  : Build the jar");
+				cr = CommandJar.makeJar(proj);
+				returnedMessage.addLine(cr.getMessage());
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
 		return returnedMessage.toString();
+	}
+	@Command(desc="pack project")
+	public String pack(
+			@CommandParam(name="project name", desc="Name of the project to be packed.")
+			String projectStr
+			){
+		StringMultiLine returnedMessage = new StringMultiLine("[laFabrique] INFO  : Build start " + projectStr  + " project.");
+		
+		
+		return returnedMessage.toString();
+	}
+	
+	
+	public AbstractProject retrieveProject(String projectName){
+		String filePath = "prj/" + projectName + ".java";
+		
+		// if the project do not exist return null
+		if(FileTool.isFileExist("00_prj/" + filePath) == false){
+			return null;
+		}
+		
+		// compile the project first
+		AbstractProject proj = null;
+		try {
+			proj = Compiler.compile(AbstractProject.class, "00_prj", filePath, "10_bin");
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		return proj;
 	}
 
 }

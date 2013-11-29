@@ -1,4 +1,4 @@
-package org.capcaval.ccoutils.jbitascii;
+package org.capcaval.ccoutils.askii;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 
 import org.capcaval.ccoutils.lang.StringTools;
 
-public class BitmapAsciiTools {
+public class AskiiTools {
 
 	public static String convertStringToAscii(String str){
 		// default width is 80 characters		

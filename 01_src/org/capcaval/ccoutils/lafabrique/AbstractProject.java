@@ -24,15 +24,18 @@ public abstract class AbstractProject implements Project{
 	public String[] authorList;
 	public String copyright;
 	public Path outputBinPath;
-	public Path productionDirPath;
-	public Path rootProjectDirPath;
-	public String[] libList;
+	public Path productionDirPath = Paths.get("20_prod");
+	public Path rootProjectDirPath = Paths.get("00_prj");
+	public String[] libList = new String[0];
 	public String jdkVersion;
 	public String name;
 	public Path projectDir = Paths.get("00_prj");
-	public String[] packageNameList;
-
+	public String[] packageNameList = new String[]{""};
+	public String url;
+	
 	public List<Path> libDirList = ArrayTools.newArrayList(Paths.get("02_lib"));
+
+	
 	
 	public AbstractProject(){
 		// retrieve the project settings
@@ -134,6 +137,9 @@ public abstract class AbstractProject implements Project{
 		this.packageNameList = packageNameList;
 	}
 	
+	public void url(String url) {
+		this.url = url;
+	}
 
 
 }

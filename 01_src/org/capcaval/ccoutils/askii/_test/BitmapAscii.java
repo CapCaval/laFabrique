@@ -1,11 +1,11 @@
-package org.capcaval.ccoutils.jbitascii.test;
+package org.capcaval.ccoutils.askii._test;
 
 import java.awt.image.BufferedImage;
 import java.net.URL;
 
 import javax.imageio.ImageIO;
 
-import org.capcaval.ccoutils.jbitascii.BitmapAsciiTools;
+import org.capcaval.ccoutils.askii.AskiiTools;
 
 public class BitmapAscii {
 
@@ -23,7 +23,7 @@ public class BitmapAscii {
 			e.printStackTrace();
 		}
 
-		String str = BitmapAsciiTools.convertBitmapToAscii(image, 160, 20, 
+		String str = AskiiTools.convertBitmapToAscii(image, 160, 20, 
 				new char[]{'@','#','§','&','*','^','/','\\','"','-','_',';',':','.', ' '});
 				//new char[]{'%',';','.',' '});
 		

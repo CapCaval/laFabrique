@@ -12,9 +12,9 @@ import org.capcaval.ccoutils.lang.SystemTools;
 //		asciiLogoGradient="@;. ",
 //		helpWidthInChar=120,
 		author="CapCaval.org",
-//		about= {"This appplication is able to perform a greetings to anyone. It is very simple and fast to write. It provides an automatic help.",
-//				"It also remember your names if you run it at least twice."
-//				},
+		about= {"This appplication is able to perform a greetings to anyone. It is very simple and fast to write. It provides an automatic help.",
+				"It also remember your names if you run it at least twice."
+				},
 		version="0.0_7"
 		)
 public class GreeterApp{

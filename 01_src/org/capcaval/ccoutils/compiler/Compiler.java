@@ -33,11 +33,7 @@ public class Compiler {
 			binDir.mkdirs();
 		}
 		
-		System.out.println(" rootDir : " + rootDir.exists() + " SourceFile : " + sourceFile.exists() + "  binDir : " + binDir.exists());
-		System.out.println( "outDir : " + outputDir + " rootDir : " + rootDir +  " sourceFile : " + sourceFile.getPath() );
-		System.out.println( "cp : " + System.getProperty("java.class.path"));
 		// Compile source file.
-		
 		int i = 1;
 		try{
 			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
@@ -49,23 +45,18 @@ public class Compiler {
 		}catch(Exception e){
 			e.printStackTrace();
 		}
-		System.out.println("Success : " + (i==0?"Yes":"No"));
 
 		Class<?> c = null;
 		
 		SystemClassLoader scm = new SystemClassLoader();
-		//scm.addURL(binDir.toString(),"./02_lib/C3.jar");
 		scm.addURL(binDir.toString(),"./10_bin");
 		String name = source.replace('/', '.').replace(".java", "");
 		
-		System.out.println("Load class : " + name + "   SCM : " + Arrays.toString(scm.getURLs()));
 		c = scm.loadClass(name);
 		
 		T instance = null;
 		if(c!=null){
 			instance = (T)c.newInstance();}
-		
-		System.out.println("instance : " + instance);
 		
 		return instance;
 	}
@@ -128,17 +119,5 @@ public class Compiler {
 		o.init();
 		
 		System.out.println(o.i);
-		
-//		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-//
-//		FileSeekerResult result = FileTool.seekFiles("*.java", Paths.get("compileTest"));
-//
-//		int compilationResult = compiler.run(null, null, null, result.getStringFileList());
-//		if (compilationResult == 0) {
-//			System.out.println(Arrays.toString(result.getFileList()));
-//			System.out.println("Compilation is successful");
-//		} else {
-//			System.out.println("Compilation Failed");
-//		}
 	}
 }
