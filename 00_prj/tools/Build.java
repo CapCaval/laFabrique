@@ -5,7 +5,7 @@ import org.capcaval.ccoutils.lafabrique.command.CommandCompile;
 import org.capcaval.ccoutils.lafabrique.command.CommandJar;
 import org.capcaval.ccoutils.lafabrique.command.CommandResult;
 
-import prj.Project;
+import prj.C3;
 import prj.ccOutils;
 
 public class Build {

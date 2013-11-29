@@ -3,7 +3,7 @@ package tools;
 import org.capcaval.ccoutils.lafabrique.command.CommandEclipseProject;
 import org.capcaval.ccoutils.lafabrique.command.CommandResult;
 
-import prj.Project;
+import prj.C3;
 
 public class UpdateEclipseProject {
 
@@ -11,7 +11,7 @@ public class UpdateEclipseProject {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Project project = new Project();
+		C3 project = new C3();
 		CommandResult cr = CommandEclipseProject.updateEclipseProject(project);
 		System.out.println(cr);
 	}

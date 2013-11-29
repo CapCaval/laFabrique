@@ -23,19 +23,19 @@
 
 	<div id="main">
 		<h1>Welcome to ccOutils</h1>
-		<p> <b>ccOutils</b> is a Java library which provides you either extra features or simplify the use of existing ones. It is made of several small utilities classes which provides functions such as CLI, Factory, Corba servant, pair etc..</p>
-<p>The main classes are : <ul>
-<p><li><b>Application</b> This abstraction provides tools to configure and to launch your own application. Auto-documentation is also available.</li></p>
-<p><li><b>Console</b> Console line can be useful either to use your code inside scripts.</li></p>
-<p><li><b>Factory</b> Provide 2 kind of abstract Factory, one very generic with less code to write and another more powerful by letting you writing your own factory interface and implementation. Check out your needs and choose one of this</li></p>
-<p><li><b>Corba Servant</b>, At first Corba is a bit difficult to get in from its rich features. ccTools will help you by simplifying servant creation.</li></p></ul>
+		<p> <b>ccOutils</b> is a generalist Java library, helping creating software faster. Its license is the MIT type one. It provides you either extra features or simplify the use of existing ones. It is made of several classes, interfaces and annotations which provides abstractions such as Application, CLI, Factory, Compiler, pair etc..</p>
+<p>The main abstractions are : <ul>
+<p><li><b>Application :</b> This abstraction provides tools to configure and to launch your own application. Auto-documentation is also available.</li></p>
+<p><li><b>Console :</b> Console line can be useful either to use your code inside scripts.</li></p>
+<p><li><b>Factory :</b> Provide 2 kinds of abstract Factory, one very generic with few code to write and another more powerful by letting you writing your own factory interface and implementation.</li></p>
+<p><li><b>AsyncTest :</b> In order to test asynchronous source. It is usefull to test network client or server for instance.It is an based on JUnit.</li></p></ul>
 		
 
 <h1>Getting started</h1>
-<p>The easiest way is to download the ccOutils_samples.zip. Unzip it in any directory and from Eclipse, select the menu "file/import.../General/Existing Projects into Workspace"  then press "next" and "Browse" to select the sample directory. If you are interested in Factory there is also an article on it.</p>
+<p>The easiest way to test it, is to download the ccOutils_x.x_x.zip. Unzip it in any directory and from Eclipse, select the menu "file/import.../General/Existing Projects into Workspace"  then press "next" and "Browse" to select the sample directory. If you are interested in Factory there is also an article on it.</p>
 
 <h1>Get involved</h1>
-<p><b>ccOutils</b> is an sub project of C³ open source project. It is included inside C³. Sources are available on GitHub, at the following link : <a href="https://github.com/CapCaval/Projects">github.com/CapCaval/Projects</a> </p>
+<p><b>ccOutils</b> is used and included by C&sup3; open source project, its web site is <a href="http://www.c3.capcaval.org">http://www.c3.capcaval.org</a>. Sources are available on GitHub, at the following link : <a href="https://github.com/CapCaval/projects">github.com/CapCaval/projects</a> inside the sub package ccoutils.</p>
 
 </div>
 

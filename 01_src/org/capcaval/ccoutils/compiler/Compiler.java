@@ -61,31 +61,6 @@ public class Compiler {
 		return instance;
 	}
 
-	public static Object compile2() throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException{
-		// Prepare source somehow.
-		String source = "package test; public class Test { static { System.out.println(\"hello\"); } public Test() { System.out.println(\"world\"); } }";
-
-		// Save source in .java file.
-		File root = new File("java");
-		File sourceFile = new File(root, "test/Test.java");
-
-		sourceFile.getParentFile().mkdirs();
-		new FileWriter(sourceFile).append(source).close();
-
-		// Compile source file.
-		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-		compiler.run(null, null, null, "-g", "-d", "java/bin", sourceFile.getPath());
-
-		// Load and instantiate compiled class.
-		URLClassLoader classLoader = URLClassLoader.newInstance(new URL[] { root.toURI().toURL() });
-		Class<?> cls = Class.forName("test.Test", true, classLoader); // Should print "hello".
-		Object instance = cls.newInstance(); // Should print "world".
-		System.out.println(instance); // Should print "test.Test@hashcode".
-		
-		return instance;
-	}
-
-
 	public static void main(String[] args) throws IOException, ClassNotFoundException, InstantiationException, IllegalAccessException {
 		// Prepare source somehow.
 //		String source = "package test; public class Test2 extends org.capcaval.ccoutils.compiler.test.AbstractClass{ static { System.out.println(\"hello\"); } public Test2() { System.out.println(\"world\"); } public void init() { System.out.println(\"new one\"); }}";
