@@ -1,1 +1,6 @@
+*~
+.classpath
+.project
+
 10_bin/
+20_prod/
