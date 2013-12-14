@@ -1,9 +1,14 @@
-***Projects
+ccProjects
 ========
 
-Projects contain several CapCaval librairies:
+ccProjects contains several CapCaval librairies:
 
-**C³
+Ermine
+------
+Graphical librairy based on Java2D, AWT, Swing, JavaFx and OpenGL librairies.
+
+
+C³
 --
 C³ is a new kind of API which provides you a new abstraction to Java language : Component features. Component purpose is not to replace object but to add a higher abstraction. This will help you to create a simple and clear structure on your softwares.
 
@@ -12,7 +17,7 @@ C³ is 100% java, because it is simpler and more efficient. Futhermore java comp
 C³ required jdk 1.7 or above to be compiled and executed.
 
 
-**ccOutils
+ccOutils
 --------
 ccOutils is a generalist library which help developpers coding faster.
 
