@@ -26,7 +26,7 @@ ccOutils
 [ccOutils](http://ccoutils.capcaval.org) is a generalist library which help developpers coding faster.
 
 
-[C³]:http://c3.capcaval.org
+[C³]: http://c3.capcaval.org
 
 
 
