@@ -26,7 +26,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import org.capcaval.ccoutils.application._test.GreeterApp;
-import org.capcaval.ccoutils.commandline.CommandLineComputer.ComputeResult;
+import org.capcaval.ccoutils.commandline.CommandLineComputer.CommandResult;
 import org.capcaval.ccoutils.converter.Converter;
 import org.capcaval.ccoutils.converter.ConverterManager;
 import org.capcaval.ccoutils.file.FileTool;
@@ -78,12 +78,12 @@ public class ApplicationTool {
 
 	}
 
-	public static ComputeResult runApplication(Class<?> applicationType, String... args) {
+	public static CommandResult runApplication(Class<?> applicationType, String... args) {
 		return runApplication(applicationType, args, (Converter<?,?>[])null);
 	}
 	
-	public static ComputeResult runApplication(Class<?> applicationType, String[] args, Converter<?,?>... converterList) {
-		ComputeResult result = null;
+	public static CommandResult runApplication(Class<?> applicationType, String[] args, Converter<?,?>... converterList) {
+		CommandResult result = null;
 		
 		try {
 			// first allocate the application
