@@ -1,7 +1,7 @@
 ccProjects
 ========
 
-ccProjects contains several CapCaval librairies:
+ccProjects contains several [CapCaval](http://capcaval.org) librairies:
 
 
 
