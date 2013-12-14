@@ -26,15 +26,21 @@ import org.capcaval.ccoutils.compiler.Compiler;
 public class LaFabriqueCommands {
 
 	@Command
-	public String updateEclipseProject() {
+	public String updateEclipseProject(String projectStr) {
+		StringMultiLine returnedMessage = new StringMultiLine("[laFabrique] INFO  : update eclipse " + projectStr  + " project.");
 		// by default do it one the current directory
-		return this.updateEclipseProject(Paths.get("."));
+		returnedMessage.addLine(this.updateEclipseProject(Paths.get(".")));
+		
+		return returnedMessage.toString();
 	}
 
 	public String updateEclipseProject(Path path) {
+		
+		
+		
 		// first compile the project
 		AbstractProject project = this.compileProject(path);
-		
+		CommandResult.applicationName = "laFab";
 		CommandResult cr = CommandEclipseProject.updateEclipseProject(project);
 		
 		return cr.getMessage();
