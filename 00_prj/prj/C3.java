@@ -17,8 +17,7 @@ public class C3 extends AbstractProject{
 		source("01_src");
 		libDir("02_lib");
 		
-		lib(	"junit-4.8.2.jar",
-				"C3.jar");
+		lib("junit-4.8.2.jar");
 		
 		jdkVersion("jdk1.7.0_09");
 		

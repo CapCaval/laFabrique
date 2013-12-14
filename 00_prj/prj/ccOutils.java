@@ -44,8 +44,4 @@ public class ccOutils extends AbstractProject{
 		// java _jar C3.jar performTest
 	}
 
-
-
-
-
 }
