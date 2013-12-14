@@ -2,6 +2,9 @@ package org.capcaval.ccoutils.lafabrique.command;
 
 
 public class CommandResult {
+	
+	public static String applicationName = "ccOutils";
+	
 	protected boolean succeed;
 	protected String message; 
 	
@@ -13,6 +16,7 @@ public class CommandResult {
 	
 	public CommandResult(String error, Throwable t){
 		this.succeed = false;
+		this.message = t.getMessage();
 	}
 
 	public String getMessage() {
@@ -21,7 +25,7 @@ public class CommandResult {
 	
 	@Override
 	public String toString(){
-		return "[C3 ERROR] : " + this.message; 
+		return "[" + applicationName + "] : " + this.message; 
 	}
 
 }
