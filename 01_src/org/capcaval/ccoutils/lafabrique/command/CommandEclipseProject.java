@@ -55,8 +55,8 @@ public class CommandEclipseProject {
 					'{',
 					'}');		
 		
-			FileTool.writeFile( proj.rootProjectDirPath + "/.classpath", classpath);
-			FileTool.writeFile( proj.rootProjectDirPath + "/.project", writer.toString());
+			FileTool.writeFile( "./.classpath", classpath);
+			FileTool.writeFile( "./.project", writer.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

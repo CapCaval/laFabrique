@@ -1,6 +1,6 @@
 *~
 .classpath
 .project
-
+.settings/
 10_bin/
 20_prod/
