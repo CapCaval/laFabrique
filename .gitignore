@@ -1,6 +1,11 @@
+#specific to gedit
 *~
+
+# specific to eclipse
 .classpath
 .project
 .settings/
+
+# specific to ccOutils.laFabrique
 10_bin/
 20_prod/
