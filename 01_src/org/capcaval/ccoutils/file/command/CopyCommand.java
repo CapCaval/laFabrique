@@ -31,7 +31,7 @@ public class CopyCommand extends FromToCommandImpl<CopyCommand>{
 		try {
 			Files.copy(pathFrom, pathTo, StandardCopyOption.REPLACE_EXISTING);
 		} catch (IOException e) {
-			this.result.errorMessage="Copy Failed";
+			this.result.addMessage("Copy Failed");
 		}		
 		return this;		
 	}

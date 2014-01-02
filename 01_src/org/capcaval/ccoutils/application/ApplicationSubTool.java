@@ -15,7 +15,7 @@ import org.capcaval.ccoutils.commandline.CommandLineComputer;
 import org.capcaval.ccoutils.commandline.CommandWrapper;
 import org.capcaval.ccoutils.converter.Converter;
 import org.capcaval.ccoutils.converter.ConverterManager;
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.lang.StringTools;
 
 public class ApplicationSubTool {
@@ -69,7 +69,7 @@ public class ApplicationSubTool {
 			appPropertyFile = appName.replace(' ', '_') + ".properties";
 			
 			// check if the file exist
-			if(FileTool.isFileExist(appPropertyFile) == false){
+			if(FileTools.isFileExist(appPropertyFile) == false){
 				// if not set it to null
 				appPropertyFile = null;
 			}

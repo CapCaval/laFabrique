@@ -1,6 +1,6 @@
 package org.capcaval.ccoutils.lafabrique.command;
 
-import org.capcaval.ccoutils.file.command.CommandResult;
+import org.capcaval.ccoutils.common.CommandResult;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 
 public class CommandJUnit {
@@ -9,5 +9,4 @@ public class CommandJUnit {
 		
 		return new CommandResult();
 	}
-
 }

@@ -43,21 +43,31 @@ public class FileSeeker extends SimpleFileVisitor<Path> {
 	public List<Path> fileList = new ArrayList<Path>();
 	public Map<String, Path> excludeFileMap = new HashMap<String, Path>();
 	private Path startingDir;
-	
+	private boolean insideJar = true;
 	
 	public FileSeeker(String pattern, Path... excludeList) throws IOException{
+		// by default seek inside jar
+		this.init(pattern, true, excludeList);
+	}
+	
+	public FileSeeker(String pattern,  boolean insideJar, Path... excludeList) throws IOException{
+		this.init(pattern, insideJar, excludeList);
+	} 
+
+	public void init(String pattern, boolean insideJar, Path... excludeList) throws IOException{
 		this.matcher = FileSystems.getDefault()
                     .getPathMatcher("glob:" + pattern);
+		
+		this.insideJar = insideJar;
 		
 		for(Path path : excludeList){
 			this.excludeFileMap.put(path.toFile().getName(), path);
 		}
-		
 	} 
-	
+
 	@Override
     public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
-		if(file.toString().endsWith(".jar")==true){
+		if((this.insideJar == true)&&(file.toString().endsWith(".jar")==true)){
 			try {
 				System.out.println(file.toFile().getAbsolutePath());
 				final JarFile jarFile = new JarFile(file.toFile());
@@ -96,6 +106,9 @@ public class FileSeeker extends SimpleFileVisitor<Path> {
 	}
 
 	public FileSeekerResult seek(Path startingDir, FileSeekerResult result) throws IOException {
+		// init result list
+		this.fileList.clear();
+		
 		// keep a ref on the starting directory
 		this.startingDir = startingDir;
 		// Go 

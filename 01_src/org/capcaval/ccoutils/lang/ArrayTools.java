@@ -89,6 +89,11 @@ public class ArrayTools {
 		return list;
 	}
 
+	@SuppressWarnings("unchecked")
+	static public <T> T[] convertToArray2(List<T> list, Class<T> type){
+		return (T[])convertToArray((List<Object>)list, (Class<?>)type);
+	}
+	
 	static public Object convertToArray(List<Object> list, Class<?> type){
 		Object object = null;
 		int i = 0;

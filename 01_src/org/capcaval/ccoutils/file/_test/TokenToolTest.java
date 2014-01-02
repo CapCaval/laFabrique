@@ -31,7 +31,7 @@ import java.nio.file.Paths;
 import java.util.List;
 import java.util.Map;
 
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.TokenTool;
 import org.capcaval.ccoutils.lang.ArrayTools;
 import org.capcaval.ccoutils.lang.StringTools;

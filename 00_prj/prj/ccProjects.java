@@ -12,16 +12,16 @@ public class ccProjects extends AbstractProject{
 		author("CapCaval.org");
 		copyright("CapCaval.org");
 		licence("MIT");
-		url("http://ccoutils.capcaval.org");
+		url("http://capcaval.org");
 
-		projectDir("00_prj");
-		source("01_src");
+		prjDir("00_prj");
+		srcDir("01_src");
 		libDir("02_lib");
+		binDir("10_bin");
+		prodDir("20_prod");
 		
 		lib("junit-4.8.2.jar");
-		
 		jdkVersion("jdk1.7.0_09");
-		prodDirPath("20_prod");
 	}
 
 }

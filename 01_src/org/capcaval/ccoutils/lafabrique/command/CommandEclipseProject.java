@@ -9,7 +9,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.common.CommandResult;
+import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.TokenTool;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 import org.capcaval.ccoutils.lang.ArrayTools;
@@ -35,7 +36,7 @@ public class CommandEclipseProject {
 		// set the jdk and the output
 		classpath =  TokenTool.replaceTokenFromReader(
 				classpath, 
-				ArrayTools.newMap("jdkVersion", proj.jdkVersion, "output", proj.productionDirPath.toString()), 
+				ArrayTools.newMap("jdkVersion", proj.jdkVersion, "output", proj.binDirPath.toString()), 
 				'{', 
 				'}');
 		
@@ -55,13 +56,13 @@ public class CommandEclipseProject {
 					'{',
 					'}');		
 		
-			FileTool.writeFile( "./.classpath", classpath);
-			FileTool.writeFile( "./.project", writer.toString());
+			FileTools.writeFile( "./.classpath", classpath);
+			FileTools.writeFile( "./.project", writer.toString());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
-		return new CommandResult(true, "Eclipse project updated");
+		return new CommandResult("Eclipse project updated");
 	}
 
 }

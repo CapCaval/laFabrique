@@ -1,18 +1,21 @@
 package org.capcaval.ccoutils.lafabrique.command;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Arrays;
 import java.util.jar.Attributes;
 import java.util.jar.Manifest;
 
+import org.capcaval.ccoutils.common.CommandResult;
 import org.capcaval.ccoutils.file.FileSeekerResult;
-import org.capcaval.ccoutils.file.FileTool;
-import org.capcaval.ccoutils.file.JarTool;
+import org.capcaval.ccoutils.file.FileTools;
+import org.capcaval.ccoutils.file.JarZipTools;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
+import org.capcaval.ccoutils.lang.ListTools;
 import org.capcaval.ccoutils.lang.StringMultiLine;
+import org.capcaval.ccoutils.lang.listProcessor.RemoveContainsFileListProcessor;
 
 public class CommandJar {
 	public static CommandResult makeJar(AbstractProject proj){
@@ -24,7 +27,7 @@ public class CommandJar {
 			Path jarPath = Paths.get(proj.jar.outputJar + "/" + proj.jar.name); 
 			
 			// delete the old one if existing
-			FileTool.deleteFile(jarPath);
+			FileTools.deleteFile(jarPath);
 			
 			zipFile = Files.createFile( jarPath);
 		} catch (IOException e) {
@@ -33,13 +36,19 @@ public class CommandJar {
 			
 		FileSeekerResult r = null;
 		try {
-			r = FileTool.seekFiles("*", proj.outputBinPath);
+			Path srcPath = proj.productionDirPath.resolve(Paths.get(proj.tempProdSource));
+			
+			r = FileTools.seekFiles("*", srcPath);
+			
+			File[] fileList = r.getFileList();
+			// remove all unwanted directories
+			fileList = ListTools.compute(fileList, new RemoveContainsFileListProcessor("_test", "_design"));
 		
-			JarTool.createJarFile(
+			JarZipTools.createJarFile(
 					zipFile.toFile(), 
 					createManifest(proj),
-					proj.outputBinPath.toFile(), 
-					r.getFileList());
+					srcPath.toFile(), 
+					fileList);
 			
 			returnedMessage.addLine("[laFabrique] INFO  : Jar successFully created at " + zipFile.toFile().getAbsolutePath());
 		
@@ -47,7 +56,7 @@ public class CommandJar {
 			e.printStackTrace();
 		}
 		
-		return new CommandResult(true, returnedMessage.toString());
+		return new CommandResult(returnedMessage.toString());
 	}
 	
 	public static Manifest createManifest(AbstractProject proj){

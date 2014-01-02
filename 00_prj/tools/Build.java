@@ -1,11 +1,9 @@
 package tools;
 
-import org.capcaval.ccoutils.lafabrique.command.CommandBuild;
+import org.capcaval.ccoutils.common.CommandResult;
 import org.capcaval.ccoutils.lafabrique.command.CommandCompile;
 import org.capcaval.ccoutils.lafabrique.command.CommandJar;
-import org.capcaval.ccoutils.lafabrique.command.CommandResult;
 
-import prj.C3;
 import prj.ccOutils;
 
 public class Build {

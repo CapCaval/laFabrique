@@ -10,7 +10,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.capcaval.ccoutils.file.FileSeekerResult;
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.lang.SystemTools.OSType;
 import org.junit.Test;
 
@@ -74,10 +74,10 @@ public class ClassTools {
 
 			FileSeekerResult result = null;
 			try {
-				result = FileTool.seekFiles(classShortName + ".class", path);
+				result = FileTools.seekFiles(classShortName + ".class", path);
 				if (result.getFileList().length == 0) {
 					// search
-					result = FileTool.seekFiles("*$" + classShortName
+					result = FileTools.seekFiles("*$" + classShortName
 							+ ".class", path);
 				}
 			} catch (IOException e) {

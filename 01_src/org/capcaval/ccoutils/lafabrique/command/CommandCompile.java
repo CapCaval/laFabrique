@@ -1,5 +1,6 @@
 package org.capcaval.ccoutils.lafabrique.command;
 
+import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -12,9 +13,10 @@ import javax.tools.JavaFileObject;
 import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
+import org.capcaval.ccoutils.common.CommandResult;
 import org.capcaval.ccoutils.file.FileFilter;
 import org.capcaval.ccoutils.file.FileSeekerResult;
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.command.FileCmd;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 import org.capcaval.ccoutils.lang.ArrayTools;
@@ -34,22 +36,24 @@ public class CommandCompile {
 		JavaCompiler.CompilationTask task = null;
 		
 		try {
-			Path[] sourcePathArray = computeAllSourcePath(proj.sourceList, proj.packageNameList);
+			Path[] sourcePathArray = computeAllSourcePath(proj.sourceDirList, proj.packageNameList);
 			// get all teh source file from the given directories
-			result = FileTool.seekFiles("*.java", sourcePathArray);
+			result = FileTools.seekFiles("*.java", sourcePathArray);
 			
 			returnedMessage.addLine("[laFabrique] INFO  : Found " + result.getFileList().length + " classes");
 	
 	        String classpath=System.getProperty("java.class.path");
-	        Path[] libPathArray = FileTool.getFileSFromNamesAndRootDirs(proj.libDirList.toArray(new Path[0]), proj.libList);
+	        Path[] libPathArray = FileTools.getFileSFromNamesAndRootDirs(proj.libDirList.toArray(new Path[0]), proj.libList);
 	        String fullpath= classpath + ":.:" + ArrayTools.toStringWithDelimiter(':', libPathArray);
 	        
-	        FileCmd.makeDir.name(proj.outputBinPath.toString()).execute();
+	        String binDir = proj.productionDirPath.toString() + "/" + proj.tempProdSource;
+	        
+	        FileCmd.makeDir.name(binDir).execute();
 	        
 	        List<String> optionList =  ArrayTools.newArrayList(
 	        		"-g",
 	        		"-classpath",fullpath,
-	        		"-d", proj.outputBinPath.toString());
+	        		"-d", binDir);
 	        
 	        StandardJavaFileManager sfm = compiler.getStandardFileManager(null, null, null);
 	        Iterable<? extends JavaFileObject> fileObjects = sfm.getJavaFileObjects(result.getStringFileList());
@@ -79,10 +83,10 @@ public class CommandCompile {
 		
 		if (isSuccessFull == true) {
 			returnedMessage.addLine("[laFabrique] INFO  : Compilation is successful");
-			commandResult = new CommandResult(true, returnedMessage.toString());
+			commandResult = new CommandResult(returnedMessage.toString());
 		}else{
 			returnedMessage.addLine("[laFabrique] ERROR  : Compilation failed");
-			commandResult = new CommandResult(false, returnedMessage.toString());
+			commandResult = new CommandResult(returnedMessage.toString());
 		}
 		
 		return commandResult;
@@ -91,7 +95,7 @@ public class CommandCompile {
 	private static void cleanProductionDirectory(Path productionDirPath) {
 		try{
 			// delete the production if existing
-			FileTool.deleteFile( productionDirPath);
+			FileTools.deleteFile( productionDirPath);
 			// recreate it
 			Files.createDirectories( productionDirPath);}
 		catch(Exception e){
@@ -102,12 +106,14 @@ public class CommandCompile {
 	private static void copyAllNonJavaSource(AbstractProject proj) {
 		FileFilter fileFilter = newNonJavaFilter();
 		
-		for(Path path : proj.sourceList){
+		Path destBinDir = proj.productionDirPath.resolve(Paths.get(proj.tempProdSource));
+		
+		for(Path path : proj.sourceDirList){
 			for(String packageName : proj.packageNameList){
 				String packagePath = packageName.replace(".","/");
 				Path p = Paths.get(path.toString()+"/" + packagePath);
 				// let's copy
-				FileTool.copy( p, proj.outputBinPath, path, fileFilter);
+				FileTools.copy( p, destBinDir, path, fileFilter);
 			}
 		}
 	}

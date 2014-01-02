@@ -11,33 +11,41 @@ import java.util.List;
 
 import org.capcaval.ccoutils.commandline.Command;
 import org.capcaval.ccoutils.commandline.CommandParam;
-import org.capcaval.ccoutils.file.FileTool;
-import org.capcaval.ccoutils.file.FileTool.FilePropertyEnum;
-import org.capcaval.ccoutils.lafabrique.command.CommandBuild;
+import org.capcaval.ccoutils.common.CommandResult;
+import org.capcaval.ccoutils.compiler.Compiler;
+import org.capcaval.ccoutils.file.FileTools;
+import org.capcaval.ccoutils.file.FileTools.FilePropertyEnum;
 import org.capcaval.ccoutils.lafabrique.command.CommandCompile;
 import org.capcaval.ccoutils.lafabrique.command.CommandEclipseProject;
 import org.capcaval.ccoutils.lafabrique.command.CommandJar;
-import org.capcaval.ccoutils.lafabrique.command.CommandResult;
+import org.capcaval.ccoutils.lafabrique.command.CommandPack;
 import org.capcaval.ccoutils.lang.ArrayTools;
 import org.capcaval.ccoutils.lang.StringMultiLine;
-import org.capcaval.ccoutils.compiler.Compiler;
 
 
 public class LaFabriqueCommands {
 
 	@Command
-	public String updateEclipseProject() {
-		// by default do it one the current directory
-		return this.updateEclipseProject(Paths.get("."));
-	}
+	public String updateEclipseProject(String projectNameStr) {
+		CommandResult cr1 = new CommandResult("Update Eclipse project named " + projectNameStr);
 
-	public String updateEclipseProject(Path path) {
-		// first compile the project
-		AbstractProject project = this.compileProject(path);
+		// compile the project first
+		AbstractProject project = this.retrieveProject(projectNameStr);
+
+		if(project == null){
+			StringMultiLine returnedMessage = new StringMultiLine(
+					"Error project " + projectNameStr + " can not be found.",
+					"                     the file 00_prj/prj/" + projectNameStr + ".java can not be found.");
+			
+			CommandResult crError = new CommandResult(returnedMessage.toString());
+			
+			return cr1.toString() + crError.toString();
+		}
 		
-		CommandResult cr = CommandEclipseProject.updateEclipseProject(project);
+		CommandResult cr2 = CommandEclipseProject.updateEclipseProject(project);
 		
-		return cr.getMessage();
+		// by default do it one the current directory
+		return cr1.toString() + cr2.toString();
 	}
 
 	
@@ -55,7 +63,7 @@ public class LaFabriqueCommands {
 		// clean the directory
 		try {
 			if (projectPath.toFile().exists() == true) {
-				FileTool.deleteFile(projectPath);
+				FileTools.deleteFile(projectPath);
 			}
 		} catch (IOException e1) {
 			e1.printStackTrace();
@@ -63,7 +71,7 @@ public class LaFabriqueCommands {
 
 		List<Path> subDirList = ArrayTools.newArrayList(rootProj.projectDir);
 		// add all the source directory
-		for(Path srcPath : rootProj.sourceList){
+		for(Path srcPath : rootProj.sourceDirList){
 			subDirList.add(srcPath);
 		}
 		// add all the lib directory
@@ -132,10 +140,10 @@ public class LaFabriqueCommands {
 		// projectPath.toString());
 
 		InputStream laFabStream = this.getClass().getResourceAsStream("laFab");
-		FileTool.saveInputStream(laFabStream, Paths.get(projectPath.toString(), "laFab"), FilePropertyEnum.xr_);
+		FileTools.saveInputStream(laFabStream, Paths.get(projectPath.toString(), "laFab"), FilePropertyEnum.xr_);
 
 		InputStream laFabBatStream = this.getClass().getResourceAsStream("laFab.bat");
-		FileTool.saveInputStream(laFabBatStream, Paths.get(projectPath.toString(), "laFab.bat"), FilePropertyEnum.xr_);
+		FileTools.saveInputStream(laFabBatStream, Paths.get(projectPath.toString(), "laFab.bat"), FilePropertyEnum.xr_);
 
 		// create a new Proj
 		try {
@@ -148,7 +156,7 @@ public class LaFabriqueCommands {
 			// Path projPath = Paths.get(projectPath.toString(), "00_project");
 			// Files.createDirectories(projPath);
 
-			FileTool.replaceTokenInFile(prjReader, Paths.get(projectPath.toString() + "/00_prj/prj/", "Project.java"),
+			FileTools.replaceTokenInFile(prjReader, Paths.get(projectPath.toString() + "/00_prj/prj/", "Project.java"),
 					ArrayTools.newMap("projectName", name), '{', '}');
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -211,14 +219,21 @@ public class LaFabriqueCommands {
 			returnedMessage.addLine("[laFabrique] INFO  : Compile all classes");
 			// Now that the project is there let's build it
 			CommandResult cr = CommandCompile.compile(proj);
-			returnedMessage.addLine( cr.getMessage());
+			returnedMessage.addLine( cr.getReturnMessage());
 
 			if (proj.jar.name != null) {
 				returnedMessage.addLine("[laFabrique] INFO  : Build the jar");
 				cr = CommandJar.makeJar(proj);
-				returnedMessage.addLine(cr.getMessage());
+				returnedMessage.addLine(cr.getReturnMessage());
+				
+				// copy the new jar inside the sample directory
+				//copyFile(returnedMessage, proj.productionDirPath.toString() + "/" + proj.jar.name, "30_sample/02_lib");
+				Path src = Paths.get(proj.productionDirPath.toString() + "/" + proj.jar.name);
+				Path dst = Paths.get("30_sample/02_lib/"+ proj.jar.name);
+				FileTools.copy( src, dst);
+				returnedMessage.addLine("[laFabrique] INFO  : copy the jar to " + dst.toString());
 			}
-
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -230,9 +245,12 @@ public class LaFabriqueCommands {
 			@CommandParam(name="project name", desc="Name of the project to be packed.")
 			String projectStr
 			){
-		StringMultiLine returnedMessage = new StringMultiLine("[laFabrique] INFO  : Build start " + projectStr  + " project.");
+		StringMultiLine returnedMessage = new StringMultiLine("[laFabrique] INFO  : Pack start " + projectStr  + " project.");
 		
+		// compile the project first
+		AbstractProject proj = this.retrieveProject(projectStr);
 		
+		CommandPack.pack(proj);
 		return returnedMessage.toString();
 	}
 	
@@ -241,7 +259,7 @@ public class LaFabriqueCommands {
 		String filePath = "prj/" + projectName + ".java";
 		
 		// if the project do not exist return null
-		if(FileTool.isFileExist("00_prj/" + filePath) == false){
+		if(FileTools.isFileExist("00_prj/" + filePath) == false){
 			return null;
 		}
 		

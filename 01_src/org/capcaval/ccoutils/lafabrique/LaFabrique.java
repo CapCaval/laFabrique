@@ -1,9 +1,9 @@
 package org.capcaval.ccoutils.lafabrique;
 
-import org.capcaval.ccoutils.application.ApplicationTool;
+import org.capcaval.ccoutils.application.ApplicationTools;
 import org.capcaval.ccoutils.application.annotations.AggregatedCommand;
 import org.capcaval.ccoutils.application.annotations.AppInformation;
-import org.capcaval.ccoutils.commandline.CommandLineComputer.ComputeResult;
+import org.capcaval.ccoutils.common.CommandResult;
 
 @AppInformation (
 		name="laFabrique",
@@ -18,7 +18,7 @@ public class LaFabrique{
 	protected LaFabriqueCommands laFabriqueCommands = new LaFabriqueCommands();
 	
 	public static void main(String[] args) {
-		ComputeResult r = ApplicationTool.runApplication(LaFabrique.class, args);
-		System.out.println(r.returnMessage);
+		CommandResult r = ApplicationTools.runApplication(LaFabrique.class, args);
+		System.out.println(r.getReturnMessage());
 	}
 }

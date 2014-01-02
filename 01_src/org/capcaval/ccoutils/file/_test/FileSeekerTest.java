@@ -28,12 +28,12 @@ import java.util.Arrays;
 import junit.framework.Assert;
 
 import org.capcaval.ccoutils.file.FileSeekerResult;
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
 
 public class FileSeekerTest {
 	@org.junit.Test
 	public void testFileSeeker() throws IOException {
-		FileSeekerResult result = FileTool.seekFiles("*.java", Paths.get("01_src"));
+		FileSeekerResult result = FileTools.seekFiles("*.java", Paths.get("01_src"));
 		Assert.assertTrue(result.getFileList().length > 1);
 		
 		System.out.println(Arrays.toString(result.getFileList()));
@@ -41,7 +41,7 @@ public class FileSeekerTest {
 
 	@org.junit.Test
 	public void testFileSeekerinJar() throws IOException {
-		FileSeekerResult result = FileTool.seekFiles("*.class", Paths.get("02_lib"));
+		FileSeekerResult result = FileTools.seekFiles("*.class", Paths.get("02_lib"));
 		Assert.assertTrue(result.getFileList().length > 1);
 		
 		System.out.println(Arrays.toString(result.getFileList()));
@@ -49,10 +49,18 @@ public class FileSeekerTest {
 	
 	@org.junit.Test
 	public void testFileInnerSeekerinJar() throws IOException {
-		FileSeekerResult result = FileTool.seekFiles("*$InnerTest.class", Paths.get("10_bin"));
+		FileSeekerResult result = FileTools.seekFiles("*$InnerTest.class", Paths.get("10_bin"));
 		Assert.assertTrue(result.getFileList().length == 1);
 		
 		System.out.println(Arrays.toString(result.getFileList()));
 	}
 
+	
+	@org.junit.Test
+	public void testFileNoPointSeekerinJar() throws IOException {
+		FileSeekerResult result = FileTools.seekFiles("*", Paths.get("10_bin"));
+		//Assert.assertTrue(result.getFileList().length == 1);
+		
+		System.out.println(Arrays.toString(result.getFileList()));
+	}
 }

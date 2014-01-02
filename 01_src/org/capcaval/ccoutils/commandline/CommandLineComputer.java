@@ -8,6 +8,7 @@ import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.capcaval.ccoutils.common.CommandResult;
 import org.capcaval.ccoutils.converter.Converter;
 import org.capcaval.ccoutils.converter.ConverterManager;
 import org.capcaval.ccoutils.lang.ArrayError;
@@ -54,30 +55,11 @@ public class CommandLineComputer {
 		this.primitiveMap.put("char", Character.class);
 		this.primitiveMap.put("short", Short.class);
 		this.primitiveMap.put("byte", Byte.class);
-		
-	}
-
-	public class ComputeResult{
-		public String returnMessage;
-		public boolean isCommandFound;
-		
-		public ComputeResult(String returnMessage, boolean isCommandFound){
-			this.returnMessage = returnMessage;
-			this.isCommandFound = isCommandFound;
-		}
-		
-		public String getReturnMessage(){
-			return this.returnMessage;
-		}
-		
-		public boolean isCommandFound(){
-			return this.isCommandFound;
-		}
 	}
 	
-	public ComputeResult computeCommandLine(String... commandArray){
+	public CommandResult computeCommandLine(String... commandArray){
 		if((commandArray == null)||(commandArray.length == 0)){
-			return new ComputeResult("["+ this.consoleName + "] Error : There is no command or default command." + 
+			return new CommandResult("["+ this.consoleName + "] Error : There is no command or default command." + 
 					"\nPlease use help to see the avalaible commands.", false);
 		}
 		
@@ -87,7 +69,7 @@ public class CommandLineComputer {
 		CommandWrapper w = this.commandMap.get(command);
 		
 		if(w == null){
-			return new ComputeResult("["+ this.consoleName + "] Error : The command \"" + command + "\" can not be found." + 
+			return new CommandResult("["+ this.consoleName + "] Error : The command \"" + command + "\" can not be found." + 
 					"\nPlease use help to see the avalaible commands.", false);
 		}
 		
@@ -97,12 +79,12 @@ public class CommandLineComputer {
 		commandList = commandList.subList(1, commandList.size());
 
 		// let's go execute
-		ComputeResult result = executeCommand(w, commandList, this.cm);
+		CommandResult result = executeCommand(w, commandList, this.cm);
 		
 		return result;
 	}
 	
-	protected ComputeResult executeCommand(CommandWrapper w, List<String> commandList, ConverterManager cm) {
+	protected CommandResult executeCommand(CommandWrapper w, List<String> commandList, ConverterManager cm) {
 		ArrayError arrayError = null;
 		Object returnedObject = null;
 		
@@ -112,7 +94,7 @@ public class CommandLineComputer {
 			
 			// check the number of parameter and if it is not containing a list
 			if((w.isContaingList == false)&&(commandList.size() != paramTypeList.length)){
-				return new ComputeResult("["+ this.consoleName + "] Error : The command " + w.commandStr + 
+				return new CommandResult("["+ this.consoleName + "] Error : The command " + w.commandStr + 
 						" needs " + paramTypeList.length + " parameters and you have entered " + commandList.size() + " parameter(s)" +
 						"\n  the command signature is " + w.commandStr + Arrays.toString(paramTypeList), false); 
 			}
@@ -148,7 +130,7 @@ public class CommandLineComputer {
 			Converter<Object,String> c = (Converter<Object,String>)this.cm.getConverter(retType, String.class);
 			str = c.convert(returnedObject);
 			}
-		return new ComputeResult(str, true);
+		return new CommandResult(str, true);
 	}
 	private void computeParam(Class<?> type, List<Object> paramObjList, ArrayError arrayError, List<String> paramList, ConverterManager cm) {
 		// check if it is an enum

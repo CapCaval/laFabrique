@@ -38,5 +38,27 @@ public class SystemTools {
 		return message;
 	}
 
-
+	public static Class<?> getCallerType(){
+		// the default call level is 3
+		return getCallerType(3);
+	}
+	
+	public static Class<?> getCallerType(int callLevel){
+		// get the stack to see who called this static method
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		
+		// get the class name of the caller
+		String className = stackTrace[callLevel].getClassName();
+		
+		// get the path of the calling class
+		Class<?> type = null;
+		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
+		try {
+			type =  classLoader.loadClass(className);
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+		
+		return type;
+	}
 }

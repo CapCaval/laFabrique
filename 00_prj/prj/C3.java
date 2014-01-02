@@ -13,17 +13,17 @@ public class C3 extends AbstractProject{
 		copyright("CapCaval.org");
 		licence("MIT");
 
-		projectDir("00_prj");
-		source("01_src");
+		prjDir("00_prj");
+		srcDir("01_src");
 		libDir("02_lib");
 		
 		lib("junit-4.8.2.jar");
 		
 		jdkVersion("jdk1.7.0_09");
 		
-		librairiePath("04_lib");
-		librairiesForCompiling("ccTools");
-		prodDirPath("20_prod");
+//		librairiePath("04_lib");
+//		librairiesForCompiling("ccTools");
+		prodDir("20_prod");
 
 		jar.name("C3.jar");
 		jar.excludeDirectoryName("_test");

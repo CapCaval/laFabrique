@@ -2,7 +2,7 @@ package org.capcaval.ccoutils.converter.basicconverters;
 
 import org.capcaval.ccoutils.converter.Converter;
 import org.capcaval.ccoutils.converter.ConverterAbstract;
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.lang.ClassTools;
 
 public class StringToEnum extends ConverterAbstract<String, Enum> {

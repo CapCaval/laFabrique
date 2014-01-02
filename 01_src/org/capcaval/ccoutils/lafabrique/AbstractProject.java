@@ -13,22 +13,22 @@ import org.capcaval.ccoutils.lang.ArrayTools;
  */
 public abstract class AbstractProject implements Project{
 
-	public Path[] sourceList;
+	public Path[] sourceDirList;
 
 	public List<Path> excludeSourceList;
 	public Jar jar = new Jar();
 	public Test test;
 	public String version;
-	public String[] libPathList;
 	public String licence;
 	public String[] authorList;
 	public String copyright;
-	public Path outputBinPath;
+	public Path binDirPath= Paths.get("10_bin");
 	public Path productionDirPath = Paths.get("20_prod");
 	public Path rootProjectDirPath = Paths.get("00_prj");
+	public String tempProdSource = "tempSrc";
 	public String[] libList = new String[0];
 	public String jdkVersion;
-	public String name;
+	public String name = this.getClass().getName();
 	public Path projectDir = Paths.get("00_prj");
 	public String[] packageNameList = new String[]{""};
 	public String url;
@@ -42,13 +42,13 @@ public abstract class AbstractProject implements Project{
 		this.defineProject();
 
 		// if no specific outputBinPath defined get the one
-		if(this.outputBinPath == null){
-			this.outputBinPath = Paths.get(this.productionDirPath.toString() + "/bin"); 
+		if(this.binDirPath == null){
+			this.binDirPath = Paths.get(this.productionDirPath.toString() + "/bin"); 
 		}
 		// if no specific jar bin output defined get the one 
 		if(this.jar.outputBinPath == null){
 			// by default link the jar output same as the project
-			this.jar.outputBinPath = this.outputBinPath;
+			this.jar.outputBinPath = this.binDirPath;
 			}
 		if(this.jar.outputJar == null){
 			// by default link the jar output same as the project
@@ -59,13 +59,13 @@ public abstract class AbstractProject implements Project{
 
 	
 
-	protected void source(String...stringPathList){
+	protected void srcDir(String...stringPathList){
 		List<Path> pathList = new ArrayList<>();
 		for(String str : stringPathList){
 			pathList.add(Paths.get(str));
 		}
 		
-		this.sourceList = pathList.toArray(new Path[0]);
+		this.sourceDirList = pathList.toArray(new Path[0]);
 	}
 
 	protected void author(String...authorList){
@@ -76,8 +76,8 @@ public abstract class AbstractProject implements Project{
 		this.copyright = copyright;
 	}
 
-	public void outputBinPath(String pathStr){
-		this.outputBinPath = Paths.get(pathStr);
+	public void binDir(String pathStr){
+		this.binDirPath = Paths.get(pathStr);
 	}
 	
 	protected void exclude(String...stringPathList){
@@ -92,14 +92,7 @@ public abstract class AbstractProject implements Project{
 		this.version= version;
 	}
 
-	protected void librairiePath(String... libPathList){
-		this.libPathList =libPathList;
-	}
-	
 	protected void version(int... version){
-	}
-
-	protected void librairiesForCompiling(String...stringList){
 	}
 
 	protected void outputClass(String stringList){
@@ -113,7 +106,7 @@ public abstract class AbstractProject implements Project{
 	public void lib(String... libList) {
 		this.libList = libList;
 	}
-	public void prodDirPath(String pathStr) {
+	public void prodDir(String pathStr) {
 		this.productionDirPath = Paths.get(pathStr);
 	}
 	protected void jdkVersion(String version) {
@@ -122,7 +115,7 @@ public abstract class AbstractProject implements Project{
 	protected void name(String name) {
 		this.name = name;
 	}
-	protected void projectDir(String projectDir) {
+	protected void prjDir(String projectDir) {
 		this.projectDir = Paths.get(projectDir);
 	}
 	
@@ -130,7 +123,6 @@ public abstract class AbstractProject implements Project{
 		for(String dirStr : libDirStrList){
 			this.libDirList.add(Paths.get(dirStr));
 		}
-		
 	}
 	
 	public void packageName(String... packageNameList) {

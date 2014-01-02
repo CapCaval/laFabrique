@@ -18,7 +18,7 @@ public class CommandLineAbstractMain {
 			clc.addCommandInstance(object);
 		}
 		
-		String resultStr = clc.computeCommandLine(args).returnMessage;
+		String resultStr = clc.computeCommandLine(args).getReturnMessage();
 		System.out.println(resultStr);
 	}
 

@@ -15,7 +15,7 @@ import javax.tools.ToolProvider;
 import org.capcaval.ccoutils.compiler._test.AbstractClass;
 import org.capcaval.ccoutils.compiler._test.MyInterface;
 import org.capcaval.ccoutils.file.FileSeekerResult;
-import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.lang.StringMultiLine;
 import org.capcaval.ccoutils.lang.SystemClassLoader;
 
@@ -39,7 +39,7 @@ public class Compiler {
 			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 			i = compiler.run(null, null, null, 
 					"-g",
-					"-classpath", "02_lib/ccOutils.jar:junit-4.8.2.jar:10_bin",
+					"-classpath", "10_bin:02_lib/ccOutils.jar",
 					"-d", outputDir, 
 					sourceFile.getPath());
 		}catch(Exception e){
