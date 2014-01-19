@@ -18,7 +18,7 @@ public class AskiiTools {
 	public static String convertStringToAscii(String str, String gradient, int widthInChar){
 		int fontSize = 300;
 
-		BufferedImage imageTemp = new BufferedImage(2400, 350, BufferedImage.TYPE_BYTE_GRAY);
+		BufferedImage imageTemp = new BufferedImage(10, 10, BufferedImage.TYPE_BYTE_GRAY);
 		Graphics2D gTemp = (Graphics2D)imageTemp.getGraphics();
 		
 		Font font = new Font("Verdena", Font.BOLD, fontSize);  // Verdena
@@ -41,7 +41,14 @@ public class AskiiTools {
 		// compute the image ratio
 		double ratio = width/290;
 
+		if(ratio<1){
+			// watch dog for short string
+			ratio = 1;
+		}
+		
 		int heightInChar = (int)(widthInChar / ratio);
+		
+		
 		
 		return convertBitmapToAscii(image, widthInChar, heightInChar, gradient.toCharArray());
 	}
@@ -49,6 +56,10 @@ public class AskiiTools {
 	
 	public static String convertBitmapToAscii(BufferedImage image){
 		return convertBitmapToAscii(image, new String("@&;,. ").toCharArray());
+	}
+	
+	public static String convertBitmapToAscii(BufferedImage image, String conversionTable){
+		return convertBitmapToAscii(image, conversionTable.toCharArray());
 	}
 	
 	public static String convertBitmapToAscii(BufferedImage image, char[] conversionTable){

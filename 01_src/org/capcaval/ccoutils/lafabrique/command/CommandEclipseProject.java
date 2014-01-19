@@ -5,7 +5,9 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Writer;
+import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -33,10 +35,17 @@ public class CommandEclipseProject {
 				'{', 
 				'}');
 		
+		Map<String, String> map = new HashMap<>();
+		map.put("jdkVersion", proj.jdkVersion);
+		map.put("output", proj.binDirPath.toString());
+		for(Path p : proj.sourceDirList){
+			map.put("srcPath", p.toString());
+		}
+		
 		// set the jdk and the output
 		classpath =  TokenTool.replaceTokenFromReader(
 				classpath, 
-				ArrayTools.newMap("jdkVersion", proj.jdkVersion, "output", proj.binDirPath.toString()), 
+				map, 
 				'{', 
 				'}');
 		

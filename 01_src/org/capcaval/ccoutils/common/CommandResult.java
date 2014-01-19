@@ -7,7 +7,7 @@ public class CommandResult {
 	
 	public boolean isCommandFound;
 	
-	enum Type {ERROR, WARNING, INFO};
+	public enum Type {ERROR, WARNING, INFO};
 	
 	protected Type type;
 	protected StringMultiLine message = new StringMultiLine(); 
@@ -24,11 +24,20 @@ public class CommandResult {
 	}
 	
 	public CommandResult(String message) {
-		this.type = Type.INFO;
+		this.init(Type.INFO, message);
+	}
+	
+	public CommandResult(Type type, String message) {
+		this.init(type, message);
+	}
+
+	public void init(Type type, String message) {
+		this.type = type;
 		this.message.addLine(message);
 		this.isCommandFound = true;
 	}
 
+	
 	public String getReturnMessage(){
 		return this.message.toString();
 	}
@@ -41,8 +50,12 @@ public class CommandResult {
 		this.message.addLine(message);
 	}
 	
+	public Type getType(){
+		return this.type;
+	}
+	
 	@Override
 	public String toString(){
-		return "[" + applicationName + "] " +  this.type + "  : " + this.message; 
+		return "[" + applicationName + "]\n" +  this.type + "  : " + this.message; 
 	}
 }

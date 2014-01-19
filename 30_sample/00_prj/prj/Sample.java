@@ -14,7 +14,7 @@ public class Sample extends AbstractProject{
 		licence("MIT");
 		url("http://ccoutils.capcaval.org");
 
-		srcDir("01_src");
+		srcDir("01_sampleSrc");
 		
 		libDir("02_lib");
 		lib("ccOutils.jar");

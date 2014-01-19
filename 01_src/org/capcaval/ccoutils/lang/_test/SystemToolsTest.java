@@ -19,5 +19,13 @@ public class SystemToolsTest {
 		// the caller shall be the test
 		Assert.assertEquals( this.getClass(), caller.getCaller());
 	}
+	
+	@Test
+	public void getCurrentFullMethodName(){
+		String methodName = SystemTools.getCurrentFullMethodName();
+		// check the name
+		Assert.assertEquals(this.getClass().getName() + ".getCurrentFullMethodName()", methodName);
+		
+	}
 
 }

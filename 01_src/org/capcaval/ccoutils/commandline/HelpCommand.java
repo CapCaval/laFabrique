@@ -16,10 +16,10 @@ public class HelpCommand {
 		this.consoleName = consoleName;
 	}
 
-	@Command (desc="list of available command")
-	public String h() {
-		return help();
-	}
+//	@Command (desc="list of available command")
+//	public String h() {
+//		return help();
+//	}
 	
 	@Command(desc="list of available command")
 	public String help() {

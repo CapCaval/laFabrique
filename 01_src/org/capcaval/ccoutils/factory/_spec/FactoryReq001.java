@@ -1,26 +1,12 @@
 package org.capcaval.ccoutils.factory._spec;
 
-public class FactoryReq001 implements Requirement{
+public class FactoryReq001 extends Requirement{
 
 	@Override
-	public int getID() {
-		return 0;
+	void define() {
+		this.id = 01;
+		this.name = "Test";
+		this.shortDescription = "dsjdsnkjn  iuh";
+		this.description = "BGD.BZH.FR.EU.NU";
 	}
-
-	@Override
-	public String getName() {
-		return null;
-	}
-
-	@Override
-	public String getShortDescription() {
-		return null;
-	}
-
-	@Override
-	public String[] getDescription() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 }

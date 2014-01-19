@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="00_prj"/>
-	<classpathentry excluding="org/capcaval/tools/pair/misc/TestTool.java|org/capcaval/tools/pair/misc/Tool.java|org/capcaval/tools/factory/" kind="src" path="01_src"/>
+	<classpathentry excluding="org/capcaval/tools/pair/misc/TestTool.java|org/capcaval/tools/pair/misc/Tool.java|org/capcaval/tools/factory/" kind="src" path="{srcPath}"/>
 #start#
 	<classpathentry kind="lib" path="02_lib/{jarName}"/>
 #end#

@@ -1,3 +1,0 @@
-#!/bin/bash
-export CLASSPATH=../../../10_bin
-java -cp $CLASSPATH:../../../10_bin:../../../02_lib/ccOutils.jar sample.ccoutils.console.CL $*

@@ -12,7 +12,8 @@ import java.util.List;
 import org.capcaval.ccoutils.commandline.Command;
 import org.capcaval.ccoutils.commandline.CommandParam;
 import org.capcaval.ccoutils.common.CommandResult;
-import org.capcaval.ccoutils.compiler.Compiler;
+import org.capcaval.ccoutils.common.CommandResult.Type;
+import org.capcaval.ccoutils.compiler.CompilerTools;
 import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.FileTools.FilePropertyEnum;
 import org.capcaval.ccoutils.lafabrique.command.CommandCompile;
@@ -173,7 +174,7 @@ public class LaFabriqueCommands {
 	protected AbstractProject compileProject(Path path) {
 		AbstractProject proj=null;
 		try {
-			proj = Compiler.compile(AbstractProject.class, path.toString() + "/00_prj", "prj/Project.java", "./10_bin");
+			proj = CompilerTools.compile(AbstractProject.class, path.toString() + "/00_prj", "prj/Project.java", "./10_bin");
 			// set the current path of the project
 			proj.rootProjectDirPath = path.toAbsolutePath();
 		} catch (Exception e) {
@@ -221,7 +222,7 @@ public class LaFabriqueCommands {
 			CommandResult cr = CommandCompile.compile(proj);
 			returnedMessage.addLine( cr.getReturnMessage());
 
-			if (proj.jar.name != null) {
+			if ((proj.jar.name != null)&&(cr.getType() != Type.ERROR)) {
 				returnedMessage.addLine("[laFabrique] INFO  : Build the jar");
 				cr = CommandJar.makeJar(proj);
 				returnedMessage.addLine(cr.getReturnMessage());
@@ -266,7 +267,7 @@ public class LaFabriqueCommands {
 		// compile the project first
 		AbstractProject proj = null;
 		try {
-			proj = Compiler.compile(AbstractProject.class, "00_prj", filePath, "10_bin");
+			proj = CompilerTools.compile(AbstractProject.class, "00_prj", filePath, "10_bin");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

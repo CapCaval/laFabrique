@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 package org.capcaval.ccoutils.file;
 
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
@@ -43,6 +44,8 @@ import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
+import javax.imageio.ImageIO;
 
 import org.capcaval.ccoutils.lang.ArrayTools;
 import org.capcaval.ccoutils.lang.SystemTools;
@@ -405,6 +408,20 @@ public class FileTools {
 		Class<?> type = SystemTools.getCallerType(3);
 
 		return type.getResourceAsStream(fileName);
+	}
+	
+	public static BufferedImage getLocalImage(String fileName) {
+		// get the type of the upper caller
+		Class<?> type = SystemTools.getCallerType(3);
+
+		BufferedImage image = null;
+		try {
+			image = ImageIO.read(type.getResource(fileName));
+		} catch (IOException e) {
+			e.printStackTrace();
+		} 
+		
+		return image;
 	}
 
 	

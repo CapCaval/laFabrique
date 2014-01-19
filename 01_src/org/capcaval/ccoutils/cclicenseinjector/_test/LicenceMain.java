@@ -40,7 +40,9 @@ public class LicenceMain {
 		Path templateFile = Paths.get("01_src/org/capcaval/app/cclicenseinjector/templates/MIT.txt");
 		Path outputfile = Paths.get("licence.txt");
 		
-		Map<String, String> map = ArrayTools.newMap("YEAR","2012","COPYRIGHT_HOLDERS","CapCaval.org");
+		Map<String, String> map = ArrayTools.newMap(
+				"YEAR","2012",
+				"COPYRIGHT_HOLDERS","CapCaval.org");
 		FileTools.replaceTokenInFile(templateFile, outputfile, map, '<', '>');
 		String licence = FileTools.readStringfromFile(outputfile) + "\n";
 		

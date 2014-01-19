@@ -111,7 +111,7 @@ public class ApplicationTools {
 				if(appDescription.defaultCommand == null){
 					// display the help
 					System.out.println("["+appDescription.appDetails.applicationName+"] There is no command and no default command");
-					result = appDescription.commandLineComputer.computeCommandLine("-h");
+					result = appDescription.commandLineComputer.computeCommandLine("help");
 				}
 				else{
 					// run the default

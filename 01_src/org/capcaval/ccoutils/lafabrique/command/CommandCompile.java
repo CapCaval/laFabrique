@@ -14,6 +14,7 @@ import javax.tools.StandardJavaFileManager;
 import javax.tools.ToolProvider;
 
 import org.capcaval.ccoutils.common.CommandResult;
+import org.capcaval.ccoutils.common.CommandResult.Type;
 import org.capcaval.ccoutils.file.FileFilter;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTools;
@@ -78,15 +79,16 @@ public class CommandCompile {
 			
 		CommandResult commandResult = null;
 		
-		// copy all the non java file
-		copyAllNonJavaSource(proj);
 		
 		if (isSuccessFull == true) {
+			// copy all the non java file
+			copyAllNonJavaSource(proj);
+			
 			returnedMessage.addLine("[laFabrique] INFO  : Compilation is successful");
 			commandResult = new CommandResult(returnedMessage.toString());
 		}else{
 			returnedMessage.addLine("[laFabrique] ERROR  : Compilation failed");
-			commandResult = new CommandResult(returnedMessage.toString());
+			commandResult = new CommandResult(Type.ERROR, returnedMessage.toString());
 		}
 		
 		return commandResult;

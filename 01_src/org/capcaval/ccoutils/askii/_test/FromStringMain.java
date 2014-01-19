@@ -12,7 +12,7 @@ public class FromStringMain {
 		String s = AskiiTools.convertStringToAscii("laFabrique");
 		System.out.println(s);
 		
-		s = AskiiTools.convertStringToAscii("Greeter");
+		s = AskiiTools.convertStringToAscii("a");
 		System.out.println(s);
 	}
 

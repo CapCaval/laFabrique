@@ -43,6 +43,19 @@ public class SystemTools {
 		return getCallerType(3);
 	}
 	
+	public static String getCurrentFullMethodName(){
+		// get the stack to see who called this static method
+		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();
+		
+		// get the class name of the caller
+		String className = stackTrace[2].getClassName();
+
+		// get the method of the caller
+		String methodName = stackTrace[2].getMethodName();
+		
+		return className + "." + methodName + "()";
+	}
+	
 	public static Class<?> getCallerType(int callLevel){
 		// get the stack to see who called this static method
 		StackTraceElement[] stackTrace = Thread.currentThread().getStackTrace();

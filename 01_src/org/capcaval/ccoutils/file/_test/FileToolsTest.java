@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 package org.capcaval.ccoutils.file._test;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -192,5 +193,11 @@ public class FileToolsTest {
 		Assert.assertEquals("file1", str);
 		
 	}
+	
+	@org.junit.Test
+	public void getLocalImageTest(){
+		BufferedImage image = FileTools.getLocalImage("sein.jpg");
+		Assert.assertNotNull(image);
+	}	
 
 }

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="00_prj"/>
-	<classpathentry excluding="org/capcaval/tools/pair/misc/TestTool.java|org/capcaval/tools/pair/misc/Tool.java|org/capcaval/tools/factory/" kind="src" path="01_src"/>
-	<classpathentry kind="lib" path="02_lib/ccOutils.jar" sourcepath="/ccProjects"/>
+	<classpathentry kind="src" path="01_sampleSrc"/>
+	<classpathentry kind="lib" path="02_lib/ccOutils.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_09"/>
 	<classpathentry kind="output" path="10_bin"/>
 </classpath>

@@ -66,7 +66,7 @@ public class FactoryTools {
 		
 		// throw an exception if no factory found
 		if(fih == null){
-			throw new RuntimeException("ccTools Error : The factory type : " + objType.getName() + " can not be found");
+			throw new RuntimeException("[ccOutils Factory] ERROR : The factory type : " + objType.getName() + " can not be found");
 		}
 		else{
 			// if any configure return the object implementation type
@@ -81,7 +81,7 @@ public class FactoryTools {
 	 * The implementation class has to have a constructor without parameter. 
 	 * @param factoryType Interface of the factory 
 	 * @param factoryImplType Default implementation class of the factory
-	 * @return
+	 * @return the factory instance
 	 */
 	public static <T, I extends T> T newFactory(Class<T>factoryType, Class<I> factoryImplType){
 		// allocate the factory
@@ -89,13 +89,36 @@ public class FactoryTools {
 		try {
 			factoryImplInstance = factoryImplType.newInstance();
 		} catch (Exception e) {
-			throw new RuntimeException("Error : can not allocate the factory implementation type " + factoryImplType + " because it does not have a constructor without parameters", e);
+			throw new RuntimeException("[ccOutils Factory] ERROR : can not allocate the factory implementation type " + factoryImplType + " because it does not have a constructor without parameters", e);
 		}
 		T proxy = FactoryTools.newFactory(factoryType, factoryImplInstance);
 		
 		return proxy;
 	}
 
+
+	/**
+	 * Create a new factory by defining a concrete implementation without 
+	 * The implementation class has to have a constructor without parameter. 
+	 * @param factoryType class type of the factory 
+	 * @return the instance
+	 */
+	public static <T> T newImmutableFactory(Class<T>factoryType){
+		if(factoryType.isInterface() == true){
+			throw new RuntimeException("[ccOutils Factory] ERROR : newImmutableFactory method can not" + factoryType + " type because it is an interface" );
+		}
+		// allocate the factory
+		T factoryImplInstance=null;
+		try {
+			factoryImplInstance = factoryType.newInstance();
+		} catch (Exception e) {
+			throw new RuntimeException("[ccOutils Factory] ERROR : can not allocate the factory implementation type " + factoryType + " because it does not have a constructor without parameters", e);
+		}
+		
+		return factoryImplInstance;
+	}
+
+	
 	/**
 	 * Create a new instance of a factory. It is mutable which means that the factory 
 	 * implementation can be changed with another one as long as they implement the 
