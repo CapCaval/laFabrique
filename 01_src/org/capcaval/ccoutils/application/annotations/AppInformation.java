@@ -35,6 +35,6 @@ public @interface AppInformation {
 	String propertyFile() default "";
 	boolean asciiLogo()default true;
 	String asciiLogoGradient()default "@. ";
-	int helpWidthInChar() default 80;
+	int helpWidthInChar() default 79;
 	String author();
 }

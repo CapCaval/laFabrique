@@ -1,10 +1,8 @@
 package org.capcaval.c3.c3application;
 
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.control.TabPane;
-import javafx.scene.paint.Color;
-import javafx.stage.Stage;
+import java.awt.Color;
+
+import javax.swing.GroupLayout.Group;
 
 
 public class GHelpApplication extends javafx.application.Application{
