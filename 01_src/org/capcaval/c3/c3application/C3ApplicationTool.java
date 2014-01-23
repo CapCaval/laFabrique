@@ -532,6 +532,6 @@ public class C3ApplicationTool {
 	}
 
 	public void displayGHelpToSysOut(ApplicationDescription appDesc) {
-		new GHelpApplication(appDesc);
+		//new GHelpApplication(appDesc);
 	}
 }
