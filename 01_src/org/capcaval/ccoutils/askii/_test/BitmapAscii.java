@@ -24,7 +24,7 @@ public class BitmapAscii {
 		}
 
 		String str = AskiiTools.convertBitmapToAscii(image, 160, 20, 
-				new char[]{'@','#','§','&','*','^','/','\\','"','-','_',';',':','.', ' '});
+				new char[]{'@','#','%','&','*','^','/','\\','"','-','_',';',':','.', ' '});
 				//new char[]{'%',';','.',' '});
 		
 		System.out.println("result : \n" + str);

@@ -38,7 +38,6 @@ import org.capcaval.c3.componentmanager._test.application.TestProducer.impl.Test
 import org.capcaval.c3.sample.tutorial4.numberproducer.NumberProducerEvent;
 import org.junit.Test;
 
-import com.sun.prism.es2.ES2Graphics;
 
 public class ComponentServiceTest {
 
