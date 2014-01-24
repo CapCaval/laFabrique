@@ -42,7 +42,7 @@ public class HelpCommand {
 		}
 		
 		FormatText ft = new FormatText();
-		ft.setColumnWidthInChar(80);
+		ft.setColumnWidthInChar(displayWidth);
 		
 		StringBuffer buf =new StringBuffer();
 		buf.append(ft.format(
