@@ -30,7 +30,7 @@ public class CommandCompile {
 		StringMultiLine returnedMessage = new StringMultiLine();
 		
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-
+		
 		cleanProductionDirectory(proj.productionDirPath);
 		FileSeekerResult result = null;
 		

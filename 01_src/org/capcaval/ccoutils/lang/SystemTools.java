@@ -3,7 +3,16 @@ package org.capcaval.ccoutils.lang;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.Arrays;
 
+import junit.framework.Assert;
+
+import org.capcaval.ccoutils.file.FileSeekerResult;
+import org.capcaval.ccoutils.file.FileTool;
+import org.capcaval.ccoutils.file.FileTools;
+import org.junit.Test;
 
 
 public class SystemTools {
@@ -11,6 +20,7 @@ public class SystemTools {
 	public enum OSType {Windows, Linux};
 	
 	private static String osName = System.getProperty("os.name").toLowerCase();
+	private static String javaVersion = System.getProperty("java.version");
 	
 	public static OSType getOSType() {
 		OSType type = OSType.Linux;
@@ -73,5 +83,30 @@ public class SystemTools {
 		}
 		
 		return type;
+	}
+	
+	public static Version getCurrentJavaVersion(){
+		return Version.factory.newVersion(System.getProperty("java.version"));
+	}
+
+	public static JavaInstallationInfo getJavaInstallationInfo() {
+		
+		String jrePathStr = System.getProperty("java.home");		
+	
+		Path jrePath = Paths.get(jrePathStr);
+		
+		Path parent = jrePath.getParent();
+
+		FileSeekerResult result = null;
+		try {
+			result = FileTools.seekFiles("jdk*", parent);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println(Arrays.toString(result.getPathList()));
+		
+		
+		return null;
 	}
 }
