@@ -1,7 +1,7 @@
 package org.capcaval.ccoutils.file;
 
-import java.nio.file.Path;
+import java.io.File;
 
 public interface FileFilter {
-	boolean isFileValid(Path path);
+	boolean isFileValid(File path);
 }
