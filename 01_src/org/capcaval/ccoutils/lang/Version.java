@@ -25,5 +25,7 @@ public interface Version {
 	
 	public String getVersionString();
 	public int[] getVersionIntArray();
-	public boolean isMoreRecentThan(Version version);
+	public boolean isHigherVersionThan(Version version);
+	public boolean isLowerVersionThan(Version version);
+	public long getLongValue();
 }

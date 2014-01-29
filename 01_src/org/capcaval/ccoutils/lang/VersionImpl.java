@@ -1,8 +1,9 @@
 package org.capcaval.ccoutils.lang;
 
 public class VersionImpl implements Version {
-	private String versionStr = null;
-	private int[] versionIntArray = null;
+	protected String versionStr = null;
+	protected int[] versionIntArray = null;
+	protected long versionValue; 
 
 	public VersionImpl(String versionStr) {
 		// first check the validity
@@ -13,7 +14,25 @@ public class VersionImpl implements Version {
 		} else {
 			this.versionStr = versionStr;
 			this.versionIntArray = this.convert(versionStr);
+			// compute a long value for  
+			this.versionValue = this.computeVersionValue(this.versionIntArray);
 		}
+	}
+
+	private long computeVersionValue(int[] versionIntArray) {
+		
+		long factor = 1;
+		long value = 0;
+		
+		
+		int index = versionIntArray.length;
+		for(int i = 0; i < index ; i++){
+			value = value + (versionIntArray[index -1 - i] * factor);
+			// update the factor for the next values
+			factor = factor * 10_000;
+		}
+		
+		return value;
 	}
 
 	public VersionImpl(int... versionIntArray) {
@@ -23,6 +42,8 @@ public class VersionImpl implements Version {
 		} else {
 			this.versionIntArray = versionIntArray;
 			this.versionStr = this.convert(versionIntArray);
+			// compute a long value for  
+			this.versionValue = this.computeVersionValue(this.versionIntArray);
 		}
 	}
 
@@ -71,37 +92,24 @@ public class VersionImpl implements Version {
 	}
 
 	@Override
-	public boolean isMoreRecentThan(Version version) {
-		boolean returnValue = false;
-		int[] outArray = version.getVersionIntArray();
-		int[] inArray = this.versionIntArray;
-
-		// use the shortest array
-		int longestLength = outArray.length>inArray.length?outArray.length:inArray.length;
-
-		int[] tempArray = new int[longestLength];
-		if(inArray.length < longestLength){
-			System.arraycopy(inArray, 0, tempArray, 0, inArray.length);
-			inArray = tempArray;
-		}
-		else if(outArray.length < longestLength){
-			System.arraycopy(outArray, 0, tempArray, 0, outArray.length);
-			outArray = tempArray;
-		}
-		
-			
-		for(int i =0; i< longestLength; i++){
-			if(outArray[i] < inArray[i]){
-				returnValue=true;
-				break;
-			}
-		}
-		return returnValue;
+	public boolean isHigherVersionThan(Version version) {
+		return this.versionValue>version.getLongValue();
 	}
 
 	@Override
 	public String toString() {
 		return this.versionStr;
+	}
+
+
+	@Override
+	public boolean isLowerVersionThan(Version version) {
+		return this.versionValue<version.getLongValue();
+	}
+
+	@Override
+	public long getLongValue() {
+		return this.versionValue;
 	}
 
 }

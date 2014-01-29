@@ -13,9 +13,11 @@ public class DirectorySeeker {
 		
 		// check all sub directories
 		for(File f : fileArray){
-			System.out.println(f.getName());
-			if((f.isDirectory() == true)&&(containString.contains(f.getName()) == true)){
-				result.addFiles(f.toPath());
+			if(f.isDirectory() == true){
+				String dirName = f.getName();
+				if(dirName.contains(containString) == true){
+					result.addFiles(f.toPath());
+				}
 			}
 		}
 		
