@@ -1,14 +1,18 @@
 package org.capcaval.ccoutils.file;
 
 import java.io.File;
+import java.nio.file.Path;
 
 import com.sun.xml.internal.ws.util.StringUtils;
 
 public class DirectorySeeker {
 
-	public static FileSeekerResult seekDirectory(String rootDirStr, String containString) {
+	public static FileSeekerResult seekDirectory(String containString, String rootDirStr) {
 		File root = new File(rootDirStr);
-		File[] fileArray = root.listFiles();
+		return seekDirectory(containString, root);
+	}
+	public static FileSeekerResult seekDirectory(String containString, File rootDir) {
+		File[] fileArray = rootDir.listFiles();
 		FileSeekerResult result = new FileSeekerResult();
 		
 		// check all sub directories

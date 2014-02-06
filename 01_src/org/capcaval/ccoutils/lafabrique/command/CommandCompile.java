@@ -21,7 +21,9 @@ import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.command.FileCmd;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 import org.capcaval.ccoutils.lang.ArrayTools;
+import org.capcaval.ccoutils.lang.JDKInstallationInfo;
 import org.capcaval.ccoutils.lang.StringMultiLine;
+import org.capcaval.ccoutils.lang.SystemTools;
 
 
 public class CommandCompile {
@@ -30,6 +32,12 @@ public class CommandCompile {
 		StringMultiLine returnedMessage = new StringMultiLine();
 		
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+		
+		if(compiler==null){
+			JDKInstallationInfo jdk = SystemTools.getJDKInstallationInfo();
+			System.setProperty("java.home", jdk.toString());
+			compiler = ToolProvider.getSystemJavaCompiler();
+		}
 		
 		cleanProductionDirectory(proj.productionDirPath);
 		FileSeekerResult result = null;
@@ -45,7 +53,7 @@ public class CommandCompile {
 	
 	        String classpath=System.getProperty("java.class.path");
 	        Path[] libPathArray = FileTools.getFileSFromNamesAndRootDirs(proj.libDirList.toArray(new Path[0]), proj.libList);
-	        String fullpath= classpath + ":.:" + ArrayTools.toStringWithDelimiter(':', libPathArray);
+	        String fullpath= classpath + File.pathSeparator + "."+  File.pathSeparator + ArrayTools.toStringWithDelimiter(File.pathSeparatorChar, libPathArray);
 	        
 	        String binDir = proj.productionDirPath.toString() + "/" + proj.tempProdSource;
 	        

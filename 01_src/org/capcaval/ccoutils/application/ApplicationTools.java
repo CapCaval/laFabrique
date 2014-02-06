@@ -88,7 +88,7 @@ public class ApplicationTools {
 	public static CommandResult runApplication(Class<?> applicationType, String[] args, Converter<?,?>... converterList) {
 		CommandResult result = null;
 		
-		if(isJavaVersionAboveVersion(Version.factory.newVersion("1.6"))){
+		if(isJavaVersionAboveVersion(Version.factory.newVersion("1.7"))){
 			return new CommandResult(Type.ERROR, "Java Version shall be at least 1.7 or above.");
 		}
 		
@@ -134,10 +134,10 @@ public class ApplicationTools {
 	}
 
 	private static boolean isJavaVersionAboveVersion(Version v) {
+		// get the current version
 		Version version = SystemTools.getCurrentJavaVersion();
-		System.out.println(v);
-		System.out.println(version);
-		return version.isHigherVersionThan(v);
+		// compare with the requested and return the result
+		return version.isLowerVersionThan(v);
 	}
 
 	protected static ApplicationDescription newApplicationDescription(Object appInstance, Class<?> applicationType, ConverterManager converterManager) {

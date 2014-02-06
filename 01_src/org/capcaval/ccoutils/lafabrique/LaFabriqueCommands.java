@@ -26,8 +26,10 @@ import org.capcaval.ccoutils.lang.StringMultiLine;
 
 public class LaFabriqueCommands {
 
-	@Command
-	public String updateEclipseProject(String projectNameStr) {
+	@Command(desc="Update eclipse project from the ccOutils project.")
+	public String updateEclipseProject( 
+			@CommandParam(name="project name", desc="Define the name of the project to be updated.")
+			String projectNameStr) {
 		CommandResult cr1 = new CommandResult("Update Eclipse project named " + projectNameStr);
 
 		// compile the project first

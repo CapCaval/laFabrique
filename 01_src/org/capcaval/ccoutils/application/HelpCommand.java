@@ -15,7 +15,7 @@ public class HelpCommand {
 		this.description = description;
 	}
 	
-	@Command (defaultRun = true, desc = "Displays information about this application. It finds and displays all application properties and commands.")
+	@Command (defaultRun = true, desc = "Displays information about this application. It finds and \ndisplays all application properties and commands.")
 	public String help(){
 		String logo = null;
 		if(this.description.appDetails.helpDisplayDetails != null){

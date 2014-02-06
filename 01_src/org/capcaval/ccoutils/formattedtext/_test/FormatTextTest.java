@@ -27,15 +27,15 @@ public class FormatTextTest {
 	@Test
 	public void formatTextLongTest() {
 		FormatText ft = new FormatText();
-		ft.setColumnWidthInChar(3);
+		ft.setColumnWidthInChar(8);
 		String str = ft.format(
 				Chap.level1 +	"12345678901",
-				Chap.level2 +	"12345678",
-								"l3",
+				Chap.level2 +	"123",
+								"l",
 				Chap.level1 +	"end");
 				
 		System.out.println(str);
-		String expected = "   123\n   456\n   789\n   01\n      123\n      456\n      78\n      l3\n   end\n";
+		String expected = "   1234\n   5678\n   901\n      1\n      2\n      3\n      l\n   end\n";
 		System.out.println(expected);
 		
 		Assert.assertEquals( expected, str);

@@ -1,7 +1,5 @@
 package org.capcaval.ccoutils.lang._test;
 
-import static org.junit.Assert.*;
-
 import org.capcaval.ccoutils.lang.Version;
 import org.junit.Assert;
 import org.junit.Test;

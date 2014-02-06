@@ -5,10 +5,18 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
+
+import javax.lang.model.SourceVersion;
+import javax.tools.JavaCompiler;
+import javax.tools.ToolProvider;
 
 import junit.framework.Assert;
 
+import org.capcaval.ccoutils.file.DirectorySeeker;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTool;
 import org.capcaval.ccoutils.file.FileTools;
@@ -86,27 +94,58 @@ public class SystemTools {
 	}
 	
 	public static Version getCurrentJavaVersion(){
-		return Version.factory.newVersion(System.getProperty("java.version"));
+		return Version.factory.newVersion(SystemTools.javaVersion);
 	}
 
-	public static JavaInstallationInfo getJavaInstallationInfo() {
+	public static JDKInstallationInfo getJDKInstallationInfo() {
+		JDKInstallationInfo foundJdk = null;
+		// first get the JAVA_HOME system property if set
+		String javaHome = System.getenv("JAVA_HOME");
 		
-		String jrePathStr = System.getProperty("java.home");		
-	
-		Path jrePath = Paths.get(jrePathStr);
+		// check if javac is accessible
+		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		
-		Path parent = jrePath.getParent();
-
-		FileSeekerResult result = null;
-		try {
-			result = FileTools.seekFiles("jdk*", parent);
-		} catch (IOException e) {
-			e.printStackTrace();
+		// first use the path
+		if(compiler != null){
+			// retrieve the version
+			Set<SourceVersion> set = compiler.getSourceVersions();
+		}
+		// use the java home variable if path is not set
+		else if ((javaHome!=null)&&(javaHome.length()==0)){
+			foundJdk = new JDKInstallationInfo(Paths.get(javaHome));
+		}
+		else{
+			// javac is accessible inside the path so try to get it from the java home variable
+			foundJdk = getJDKInstallationInfoFromJavaHome();
 		}
 		
-		System.out.println(Arrays.toString(result.getPathList()));
 		
+		return foundJdk;
+	}	
+	public static JDKInstallationInfo getJDKInstallationInfoFromJavaHome() {
+		// get the current jre path string
+		String jrePathStr = System.getProperty("java.home");		
+		// get the path format
+		Path jrePath = Paths.get(jrePathStr);
+		// usually jre and jdk share the same parent directory
+		Path parent = jrePath.getParent();
+		// get the sub directory with name containing jdk
+		FileSeekerResult result = DirectorySeeker.seekDirectory("jdk", parent.toFile());
+
+		// build all the java installation information
+		List<JDKInstallationInfo> jdkList = new ArrayList<>();
+		for(Path path : result.getPathList()){
+			jdkList.add(new JDKInstallationInfo(path));
+		}
 		
-		return null;
+		// get the highest version if any
+		JDKInstallationInfo higestJDK = jdkList.get(0);
+		for(JDKInstallationInfo jdk : jdkList){
+			if(jdk.version.isHigherVersionThan(higestJDK.version)){
+				higestJDK=jdk;
+			}
+		}
+		
+		return higestJDK;
 	}
 }

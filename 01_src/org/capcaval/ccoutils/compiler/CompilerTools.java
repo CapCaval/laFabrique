@@ -16,13 +16,14 @@ import org.capcaval.ccoutils.compiler._test.AbstractClass;
 import org.capcaval.ccoutils.compiler._test.MyInterface;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTools;
+import org.capcaval.ccoutils.lang.JDKInstallationInfo;
 import org.capcaval.ccoutils.lang.StringMultiLine;
 import org.capcaval.ccoutils.lang.SystemClassLoader;
+import org.capcaval.ccoutils.lang.SystemTools;
 
 public class CompilerTools {
 	
 	public static<T> T compile(Class<? extends T> type, String root, String source, String outputDir) throws ClassNotFoundException, IOException, InstantiationException, IllegalAccessException{
-		
 		compile(root, source, outputDir);
 
 		File binDir = new File(outputDir);
@@ -74,9 +75,17 @@ public class CompilerTools {
 		int i = 1;
 		try{
 			JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
+			
+			if(compiler == null){
+				// jdk is not accessible with PATH
+				JDKInstallationInfo jdk = SystemTools.getJDKInstallationInfo();
+				System.setProperty("java.home", jdk.path.toString());
+				compiler = ToolProvider.getSystemJavaCompiler();
+			}
+			
 			i = compiler.run(null, null, null, 
 					"-g",
-					"-classpath", "10_bin:02_lib/ccOutils.jar",
+					"-classpath", "../10_bin;10_bin;02_lib/ccOutils.jar",
 					"-d", outputDir, 
 					sourceFile.getPath());
 		}catch(Exception e){
