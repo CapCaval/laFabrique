@@ -85,7 +85,7 @@ public class CompilerTools {
 			
 			i = compiler.run(null, null, null, 
 					"-g",
-					"-classpath", "../10_bin;10_bin;02_lib/ccOutils.jar",
+					"-classpath", "../10_bin"+ File.pathSeparator + "10_bin"+ File.pathSeparator + "02_lib/ccOutils.jar",
 					"-d", outputDir, 
 					sourceFile.getPath());
 		}catch(Exception e){

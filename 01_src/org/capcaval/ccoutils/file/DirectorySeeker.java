@@ -1,9 +1,6 @@
 package org.capcaval.ccoutils.file;
 
 import java.io.File;
-import java.nio.file.Path;
-
-import com.sun.xml.internal.ws.util.StringUtils;
 
 public class DirectorySeeker {
 

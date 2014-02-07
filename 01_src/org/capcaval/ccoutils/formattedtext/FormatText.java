@@ -52,7 +52,12 @@ public class FormatText {
 		for(String text:strList){
 			if(text.charAt(0) == Type.start){
 				String[] strArray = text.split(String.valueOf(Type.stop));
-				text = strArray[1];
+				if(strArray.length>1){
+					text = strArray[1];
+				}else{
+					text="";
+				}
+
 				// add the cut character
 				command = strArray[0]+ Type.stop;
 				// get it

@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="00_prj"/>
 	<classpathentry kind="src" path="01_sampleSrc"/>
-	<classpathentry kind="lib" path="02_lib/ccOutils.jar"/>
+	<classpathentry kind="lib" path="02_lib/ccOutils.jar" sourcepath="/ccProjects/01_src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/jdk1.7.0_09"/>
 	<classpathentry kind="output" path="10_bin"/>
 </classpath>
