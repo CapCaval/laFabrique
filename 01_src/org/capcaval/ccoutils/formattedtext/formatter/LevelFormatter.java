@@ -15,10 +15,12 @@ public abstract class LevelFormatter implements TextFormatter{
 		for(int i=0; i<this.level; i++){
 			shift = shift + tab;
 		}
+		// add the spaces
+		String result = StringTools.formatToCharWidth(string,columnWidthInChar-shift.length(), shift);
 		// format with the correct column width 
-		String result = StringTools.formatToCharWidth(string,columnWidthInChar-this.level,"\n" + shift);
+		result = StringTools.formatToCharWidth(shift + result,columnWidthInChar,"\n");
 		
 		// concat the shift and the string
-		return shift+result;
+		return result;
 	}
 }

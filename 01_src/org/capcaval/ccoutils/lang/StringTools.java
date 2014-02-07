@@ -51,7 +51,11 @@ public class StringTools {
 		// get the string before and after the two indexes
 		StringBuffer buf = new StringBuffer(str);
 		
-		buf.insert(index, strToBeInserted);
+		try{
+			buf.insert(index, strToBeInserted);
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		
 		// concat the two string to do the job
 		return buf.toString();

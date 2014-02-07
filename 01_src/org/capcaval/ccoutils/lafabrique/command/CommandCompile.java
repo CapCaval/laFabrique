@@ -15,13 +15,15 @@ import javax.tools.ToolProvider;
 
 import org.capcaval.ccoutils.common.CommandResult;
 import org.capcaval.ccoutils.common.CommandResult.Type;
-import org.capcaval.ccoutils.file.FileFilter;
+import org.capcaval.ccoutils.file.PathFilter;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.command.FileCmd;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 import org.capcaval.ccoutils.lang.ArrayTools;
+import org.capcaval.ccoutils.lang.JDKInstallationInfo;
 import org.capcaval.ccoutils.lang.StringMultiLine;
+import org.capcaval.ccoutils.lang.SystemTools;
 
 
 public class CommandCompile {
@@ -30,7 +32,13 @@ public class CommandCompile {
 		StringMultiLine returnedMessage = new StringMultiLine();
 		
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
-
+		
+		if(compiler==null){
+			JDKInstallationInfo jdk = SystemTools.getJDKInstallationInfo();
+			System.setProperty("java.home", jdk.toString());
+			compiler = ToolProvider.getSystemJavaCompiler();
+		}
+		
 		cleanProductionDirectory(proj.productionDirPath);
 		FileSeekerResult result = null;
 		
@@ -45,7 +53,7 @@ public class CommandCompile {
 	
 	        String classpath=System.getProperty("java.class.path");
 	        Path[] libPathArray = FileTools.getFileSFromNamesAndRootDirs(proj.libDirList.toArray(new Path[0]), proj.libList);
-	        String fullpath= classpath + ":.:" + ArrayTools.toStringWithDelimiter(':', libPathArray);
+	        String fullpath= classpath + File.pathSeparator + "."+  File.pathSeparator + ArrayTools.toStringWithDelimiter(File.pathSeparatorChar, libPathArray);
 	        
 	        String binDir = proj.productionDirPath.toString() + "/" + proj.tempProdSource;
 	        
@@ -106,7 +114,7 @@ public class CommandCompile {
 	}
 
 	private static void copyAllNonJavaSource(AbstractProject proj) {
-		FileFilter fileFilter = newNonJavaFilter();
+		PathFilter fileFilter = newNonJavaFilter();
 		
 		Path destBinDir = proj.productionDirPath.resolve(Paths.get(proj.tempProdSource));
 		
@@ -120,10 +128,10 @@ public class CommandCompile {
 		}
 	}
 	
-	private static FileFilter newNonJavaFilter(){
-		FileFilter filter = new FileFilter() {
+	private static PathFilter newNonJavaFilter(){
+		PathFilter filter = new PathFilter() {
 			@Override
-			public boolean isFileValid(Path path) {
+			public boolean isPathValid(Path path) {
 				// do not copy java file
 				return (path.toString().endsWith(".java")==false);
 				}

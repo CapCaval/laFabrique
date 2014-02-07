@@ -1,6 +1,8 @@
 package org.capcaval.ccoutils.formattedtext;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 import org.capcaval.ccoutils.formattedtext.formatter.DefaultTextFormatter;
 import org.capcaval.ccoutils.formattedtext.formatter.Level1Formatter;
@@ -12,7 +14,7 @@ public class FormatText {
 	
 	protected  HashMap<String, TextFormatter> FormatterMap;
 	protected TextFormatter defaultTextFormatter = new DefaultTextFormatter();
-	private int columnWidthInChar;
+	private int columnWidthInChar = 80;
 
 	public FormatText(){
 		this.FormatterMap = new HashMap<>();
@@ -25,13 +27,29 @@ public class FormatText {
 		
 	public String format(Object... list) {
 		String command = null;
-		String text = null;
 
 		StringBuilder returnedString = new StringBuilder();
 		TextFormatter tf = this.defaultTextFormatter;
 		
+		// add line when contains carrier return
+		List<String> strList = new ArrayList<>();
 		for(Object object:list){
-			text = object.toString();
+			String str = object.toString();
+			// check if CR inside
+			if(str.contains("\n")){
+				// if so split string
+				String[] splitStr = str.split("\n");
+				for(String strToAdd : splitStr){
+					strList.add(strToAdd);
+				}
+			}
+			else{
+				strList.add(str);
+			}
+		}
+		
+		// now compute all lines
+		for(String text:strList){
 			if(text.charAt(0) == Type.start){
 				String[] strArray = text.split(String.valueOf(Type.stop));
 				text = strArray[1];
@@ -41,7 +59,7 @@ public class FormatText {
 				tf = this.getFormatter(command);
 			}
 			// format it
-			text = tf.format(this.columnWidthInChar, text);
+			text = tf.format(this.columnWidthInChar-1, text); // -1 for \n
 			returnedString.append(text + "\n");
 		}
 		return returnedString.toString();

@@ -191,8 +191,9 @@ public class ArrayTools {
 		StringBuilder str = new StringBuilder();
 		
 		for(Object o : objectList){
-			str.append(o.toString());
-			if(o == objectList[objectList.length-1]){
+			// force windows format to java one
+			str.append(o.toString().replace("\\", "/"));
+			if(o != objectList[objectList.length-1]){
 				str.append(separator);
 			}
 		}

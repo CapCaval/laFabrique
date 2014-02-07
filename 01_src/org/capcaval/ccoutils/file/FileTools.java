@@ -237,7 +237,7 @@ public class FileTools {
 		FileTools.copy(source, dest, null);
 	}
 	
-	public static void copy(Path source, Path dest, FileFilter filter) {
+	public static void copy(Path source, Path dest, PathFilter filter) {
 		if(source.toFile().isDirectory() == true){
 			FileTools.copyDirectory(source, dest, source, filter);
 		}
@@ -246,7 +246,7 @@ public class FileTools {
 		}
 	}
 
-	public static void copy(Path source, Path dest, Path rootDir, FileFilter filter) {
+	public static void copy(Path source, Path dest, Path rootDir, PathFilter filter) {
 		if(source.toFile().isDirectory() == true){
 			FileTools.copyDirectory(source, dest, rootDir, filter);
 		}
@@ -256,7 +256,7 @@ public class FileTools {
 	}
 
 	
-	public static void copyFile(Path source, Path dest, Path rootDir, FileFilter filter) {
+	public static void copyFile(Path source, Path dest, Path rootDir, PathFilter filter) {
 		// check it out
 		if( source.toFile().isFile() == false){
 			throw new RuntimeException("[ccOutils] copyFile : the following path is not a file : " + source.toString()); 
@@ -265,7 +265,7 @@ public class FileTools {
 		boolean hasToBeAdded = true; 
 		
 		if(filter != null){
-			hasToBeAdded = filter.isFileValid(source);
+			hasToBeAdded = filter.isPathValid(source);
 		}
 		
 		if(hasToBeAdded == true){
@@ -286,7 +286,7 @@ public class FileTools {
 	}
 
 	
-	public static void copyDirectory(Path source, Path dest, Path rootDir, FileFilter filter) {
+	public static void copyDirectory(Path source, Path dest, Path rootDir, PathFilter filter) {
 		File dirSrc = source.toFile();
 		
 		if(dirSrc.isDirectory() == false){
@@ -297,7 +297,7 @@ public class FileTools {
 		if(dest.toFile().exists() == false){
 			// create it 
 			try {
-				if(filter.isFileValid(source)==true){
+				if(filter.isPathValid(source)==true){
 					Files.createDirectory(dest);}
 			} catch (IOException e) {
 				e.printStackTrace();
@@ -311,7 +311,7 @@ public class FileTools {
 		if(fullDestDir.toFile().exists() == false){
 			// create it 
 			try {
-				if(filter.isFileValid(source)==true){
+				if(filter.isPathValid(source)==true){
 					Files.createDirectory(fullDestDir);}
 			} catch (IOException e) {
 				e.printStackTrace();

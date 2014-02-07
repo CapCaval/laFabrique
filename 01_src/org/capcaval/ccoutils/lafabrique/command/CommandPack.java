@@ -7,7 +7,7 @@ import java.nio.file.Paths;
 import java.util.List;
 
 import org.capcaval.ccoutils.common.CommandResult;
-import org.capcaval.ccoutils.file.FileFilter;
+import org.capcaval.ccoutils.file.PathFilter;
 import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.JarZipTools;
@@ -34,11 +34,11 @@ public class CommandPack {
 			Files.createDirectory(dirNamePath);
 			
 			// copy all the sample directory
-			FileTools.copy( Paths.get("30_sample"), dirNamePath, Paths.get("30_sample"), new FileFilter(){
+			FileTools.copy( Paths.get("30_sample"), dirNamePath, Paths.get("30_sample"), new PathFilter(){
 				List<String> excludeDirList = ArrayTools.newArrayList( "10_bin", "20_prod", ".classpath", ".project");
 				
 				@Override
-				public boolean isFileValid(Path path) {
+				public boolean isPathValid(Path path) {
 					boolean valid = true;
 					
 					if(path.toFile().getName().endsWith("~")){

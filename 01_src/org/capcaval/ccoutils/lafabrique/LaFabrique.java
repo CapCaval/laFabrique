@@ -8,7 +8,7 @@ import org.capcaval.ccoutils.common.CommandResult;
 @AppInformation (
 		name="laFabrique",
 		author="CapCaval.org",
-		about= {"LaFabrique is an application builder, 100% pure Java. There is no XML, no DSL. It provides a command abstraction and a property one."
+		about= {"LaFabrique is an application builder, 100% pure Java. There is no XML,\nno DSL. It provides a command abstraction and a property one."
 				},
 		version="0.0_1"
 		)

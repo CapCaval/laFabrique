@@ -27,9 +27,12 @@ import java.util.Properties;
 
 import org.capcaval.ccoutils.application._test.GreeterApp;
 import org.capcaval.ccoutils.common.CommandResult;
+import org.capcaval.ccoutils.common.CommandResult.Type;
 import org.capcaval.ccoutils.converter.Converter;
 import org.capcaval.ccoutils.converter.ConverterManager;
 import org.capcaval.ccoutils.file.FileTools;
+import org.capcaval.ccoutils.lang.SystemTools;
+import org.capcaval.ccoutils.lang.Version;
 
 public class ApplicationTools {
 
@@ -85,6 +88,10 @@ public class ApplicationTools {
 	public static CommandResult runApplication(Class<?> applicationType, String[] args, Converter<?,?>... converterList) {
 		CommandResult result = null;
 		
+		if(isJavaVersionAboveVersion(Version.factory.newVersion("1.7"))){
+			return new CommandResult(Type.ERROR, "Java Version shall be at least 1.7 or above.");
+		}
+		
 		try {
 			// first allocate the application
 			Object appInstance = applicationType.newInstance();
@@ -124,6 +131,13 @@ public class ApplicationTools {
 			e.printStackTrace();
 		}
 		return result;
+	}
+
+	private static boolean isJavaVersionAboveVersion(Version v) {
+		// get the current version
+		Version version = SystemTools.getCurrentJavaVersion();
+		// compare with the requested and return the result
+		return version.isLowerVersionThan(v);
 	}
 
 	protected static ApplicationDescription newApplicationDescription(Object appInstance, Class<?> applicationType, ConverterManager converterManager) {
