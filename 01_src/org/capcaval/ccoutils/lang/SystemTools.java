@@ -6,7 +6,6 @@ import java.io.InputStreamReader;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
@@ -14,13 +13,8 @@ import javax.lang.model.SourceVersion;
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
-import junit.framework.Assert;
-
 import org.capcaval.ccoutils.file.DirectorySeeker;
 import org.capcaval.ccoutils.file.FileSeekerResult;
-import org.capcaval.ccoutils.file.FileTool;
-import org.capcaval.ccoutils.file.FileTools;
-import org.junit.Test;
 
 
 public class SystemTools {

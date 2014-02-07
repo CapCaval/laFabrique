@@ -27,11 +27,8 @@ public class FormatTextTest {
 	@Test
 	public void formatTextLongTest() {
 		FormatText ft = new FormatText();
-<<<<<<< HEAD
-		ft.setColumnWidthInChar(6);
-=======
 		ft.setColumnWidthInChar(8);
->>>>>>> 7ca053b8518e9c6519c8daa469f16447a236a453
+
 		String str = ft.format(
 				Chap.level1 +	"12345678901",
 				Chap.level2 +	"123",
