@@ -5,6 +5,6 @@
 #start#
 	<classpathentry kind="lib" path="02_lib/{jarName}"/>
 #end#
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/{jdkVersion}"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="{output}"/>
 </classpath>

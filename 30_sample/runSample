@@ -1,3 +1,9 @@
 #!/bin/bash
-java -cp .:./02_lib/ccOutils.jar:./10_bin ccoutils.RunSample $*
+
+if [ ! -d "20_prod" ]; then 
+ echo [sample] info : compile Sample 
+ ./laFab build Sample
+fi
+
+java -cp .:./20_prod/tempSrc:./10_bin:./02_lib/ccOutils.jar ccoutils.RunSample $*
 

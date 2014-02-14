@@ -18,6 +18,8 @@ public class AskiiSample {
 	@Command(desc = "show how to create an ascii logo. It shows two different logos display.")
 	public String asciiLogo(){
 		System.out.println( SampleCommons.SAMPLE_SOURCE_CODE_MESSAGE + SystemTools.getCurrentFullMethodName());
+		FileTools.readStringfromFile(pathStr);
+		
 		
 		// ask for a string logo
 		String logoStr = SystemTools.readConsoleInput("Enter a logo name : ");
@@ -29,7 +31,7 @@ public class AskiiSample {
 		str.addLine(AskiiTools.convertStringToAscii(logoStr));
 		
 		//set a second logo with others parameters 
-		str.addLine(AskiiTools.convertStringToAscii(logoStr, "$*' ",120));
+		str.addLine(AskiiTools.convertStringToAscii(logoStr, " '*$", 70));
 		
 		// this is it 
 		return str.toString();

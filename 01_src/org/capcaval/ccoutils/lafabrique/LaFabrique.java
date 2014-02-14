@@ -19,6 +19,6 @@ public class LaFabrique{
 	
 	public static void main(String[] args) {
 		CommandResult r = ApplicationTools.runApplication(LaFabrique.class, args);
-		System.out.println(r.getReturnMessage());
+		System.out.println(r.toString());
 	}
 }

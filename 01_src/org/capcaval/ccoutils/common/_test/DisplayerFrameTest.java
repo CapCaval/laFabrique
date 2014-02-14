@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 
 import org.capcaval.ccoutils.common.ImageDisplayerFrame;
 import org.capcaval.ccoutils.common.TextDisplayerFrame;
+import org.capcaval.ccoutils.common.TextFileDisplayFrame;
 import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.lang.StringMultiLine;
 import org.junit.Test;
@@ -36,4 +37,16 @@ public class DisplayerFrameTest {
 			e.printStackTrace();
 		}
 	}
+
+	@Test
+	public void textFileDisplayTest() {
+		TextFileDisplayFrame.factory.newTextFileDisplayFrame().display();
+		
+		try {
+			Thread.sleep(10000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+	}
+
 }

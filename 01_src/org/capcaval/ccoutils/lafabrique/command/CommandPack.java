@@ -13,6 +13,8 @@ import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.JarZipTools;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 import org.capcaval.ccoutils.lang.ArrayTools;
+import org.capcaval.ccoutils.lang.SystemTools;
+import org.capcaval.ccoutils.lang.SystemTools.OSType;
 
 public class CommandPack {
 
@@ -63,27 +65,26 @@ public class CommandPack {
 					return returnValue;
 				}});
 			
-			FileSeekerResult fsResult = FileTools.seekFiles("*", false, dirNamePath);
 			
-			// create the zip file
-			JarZipTools.createZipFile(
-					new File( projName+ ".zip"), 
-					proj.productionDirPath.toFile(), 
-					fsResult.getFileList());
-			
+			if (SystemTools.getOSType() == OSType.Windows) {
+
+				FileSeekerResult fsResult = FileTools.seekFiles("*", false, dirNamePath);
+
+				// create the zip file
+				JarZipTools.createZipFile(
+						new File(projName + ".zip"), 
+						proj.productionDirPath.toFile(),
+						fsResult.getFileList());
+			}else{ // linux
+				String dirNameStr = dirNamePath.getFileName().toString();
+				String command = "zip -r " + dirNameStr+".zip " + dirNameStr;
+				Runtime.getRuntime().exec(command, null, dirNamePath.getParent().toFile());
+				
+			}
+			result.addMessage("File " + projName + ".zip is created.");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		//FileTool.
-		
-		// copy all the sample directory
-		//FileTools.copy(source, dest)
-		
-		
-		// laFab + laFab.bat
-		// 00_prj
-		// 02_lib + ccOutils.jar
-		// 30_sample
 		
 		return result;
 	}

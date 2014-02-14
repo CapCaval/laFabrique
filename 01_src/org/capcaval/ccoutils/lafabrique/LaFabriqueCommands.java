@@ -253,7 +253,9 @@ public class LaFabriqueCommands {
 		// compile the project first
 		AbstractProject proj = this.retrieveProject(projectStr);
 		
-		CommandPack.pack(proj);
+		CommandResult result = CommandPack.pack(proj);
+		returnedMessage.addLine(result.toString());
+		
 		return returnedMessage.toString();
 	}
 	
