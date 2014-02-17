@@ -18,7 +18,7 @@ public class AskiiSample {
 	@Command(desc = "show how to create an ascii logo. It shows two different logos display.")
 	public String asciiLogo(){
 		System.out.println( SampleCommons.SAMPLE_SOURCE_CODE_MESSAGE + SystemTools.getCurrentFullMethodName());
-		FileTools.readStringfromFile(pathStr);
+		//FileTools.readStringfromFile(pathStr);
 		
 		
 		// ask for a string logo
