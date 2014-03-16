@@ -29,6 +29,4 @@ public interface SchedulerFactory {
 	static public SchedulerFactory factory = new SchedulerFactoryImpl();
 	
 	public ScheduledExecutorService newSingleThreadScheduledExecutor(String newThreadName);
-	public ScheduledExecutorService newSingleThreadScheduledExecutor(Thread thread);
-	
 }

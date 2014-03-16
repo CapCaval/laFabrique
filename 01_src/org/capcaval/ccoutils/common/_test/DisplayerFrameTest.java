@@ -1,6 +1,7 @@
 package org.capcaval.ccoutils.common._test;
 
 import java.awt.image.BufferedImage;
+import java.nio.file.Path;
 
 import org.capcaval.ccoutils.common.ImageDisplayerFrame;
 import org.capcaval.ccoutils.common.TextDisplayerFrame;
@@ -40,7 +41,13 @@ public class DisplayerFrameTest {
 
 	@Test
 	public void textFileDisplayTest() {
-		TextFileDisplayFrame.factory.newTextFileDisplayFrame().display();
+		Path p = FileTools.getLocalResourcePath("crowAndFox.txt");
+		
+		//TextFileDisplayFrame.factory.newTextFileDisplayFrame(p).display();
+
+		
+		TextFileDisplayFrame.factory.newTextFileDisplayFrame(this.getClass()).display(100,10,600,400);
+
 		
 		try {
 			Thread.sleep(10000);

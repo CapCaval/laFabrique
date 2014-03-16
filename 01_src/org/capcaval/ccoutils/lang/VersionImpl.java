@@ -2,10 +2,13 @@ package org.capcaval.ccoutils.lang;
 
 public class VersionImpl implements Version {
 	protected String versionStr = null;
-	protected int[] versionIntArray = null;
+	protected int[] versionIntArray = new int[]{0,0,0,0,0,0};
 	protected long versionValue; 
 
 	public VersionImpl(String versionStr) {
+		// remove all characters
+		versionStr = versionStr.replaceAll("[abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ]", "0");
+		
 		// first check the validity
 		if (this.isStringValid(versionStr) == false) {
 			String message = "[ccOutils] Errors : the string \"" + versionStr
@@ -13,7 +16,7 @@ public class VersionImpl implements Version {
 			throw new RuntimeException(message);
 		} else {
 			this.versionStr = versionStr;
-			this.versionIntArray = this.convert(versionStr);
+			this.versionIntArray = this.convert(versionStr, this.versionIntArray);
 			// compute a long value for  
 			this.versionValue = this.computeVersionValue(this.versionIntArray);
 		}
@@ -29,7 +32,7 @@ public class VersionImpl implements Version {
 		for(int i = 0; i < index ; i++){
 			value = value + (versionIntArray[index -1 - i] * factor);
 			// update the factor for the next values
-			factor = factor * 10_000;
+			factor = factor * 1_000;
 		}
 		
 		return value;
@@ -72,7 +75,7 @@ public class VersionImpl implements Version {
 		return StringTools.isExclusiveMadeOf(versionStr, "0123456789._-");
 	}
 
-	protected int[] convert(String versionStr) {
+	protected int[] convert(String versionStr, int[] inArray) {
 		// first convert all most common delimiter if any to point
 		versionStr = versionStr.replace("-", ".");
 		versionStr = versionStr.replace("_", ".");
@@ -80,15 +83,13 @@ public class VersionImpl implements Version {
 		// secondly split the string
 		String[] splittedStrArray = versionStr.split("\\.");
 
-		// convert all string to int
-		int[] intArray = new int[splittedStrArray.length];
 
 		int i = 0;
 		for (String str : splittedStrArray) {
-			intArray[i++] = Integer.parseInt(str);
+			inArray[i++] = Integer.parseInt(str);
 		}
 
-		return intArray;
+		return inArray;
 	}
 
 	@Override

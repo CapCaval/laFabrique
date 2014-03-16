@@ -21,7 +21,8 @@ import org.capcaval.ccoutils.file.FileTools;
 import org.capcaval.ccoutils.file.command.FileCmd;
 import org.capcaval.ccoutils.lafabrique.AbstractProject;
 import org.capcaval.ccoutils.lang.ArrayTools;
-import org.capcaval.ccoutils.lang.JDKInstallationInfo;
+import org.capcaval.ccoutils.lang.Jdk;
+import org.capcaval.ccoutils.lang.JdkPathInfo;
 import org.capcaval.ccoutils.lang.StringMultiLine;
 import org.capcaval.ccoutils.lang.SystemTools;
 
@@ -34,10 +35,31 @@ public class CommandCompile {
 		JavaCompiler compiler = ToolProvider.getSystemJavaCompiler();
 		
 		if(compiler==null){
-			JDKInstallationInfo jdk = SystemTools.getJDKInstallationInfo();
+			JdkPathInfo jdk = SystemTools.getJDKInstallationInfo();
 			System.setProperty("java.home", jdk.toString());
+			
+			SystemTools.addPathToClassPath(jdk.toString()+"/lib/tools.jar");
+			
 			compiler = ToolProvider.getSystemJavaCompiler();
 		}
+		
+		if(compiler ==null){
+			// use java home system property
+			String javaHome = System.getenv("JAVA_HOME");
+			if((javaHome!=null)&&(javaHome.length()>1)){
+				System.setProperty("java.home", javaHome);
+				
+				SystemTools.addPathToClassPath(javaHome+"/lib/tools.jar");
+				
+				compiler = ToolProvider.getSystemJavaCompiler();
+			}
+		}
+
+		if(compiler ==null){
+			returnedMessage.addLine("[laFabrique] ERROR  : CANNOT find JDK. Please install a 1.7 version or above.");
+			return new CommandResult(Type.ERROR, returnedMessage.toString());
+		}
+
 		
 		cleanProductionDirectory(proj.productionDirPath);
 		FileSeekerResult result = null;

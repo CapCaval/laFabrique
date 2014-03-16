@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.capcaval.ccoutils.common.CommandResult;
+import org.capcaval.ccoutils.common.CommandResult.Type;
 import org.capcaval.ccoutils.converter.Converter;
 import org.capcaval.ccoutils.converter.ConverterManager;
 import org.capcaval.ccoutils.lang.ArrayError;
@@ -59,8 +60,8 @@ public class CommandLineComputer {
 	
 	public CommandResult computeCommandLine(String... commandArray){
 		if((commandArray == null)||(commandArray.length == 0)){
-			return new CommandResult("["+ this.consoleName + "] Error : There is no command or default command." + 
-					"\nPlease use help to see the avalaible commands.", false);
+			return new CommandResult(Type.ERROR,  "There is no command or default command." + 
+					"\nPlease use help to see the available commands.");
 		}
 		
 		// get the command name
@@ -69,8 +70,8 @@ public class CommandLineComputer {
 		CommandWrapper w = this.commandMap.get(command);
 		
 		if(w == null){
-			return new CommandResult("["+ this.consoleName + "] Error : The command \"" + command + "\" can not be found." + 
-					"\nPlease use help to see the avalaible commands.", false);
+			return new CommandResult( Type.ERROR, "The command \"" + command + "\" can not be found." + 
+					"\nPlease use help to see the avalaible commands.");
 		}
 		
 		//

@@ -3,20 +3,14 @@ package org.capcaval.ccoutils.compiler;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.nio.file.Paths;
-import java.util.Arrays;
 
 import javax.tools.JavaCompiler;
 import javax.tools.ToolProvider;
 
 import org.capcaval.ccoutils.compiler._test.AbstractClass;
-import org.capcaval.ccoutils.compiler._test.MyInterface;
-import org.capcaval.ccoutils.file.FileSeekerResult;
 import org.capcaval.ccoutils.file.FileTools;
-import org.capcaval.ccoutils.lang.JDKInstallationInfo;
+import org.capcaval.ccoutils.lang.Jdk;
+import org.capcaval.ccoutils.lang.JdkPathInfo;
 import org.capcaval.ccoutils.lang.StringMultiLine;
 import org.capcaval.ccoutils.lang.SystemClassLoader;
 import org.capcaval.ccoutils.lang.SystemTools;
@@ -78,16 +72,40 @@ public class CompilerTools {
 			
 			if(compiler == null){
 				// jdk is not accessible with PATH
-				JDKInstallationInfo jdk = SystemTools.getJDKInstallationInfo();
-				System.setProperty("java.home", jdk.path.toString());
+				JdkPathInfo jdk = SystemTools.getJDKInstallationInfo();
+				System.setProperty("java.home", jdk.path.toString() + "/bin");
 				compiler = ToolProvider.getSystemJavaCompiler();
 			}
 			
-			i = compiler.run(null, null, null, 
+			if(compiler ==null){
+				// use java home system property
+				String javaHome = System.getenv("JAVA_HOME");
+				if((javaHome!=null)&&(javaHome.length()>1)){
+					//System.setProperty("java.home", javaHome);
+					SystemTools.addPathToClassPath(javaHome+"/lib/tools.jar");
+					compiler = ToolProvider.getSystemJavaCompiler();
+				}
+			}
+			
+			if(compiler==null){
+				JdkPathInfo jdk = SystemTools.getJDKInstallationInfo();
+				System.setProperty("java.home", jdk.path.toString());
+				
+				SystemTools.addPathToClassPath(jdk.toString()+"/lib/tools.jar");
+				
+				compiler = ToolProvider.getSystemJavaCompiler();
+			}
+			
+			if(compiler != null){
+				i = compiler.run(null, null, null, 
 					"-g",
 					"-classpath", "../10_bin"+ File.pathSeparator + "10_bin"+ File.pathSeparator + "02_lib/ccOutils.jar",
 					"-d", outputDir, 
 					sourceFile.getPath());
+			}
+			else{
+				System.out.println("[ccOutils] ERROR : JDK cannot be found. Please install a version 1.7 or above. ccOutils uses the PATH to find JDK firstly and secondly JAVA_HOME variable.");
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 		}

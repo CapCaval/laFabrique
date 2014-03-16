@@ -2,7 +2,8 @@ package org.capcaval.ccoutils.lang._test;
 
 import junit.framework.Assert;
 
-import org.capcaval.ccoutils.lang.JDKInstallationInfo;
+import org.capcaval.ccoutils.lang.Jdk;
+import org.capcaval.ccoutils.lang.JdkPathInfo;
 import org.capcaval.ccoutils.lang.SystemTools;
 import org.capcaval.ccoutils.lang.Version;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class SystemToolsTest {
 		
 		//System.setProperty("java.home", "D:\\prg\\Java\\jdk1.7.0_51");
 		
-		JDKInstallationInfo info = SystemTools.getJDKInstallationInfo();
+		JdkPathInfo info = SystemTools.getJDKInstallationInfo();
 		System.out.println("JDK : " + info.path.toString());
 		Assert.assertNotNull(info);
 		

@@ -15,7 +15,13 @@ public class DataImpl<T> implements Data<T> {
 	T value;
 	Map<Class<?>, Converter<?, T>> converterMap = new HashMap<>();
 	List<DataEvent<T>> observerList = new ArrayList<>();
+
+	public DataImpl(){
+	}
 	
+	public DataImpl(T value){
+		this.setValue(value);
+	}
 	
 	@Override
 	public void setValue(T value) {

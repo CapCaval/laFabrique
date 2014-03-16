@@ -7,9 +7,9 @@ public class CommandResult {
 	
 	public boolean isCommandFound;
 	
-	public enum Type {ERROR, WARNING, INFO};
+	public enum Type {ERROR, WARNING, INFO, NONE};
 	
-	protected Type type;
+	protected Type type = Type.NONE;
 	protected StringMultiLine message = new StringMultiLine(); 
 	protected Throwable throwable;	
 
@@ -56,6 +56,13 @@ public class CommandResult {
 	
 	@Override
 	public String toString(){
-		return "[" + applicationName + "]\n" +  this.type + "  : " + this.message; 
+		String str = null;
+		// if type is none just take the string as it is
+		if(this.type == Type.NONE){
+			str = this.message.toString();
+		}else{ // otherwise format the message with the type and application name
+			str = "[" + applicationName + "] " +  this.type + "  : " + this.message;
+		}
+		return str;
 	}
 }

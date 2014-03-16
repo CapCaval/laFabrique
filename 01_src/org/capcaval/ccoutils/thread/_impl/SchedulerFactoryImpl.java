@@ -41,17 +41,4 @@ public class SchedulerFactoryImpl implements SchedulerFactory {
 				
 		return Executors.newSingleThreadScheduledExecutor(threadFactory);
 	}
-
-	@Override
-	public ScheduledExecutorService newSingleThreadScheduledExecutor(
-			final Thread thread) {
-		ThreadFactory threadFactory = new ThreadFactory(){
-			@Override
-				public Thread newThread(Runnable r) {
-					return thread;
-				}};
-				
-		return Executors.newSingleThreadScheduledExecutor(threadFactory);
-	}
-
 }

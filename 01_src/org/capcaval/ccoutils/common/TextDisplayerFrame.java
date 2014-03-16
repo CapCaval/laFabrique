@@ -54,6 +54,12 @@ public class TextDisplayerFrame {
 	public void display(){
 		this.frame.setVisible(true);
 	}
+
+	public void display(int x, int y, int width, int height){
+		this.frame.setBounds(x, y, width, height);
+		this.frame.setVisible(true);
+	}
+
 	
 	public void hide(){
 		this.frame.setVisible(false);

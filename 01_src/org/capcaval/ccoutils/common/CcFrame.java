@@ -8,6 +8,11 @@ import java.awt.event.ComponentListener;
 import javax.swing.JFrame;
 
 public class CcFrame extends JFrame{
+	int x =0;
+	int y =0;
+	int width =100;
+	int height =200;
+	
 	public CcFrame(){
 		this.init("", 0, 0, 300, 600);
 	}
@@ -26,11 +31,17 @@ public class CcFrame extends JFrame{
     	this.addComponentListener(this.newComponentListener(title, x, y, width, height));	
 	}
 	
-	private ComponentListener newComponentListener(final String title, final int x, final int y, final int width, final int height) {
+	private ComponentListener newComponentListener(final String title, int x, int y, int width, int height) {
+		
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		
 		ComponentListener listener = new ComponentListener() {
 			@Override
 			public void componentShown(ComponentEvent e) {
-				initFrame(title, x, y, width, height);
+				initFrame(title, CcFrame.this.x, CcFrame.this.y, CcFrame.this.width, CcFrame.this.height);
 			}
 			
 			@Override public void componentResized(ComponentEvent e) {}
@@ -49,5 +60,15 @@ public class CcFrame extends JFrame{
 
 	public void addInside(Component c){
 		this.getContentPane().add(c);
+	}
+	
+	@Override
+	public void setBounds(int x, int y, int width, int height){
+		super.setBounds(x, y, width, height);
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		
 	}
 }

@@ -1,8 +1,12 @@
 package org.capcaval.ccoutils.data;
 
-import org.capcaval.ccoutils.data._impl.DataImpl;
-import org.capcaval.ccoutils.factory.FactoryTools;
-import org.capcaval.ccoutils.factory.GenericFactory;
 
 public interface Data<T> extends DataReadWrite<T>, DataFeeder<T> {
+	public static DataFactory factory = new DataFactoryImpl();
+	
+	public interface DataFactory{
+		<T> Data<T> newData();
+		<T> Data<T> newData(T data);
+		<T> DataReadOnly<T> newReadOnlyData(T data);
+	}
 }

@@ -136,6 +136,9 @@ public class ApplicationTools {
 	private static boolean isJavaVersionAboveVersion(Version v) {
 		// get the current version
 		Version version = SystemTools.getCurrentJavaVersion();
+		// remove release candidate version
+		
+		
 		// compare with the requested and return the result
 		return version.isLowerVersionThan(v);
 	}
