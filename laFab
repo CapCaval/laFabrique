@@ -10,6 +10,6 @@ if [[ "$JAVA_VERSION" < "1.7" ]]; then
 fi
 
 
-#launch laFab
-java -cp .:./10_bin:./02_lib/ccOutils.jar org.capcaval.ccoutils.lafabrique.LaFabrique $*
+#launch application
+java -cp 10_bin:02_lib/junit-4.8.2.jar:02_lib/laFabrique.jar org.capcaval.lafabrique.lafab.LaFab $*
 

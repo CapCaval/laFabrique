@@ -27,7 +27,6 @@ import junit.framework.Assert;
 
 import org.capcaval.c3.c3application.C3Application;
 import org.capcaval.c3.component.ComponentEventSubscribe;
-import org.capcaval.c3.component.annotation.ConsumedEvent;
 import org.capcaval.c3.component.annotation.EventSubcribe;
 import org.capcaval.c3.component.annotation.UsedService;
 import org.capcaval.c3.componentmanager._test.application.TestConsummer.TestConsummerService;
@@ -35,7 +34,6 @@ import org.capcaval.c3.componentmanager._test.application.TestConsummer.imp.Test
 import org.capcaval.c3.componentmanager._test.application.TestProducer.TestProducerEvent;
 import org.capcaval.c3.componentmanager._test.application.TestProducer.TestProducerService;
 import org.capcaval.c3.componentmanager._test.application.TestProducer.impl.TestProducerImpl;
-import org.capcaval.c3.sample.tutorial4.numberproducer.NumberProducerEvent;
 import org.junit.Test;
 
 

@@ -24,14 +24,16 @@ public class AskiiImageSample {
 		// load the file inside the sample package
 		BufferedImage image = FileTools.getLocalImage("mouette.jpg");
 		
-		// display it
-		ImageDisplayerFrame.factory.newImageDisplayerFrame(image).display();
-		
 		// convert it to string
 		String askiiFish = AskiiTools.convertBitmapToAscii(image, 240, 90, "$*'  ");
 		
 		// display the ascii image
-		TextDisplayerFrame.factory.newTextDisplayerFrame(500, 0, 1000, 1000, askiiFish).display();
+		TextDisplayerFrame.factory.newTextDisplayerFrame(500, 0, 1000, 1000, askiiFish, false).display();
 		
+		// display it
+		ImageDisplayerFrame.factory.newImageDisplayerFrame(image).display(1000,0);
+		
+		SystemTools.readConsoleInput("\nPlease, press return key to quit.");
+		System.exit(0);
 	}
 }

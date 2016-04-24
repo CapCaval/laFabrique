@@ -23,11 +23,7 @@ THE SOFTWARE.
 */
 
 
-import java.lang.reflect.Proxy;
-
 import org.capcaval.c3.c3application.C3Application;
-import org.capcaval.c3.component.ComponentService;
-import org.capcaval.c3.componentmanager._impl.tools.ComponentServiceProxy;
 import org.capcaval.c3.componentmanager._impl.tools._test.asyncomp.impl.AsyncCompImpl;
 
 public class ProxyTest {

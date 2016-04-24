@@ -1,0 +1,55 @@
+package com.thalesgroup.tas.amascos.rmgpic.rmgtools.statemanager.test.view;
+
+import com.thalesgroup.tas.amascos.rmgpic.rmgtools.statemanager.test.sample.State;
+import com.thalesgroup.tas.amascos.rmgpic.rmgtools.statemanager.StateManager;
+import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+
+public class MainCtrl 
+{
+    protected MainView view;
+
+    /**
+     * Get accessor for view
+     */
+    public MainView getView () {
+        return this.view;
+    }
+
+    /**
+     * Card accessor for view
+     */
+    public int cardView () {
+        if ( this.view == null ) return 0;
+        else return 1;
+    }
+
+
+    public MainCtrl(
+        final StateManager stateManager)
+    {
+// objecteering-startJavaSuper.................................N/0E11/OBAW7M:FVZ
+// objecteering-endJavaSuper...................................E/0E11/OBAW7M:FVZ
+// objecteering-start..........................................T/2F12/OBAW7M:SZZ
+    	this.view = new MainView(stateManager);
+    	
+    	
+    	this.view.getStateCombo().setModel(new DefaultComboBoxModel(State.values()));
+    	
+    	// change the state from new combo selection
+    	this.view.getStateCombo().addItemListener(new ItemListener() {
+			@Override
+			public void itemStateChanged(ItemEvent event) {
+				
+				State item = (State)event.getItem();
+				
+				if (event.getStateChange() == ItemEvent.SELECTED) {
+					stateManager.update(item);
+				}
+			}
+		});
+    	
+// objecteering-end............................................E/2F12/OBAW7M:SZZ
+    }
+}

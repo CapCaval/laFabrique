@@ -22,6 +22,7 @@ THE SOFTWARE.
 package org.capcaval.c3.componentmanager.tools;
 
 import java.lang.reflect.Method;
+import java.util.concurrent.ScheduledExecutorService;
 
 import org.capcaval.c3.component.Component;
 import org.capcaval.c3.component.ComponentEvent;
@@ -30,9 +31,7 @@ import org.capcaval.c3.component.ComponentState;
 import org.capcaval.c3.componentmanager._impl.tools.ComponentDescriptionFactoryImpl;
 import org.capcaval.c3.componentmanager._impl.tools.ComponentItemDescription;
 import org.capcaval.c3.componentmanager._impl.tools.SubComponentDescription;
-import org.capcaval.c3.componentmanager._impl.tools.UsedEventSubscribeDescription;
-import org.capcaval.c3.componentmanager._impl.tools.UsedServicesDescription;
-import org.capcaval.ccoutils.pair.Pair;
+import org.capcaval.lafabrique.pair.Pair;
 
 
 public interface ComponentDescription {
@@ -55,6 +54,7 @@ public interface ComponentDescription {
 
 
 	public void setComponentType(Class<?> cmpnClass);
+	public Class<?> getComponentType();
 	public void setComponentName(String name);
 //	public void setProvidedServiceList(Class<? extends ComponentService>[] serviceList);
 	
@@ -92,6 +92,13 @@ public interface ComponentDescription {
 	public void addProvidedServices(
 			Class<? extends ComponentService> serviceType, Class<?> cmpnClass);
 
+	public void setThread(String threadName);
+	public String getThread();
 
+	public void setScheduledExecutorService(ScheduledExecutorService ses);
+	public ScheduledExecutorService getScheduledExecutorService();
+
+	public void setTaskArray(Task[] taskArray);
+	public Task[] getTaskArray();
 
 }

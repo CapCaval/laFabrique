@@ -1,14 +1,19 @@
 package prj;
 
-import org.capcaval.ccoutils.lafabrique.AbstractProject;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
-public class ccOutils extends AbstractProject{
+import org.capcaval.lafabrique.common.CommandResult;
+import org.capcaval.lafabrique.file.FileTools;
+import org.capcaval.lafabrique.lafab.command.LaFabTask;
+import org.capcaval.lafabrique.project.Project;
+
+public class ccOutils extends Project{
 	
-
 	@Override
 	public void defineProject(){
 		name("ccOutils");
-		version("0.0.1");
+		version("0.0.3");
 		author("CapCaval.org");
 		copyright("CapCaval.org");
 		licence("MIT");
@@ -21,10 +26,24 @@ public class ccOutils extends AbstractProject{
 		packageName("org.capcaval.ccoutils");
 		
 		lib("junit-4.8.2.jar");
-		jdkVersion("jdk1.7.0_09");
 
 		jar.name("ccOutils.jar");
-		jar.excludeDirectoryName("_test", "_design");
+		jar.includeSource(true);
+		jar.excludedDirectoryName("_test", "_design");
+		jar.postTask(new LaFabTask() {
+			@Override
+			public CommandResult run(Project project) {
+				CommandResult cr = new CommandResult();
+				Path src = Paths.get(project.productionDirPath.toString() + "/" + project.jar.name);
+				Path dst = Paths.get("30_sample/02_lib/"+ project.jar.name);
+				FileTools.copy( src, dst);
+				cr.addInfoMessage("copy the jar to " + dst.toString());
+				
+				return cr;
+			}
+		});
+		
+		pack.name("ccoutils.zip");
 	}
 
 }

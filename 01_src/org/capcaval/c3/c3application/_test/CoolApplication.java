@@ -25,7 +25,6 @@ import java.nio.file.FileSystems;
 import java.nio.file.Path;
 
 import org.capcaval.c3.c3application.C3Application;
-import org.capcaval.c3.c3application.C3ApplicationFullState;
 import org.capcaval.c3.c3application.annotations.AppProperty;
 
 public class CoolApplication extends C3Application {

@@ -1,0 +1,59 @@
+package com.thalesgroup.tas.amascos.rmgpic.rmgtools.statemanager.test.view;
+
+import javax.swing.JPanel;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+
+public class SubView 
+    extends JPanel
+{
+    protected JButton plusBtn = new JButton("+");
+
+    /**
+     * Get accessor for plusBtn
+     */
+    public JButton getPlusBtn () {
+        return this.plusBtn;
+    }
+
+    /**
+     * Card accessor for plusBtn
+     */
+    public int cardPlusBtn () {
+        if ( this.plusBtn == null ) return 0;
+        else return 1;
+    }
+
+    protected JButton minusBtn = new JButton("+");
+
+    /**
+     * Get accessor for minusBtn
+     */
+    public JButton getMinusBtn () {
+        return this.minusBtn;
+    }
+
+    /**
+     * Card accessor for minusBtn
+     */
+    public int cardMinusBtn () {
+        if ( this.minusBtn == null ) return 0;
+        else return 1;
+    }
+
+
+    public SubView()
+    {
+// objecteering-startJavaSuper.................................N/9D12/OBAW7M:JVZ
+// objecteering-endJavaSuper...................................E/9D12/OBAW7M:JVZ
+// objecteering-start..........................................T/M812/OBAW7M:ZZZ
+    	this.plusBtn = new JButton("+");
+    	this.minusBtn = new JButton("-");
+
+		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
+		
+		this.add(this.plusBtn);
+		this.add(this.minusBtn);
+// objecteering-end............................................E/M812/OBAW7M:ZZZ
+    }
+}

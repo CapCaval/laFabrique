@@ -1,3 +1,0 @@
-#!/bin/bash
-java -cp .:./02_lib/ccOutils.jar:./10_bin:./20_prod/tempSrc ccoutils.application.AppSample $*
-

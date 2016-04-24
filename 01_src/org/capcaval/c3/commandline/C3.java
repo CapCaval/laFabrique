@@ -1,6 +1,6 @@
 package org.capcaval.c3.commandline;
 
-import org.capcaval.ccoutils.commandline.CommandLineAbstractMain;
+import org.capcaval.lafabrique.commandline.CommandLineAbstractMain;
 
 public class C3 extends CommandLineAbstractMain{
 	

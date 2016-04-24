@@ -21,10 +21,7 @@ THE SOFTWARE.
 */
 package test.subcomponent.maincomponent.impl;
 
-import org.capcaval.c3.component.annotation.ProducedEvent;
 import org.capcaval.c3.component.annotation.SubComponent;
-
-
 
 import test.subcomponent.maincomponent.MainComponent;
 import test.subcomponent.maincomponent.MainComponentService;

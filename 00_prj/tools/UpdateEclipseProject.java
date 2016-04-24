@@ -1,7 +1,7 @@
 package tools;
 
-import org.capcaval.ccoutils.common.CommandResult;
-import org.capcaval.ccoutils.lafabrique.command.CommandEclipseProject;
+import org.capcaval.lafabrique.common.CommandResult;
+import org.capcaval.lafabrique.lafab.command.CommandEclipseProject;
 
 import prj.ccProjects;
 

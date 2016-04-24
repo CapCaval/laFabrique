@@ -24,7 +24,6 @@ package org.capcaval.c3.c3application;
 import org.capcaval.c3.c3application.objectfactory.ObjectFactoryFromStringValue;
 import org.capcaval.c3.component.Component;
 import org.capcaval.c3.componentmanager.ComponentManager;
-import org.capcaval.c3.componentmanager._impl.ComponentManagerImpl;
 
 public abstract class C3ApplicationFullState implements ApplicationState{
 	

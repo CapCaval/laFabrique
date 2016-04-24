@@ -5,6 +5,7 @@ import org.capcaval.ccoutils.application.annotations.AggregatedCommand;
 import org.capcaval.ccoutils.application.annotations.AppInformation;
 import org.capcaval.ccoutils.common.CommandResult;
 
+import ccoutils.application.AppSampleAggregate;
 import ccoutils.askii.AskiiImageSample;
 import ccoutils.askii.AskiiLogoSample;
 import ccoutils.compiler.CompilerSample;
@@ -29,6 +30,9 @@ public class RunSample {
 
 	@AggregatedCommand
 	DataSample dataSample = new DataSample();
+	
+	@AggregatedCommand
+	AppSampleAggregate appSample = new AppSampleAggregate();
 	
 	/**
 	 * @param args

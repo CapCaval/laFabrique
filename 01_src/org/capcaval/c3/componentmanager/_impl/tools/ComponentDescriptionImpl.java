@@ -24,15 +24,18 @@ package org.capcaval.c3.componentmanager._impl.tools;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ScheduledExecutorService;
 
 import org.capcaval.c3.component.Component;
 import org.capcaval.c3.component.ComponentEvent;
 import org.capcaval.c3.component.ComponentService;
 import org.capcaval.c3.component.ComponentState;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription;
-import org.capcaval.ccoutils.pair.Pair;
-import org.capcaval.ccoutils.pair.PairFactory;
-import org.capcaval.ccoutils.pair.PairImpl;
+import org.capcaval.c3.componentmanager.tools.Task;
+import org.capcaval.c3.componentmanager.tools.UsedEventSubscribeDescription;
+import org.capcaval.c3.componentmanager.tools.UsedServicesDescription;
+import org.capcaval.lafabrique.pair.Pair;
+import org.capcaval.lafabrique.pair.PairImpl;
 
 
 public class ComponentDescriptionImpl implements ComponentDescription {
@@ -55,6 +58,9 @@ public class ComponentDescriptionImpl implements ComponentDescription {
 	protected List<SubComponentDescription> subComponentList = new ArrayList<SubComponentDescription>();
 	protected List<ComponentItemDescription> componentItemList = new ArrayList<ComponentItemDescription>();
 	protected List<Class<?>> consumedEventList = new ArrayList<Class<?>>();
+	private String threadName;
+	private ScheduledExecutorService ses;
+	private Task[] taskArray;
 
 	
 	@Override
@@ -95,7 +101,7 @@ public class ComponentDescriptionImpl implements ComponentDescription {
 	}
 
 	@Override
-	public Pair[] getProvidedServiceList() {
+	public Pair<?,?>[] getProvidedServiceList() {
 		return this.providedServiceslist.toArray(new PairImpl[0]);
 	}
 
@@ -119,6 +125,7 @@ public class ComponentDescriptionImpl implements ComponentDescription {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Class<? extends ComponentEvent>[] getProvidedEventList() {
 		return this.providedEventsList.toArray(new Class[0]);
@@ -213,7 +220,7 @@ public class ComponentDescriptionImpl implements ComponentDescription {
 		}
 		str.append("USED SERVICES : \n");
 		for(UsedServicesDescription desc : this.usedServicesList){
-			str.append("\t "+desc.field.getType()+"\n");
+			str.append("\t "+desc.getField().getType()+"\n");
 		}
 		str.append("CONSUMED EVENT: \n");
 		for(Method method : this.consumedEventMethodList){
@@ -221,7 +228,7 @@ public class ComponentDescriptionImpl implements ComponentDescription {
 		}
 		str.append("USED EVENT SUBSCRIBE: \n");
 		for(UsedEventSubscribeDescription desc : this.usedEventSubscribeList){
-			str.append("\t "+desc.field.getGenericType()+"\n");
+			str.append("\t "+desc.getField().getGenericType()+"\n");
 		}
 		str.append("SUB COMPONENT: \n");
 		for(SubComponentDescription desc : this.subComponentList){
@@ -276,10 +283,42 @@ public class ComponentDescriptionImpl implements ComponentDescription {
 
 	@Override
 	public Class<?>[] getConsumedEventList() {
-		// TODO Auto-generated method stub
 		return this.consumedEventList.toArray(new Class<?>[0]);
 	}
 
+	@Override
+	public void setThread(String threadName) {
+		this.threadName = threadName;
+		
+	}
 
+	@Override
+	public String getThread() {
+		return this.threadName;
+	}
 
+	@Override
+	public void setScheduledExecutorService(ScheduledExecutorService ses) {
+		this.ses = ses;
+	}
+
+	@Override
+	public ScheduledExecutorService getScheduledExecutorService() {
+		return this.ses;
+	}
+
+	@Override
+	public void setTaskArray(Task[] taskArray) {
+		this.taskArray = taskArray;
+	}
+
+	@Override
+	public Task[] getTaskArray() {
+		return this.taskArray;
+	}
+
+	@Override
+	public Class<?> getComponentType() {
+		return this.componentType;
+	}
 }

@@ -1,6 +1,6 @@
 package prj;
 
-import org.capcaval.ccoutils.lafabrique.AbstractProject;
+import org.capcaval.ccoutils.lafabrique.lafab.AbstractProject;
 
 
 public class Sample extends AbstractProject{
@@ -20,7 +20,5 @@ public class Sample extends AbstractProject{
 		lib("ccOutils.jar");
 		
 		binDir("10_bin");
-		
-		jdkVersion("jdk1.7.0_09");
 	}
 }

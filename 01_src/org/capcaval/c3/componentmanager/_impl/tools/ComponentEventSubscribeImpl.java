@@ -26,15 +26,30 @@ import java.util.List;
 
 import org.capcaval.c3.component.ComponentEvent;
 import org.capcaval.c3.component.ComponentEventSubscribe;
+import org.capcaval.c3.component.PostSubscribe;
 
 public class ComponentEventSubscribeImpl <T extends ComponentEvent> implements ComponentEventSubscribe <T> {
 
-	public List<T> observerList = new ArrayList<T>();
+	protected List<T> observerList = new ArrayList<T>();
+	protected PostSubscribe postSubscribe;
+	
+	public ComponentEventSubscribeImpl(){
+		
+	}
+	
+	public ComponentEventSubscribeImpl(PostSubscribe postSubscribe){
+		this.postSubscribe = postSubscribe;
+	}
 	
 	@Override
 	public void subscribe(T observer) {
 		// add a new observer in order to receive T events
 		this.observerList.add(observer);
+		
+		//TODO to finish
+		if(this.postSubscribe != null){
+			this.postSubscribe.notifyPostSubscribe();
+		}
 	}
 
 	@Override

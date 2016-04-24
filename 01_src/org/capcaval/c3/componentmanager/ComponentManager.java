@@ -49,6 +49,8 @@ public interface ComponentManager {
 	 */
 	public <T extends ComponentService> T getComponentService(Class<T> componentType);
 	public <T extends ComponentEvent> ComponentEventSubscribe<T> getComponentEventSubscribe(Class<T> eventType);
+
+	
 	
 	/**
 	 * @return
@@ -69,5 +71,7 @@ public interface ComponentManager {
 	public ComponentManagerController getController();
 	
 	public void reset();
+
+	public void injectServicesAndEvents(Object obj);
 
 }

@@ -29,7 +29,6 @@ import org.capcaval.c3.component.annotation.ConsumedEvent;
 import org.capcaval.c3.component.annotation.EventSubcribe;
 import org.capcaval.c3.component.annotation.UsedService;
 
-
 import test.test2components.numberproducer.NumberProducerEvent;
 import test.test2components.numberproducer.NumberProducerService;
 import test.test2components.numberreceiver.NumberReceiver;

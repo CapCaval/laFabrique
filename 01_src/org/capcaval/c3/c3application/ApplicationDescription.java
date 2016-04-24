@@ -24,8 +24,8 @@ package org.capcaval.c3.c3application;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.capcaval.c3.componentmanager._impl.tools.UsedEventSubscribeDescription;
-import org.capcaval.c3.componentmanager._impl.tools.UsedServicesDescription;
+import org.capcaval.c3.componentmanager.tools.UsedEventSubscribeDescription;
+import org.capcaval.c3.componentmanager.tools.UsedServicesDescription;
 
 public class ApplicationDescription {
 

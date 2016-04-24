@@ -1,9 +1,10 @@
 package tools;
 
-import org.capcaval.ccoutils.common.CommandResult;
-import org.capcaval.ccoutils.lafabrique.command.CommandPack;
+import org.capcaval.lafabrique.common.CommandResult;
+import org.capcaval.lafabrique.lafab.command.CommandPack;
+import org.capcaval.lafabrique.project.Project;
 
-import prj.ccOutils;
+import prj.DefaultProject;
 
 public class PackProject {
 
@@ -11,10 +12,15 @@ public class PackProject {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		//ccProjects project = new ccProjects();
-		ccOutils project = new ccOutils();
+		Class<?> defaultProjType = new DefaultProject().getDefaultProject();
+		Project proj=null;
+		try {
+			proj = (Project)defaultProjType.newInstance();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		
-		CommandResult cr = CommandPack.pack(project);
+		CommandResult cr = CommandPack.pack(proj);
 		System.out.println(cr);
 	}
 

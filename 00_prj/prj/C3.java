@@ -1,8 +1,8 @@
 package prj;
 
-import org.capcaval.ccoutils.lafabrique.AbstractProject;
+import org.capcaval.lafabrique.project.Project;
 
-public class C3 extends AbstractProject{
+public class C3 extends Project{
 	
 
 	@Override
@@ -18,15 +18,15 @@ public class C3 extends AbstractProject{
 		libDir("02_lib");
 		
 		lib("junit-4.8.2.jar");
+		test.lib("junit-4.8.2.jar");
 		
-		jdkVersion("jdk1.7.0_09");
 		
 //		librairiePath("04_lib");
 //		librairiesForCompiling("ccTools");
 		prodDir("20_prod");
 
 		jar.name("C3.jar");
-		jar.excludeDirectoryName("_test");
+		jar.excludedDirectoryName("_test");
 		
 		// tout compiler dans bin
 		// copier la compil sans les rep _test dans temp/jar

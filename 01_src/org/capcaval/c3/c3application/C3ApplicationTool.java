@@ -50,10 +50,10 @@ import org.capcaval.c3.component.ComponentService;
 import org.capcaval.c3.componentmanager.ComponentManager;
 import org.capcaval.c3.componentmanager.ComponentManagerController;
 import org.capcaval.c3.componentmanager._impl.tools.ComponentDescriptionContainer;
-import org.capcaval.c3.componentmanager._impl.tools.UsedEventSubscribeDescription;
-import org.capcaval.c3.componentmanager._impl.tools.UsedServicesDescription;
-import org.capcaval.c3.componentmanager.tools.ComponentAnalyserTool;
+import org.capcaval.c3.componentmanager.tools.ComponentTools;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription;
+import org.capcaval.c3.componentmanager.tools.UsedEventSubscribeDescription;
+import org.capcaval.c3.componentmanager.tools.UsedServicesDescription;
 
 
 
@@ -440,11 +440,11 @@ public class C3ApplicationTool {
 		Class<?> currenType = applicationInstance.getClass();
 		
 		// seek any used services
-		UsedServicesDescription[] usedServiceFieldList = ComponentAnalyserTool.getUsedServiceFieldList(currenType);
+		UsedServicesDescription[] usedServiceFieldList = ComponentTools.getUsedServiceFieldList(currenType);
 		ad.addUsedComponentServiceFieldList(usedServiceFieldList);
 
 		// seek any consumed event subscribe
-		UsedEventSubscribeDescription[] cmpEventSubscribeList = ComponentAnalyserTool.getUsedEventSubscribeList(currenType);
+		UsedEventSubscribeDescription[] cmpEventSubscribeList = ComponentTools.getUsedEventSubscribeList(currenType);
 		ad.addUsedComponentEventSubscribeFieldList(cmpEventSubscribeList);
 		
 		return ad;

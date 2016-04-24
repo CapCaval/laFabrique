@@ -1,8 +1,8 @@
 package prj;
 
-import org.capcaval.ccoutils.lafabrique.AbstractProject;
+import org.capcaval.lafabrique.project.Project;
 
-public class ccProjects extends AbstractProject{
+public class ccProjects extends Project{
 	
 
 	@Override
@@ -21,7 +21,6 @@ public class ccProjects extends AbstractProject{
 		prodDir("20_prod");
 		
 		lib("junit-4.8.2.jar");
-		jdkVersion("jdk1.7.0_09");
 	}
 
 }

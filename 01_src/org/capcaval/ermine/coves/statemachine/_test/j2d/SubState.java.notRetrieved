@@ -1,0 +1,9 @@
+package com.thalesgroup.tas.amascos.rmgpic.rmgtools.statemanager.test.view;
+
+
+import java.io.Serializable;
+
+public enum SubState
+{
+ min, max
+}

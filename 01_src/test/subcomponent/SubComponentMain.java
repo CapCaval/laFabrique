@@ -21,12 +21,8 @@ THE SOFTWARE.
 */
 package test.subcomponent;
 
-import org.capcaval.c3.component.ComponentEventSubscribe;
 import org.capcaval.c3.componentmanager.ComponentManager;
 
-import test.simpleserviceandevent.hellomachine.HelloMachineEvent;
-import test.simpleserviceandevent.hellomachine.HelloMachineServices;
-import test.simpleserviceandevent.hellomachine.impl.HelloMachineImpl;
 import test.subcomponent.maincomponent.MainComponentService;
 import test.subcomponent.maincomponent.impl.MainComponentImpl;
 import test.subcomponent.maincomponent.sub1.Sub1Service;

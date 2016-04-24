@@ -17,9 +17,11 @@ import ccoutils.SampleCommons;
 public class AskiiLogoSample {
 
 	@Command(desc = "show how to create an ascii logo. It shows two different logo displays.")
-	public String asciiLogo(){
+	public void asciiLogo(){
 		System.out.println( SampleCommons.SAMPLE_SOURCE_CODE_MESSAGE + SystemTools.getCurrentFullMethodName());
-		TextFileDisplayFrame.factory.newTextFileDisplayFrame(this.getClass()).display(800, 0, 600, 800);		
+		TextFileDisplayFrame f = TextFileDisplayFrame.factory.newTextFileDisplayFrame(this.getClass());	
+		
+		f.display(800, 0, 600, 800);
 		
 		// ask for a string logo
 		String logoStr = SystemTools.readConsoleInput("Enter a logo name : ");
@@ -33,7 +35,9 @@ public class AskiiLogoSample {
 		//set a second logo with others parameters 
 		str.addLine(AskiiTools.convertStringToAscii(logoStr, " '*$", 70));
 		
-		// this is it 
-		return str.toString();
+		System.out.println(str.toString());
+		
+		SystemTools.readConsoleInput("Please, press return key to quit.");
+		System.exit(0);
 	}
 }

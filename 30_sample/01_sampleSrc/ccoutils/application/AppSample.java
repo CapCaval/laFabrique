@@ -4,6 +4,7 @@ import org.capcaval.ccoutils.application.ApplicationTools;
 import org.capcaval.ccoutils.application.annotations.AppInformation;
 import org.capcaval.ccoutils.application.annotations.AppProperty;
 import org.capcaval.ccoutils.commandline.Command;
+import org.capcaval.ccoutils.commandline.CommandParam;
 import org.capcaval.ccoutils.common.CommandResult;
 import org.capcaval.ccoutils.lang.SystemTools;
 
@@ -14,12 +15,11 @@ public class AppSample {
 	private String name = null;
 	
 	public static void main(String[] args) {
-		
 		CommandResult r = ApplicationTools.runApplication(AppSample.class, args);
 		System.out.println(r.getReturnMessage());
 	}
 	
-	@Command
+	@Command(desc="Command illustrating how to use properties.")
 	public String hello(){
 		if(this.name == null){
 			this.name = SystemTools.readConsoleInput("What is your name?");
@@ -29,13 +29,21 @@ public class AppSample {
 	}
 	
 	
-	@Command
-	public int add(int a, int b){
+	@Command(desc="Simple command with integer.")
+	public int add(
+			@CommandParam(name = "a", desc="First value to add.")
+			int a, 
+			@CommandParam(name = "b", desc="Second value to add.")
+			int b){
 		return a+b;
 	}
 
-	@Command
-	public float sub(float a, float b){
+	@Command(desc="Simple command with float.")
+	public float sub(
+			@CommandParam(name = "a", desc="First value to substract.")
+			float a, 
+			@CommandParam(name = "b", desc="Second value to substract.")
+			float b){
 		return a-b;
 	}
 }

@@ -23,7 +23,6 @@ package test.simpleserviceandevent.hellomachine.impl;
 
 import org.capcaval.c3.component.annotation.ProducedEvent;
 
-
 import test.simpleserviceandevent.hellomachine.HelloMachine;
 import test.simpleserviceandevent.hellomachine.HelloMachineEvent;
 import test.simpleserviceandevent.hellomachine.HelloMachineServices;

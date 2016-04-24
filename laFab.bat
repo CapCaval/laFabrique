@@ -6,7 +6,7 @@ echo [laFab] ERROR : laFabrique needs at least a JDK version above 1.7 to be ins
 goto end
 
 :found
-java -cp .;./10_bin;./02_lib/ccOutils.jar org.capcaval.ccoutils.lafabrique.LaFabrique %*
+java -cp 10_bin;02_lib/junit-4.8.2.jar;02_lib/laFabrique.jar org.capcaval.lafabrique.lafab.LaFab %*
 :end
 
 

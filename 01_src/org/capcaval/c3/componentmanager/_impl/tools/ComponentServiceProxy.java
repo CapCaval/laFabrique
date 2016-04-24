@@ -65,13 +65,8 @@ public class ComponentServiceProxy <T extends ComponentService> implements Invoc
 			try {
 				this.method.invoke(this.proxy, this.args);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			
 		}
-		
-		
-
 	}
 }

@@ -32,7 +32,12 @@ public class FactorySample {
 		Greeter greeterAussie = Greeter.factory.newInstance();
 		returnStr.addLine(greeterAussie.sayHelloTo("John"));
 		
-		return returnStr.toString();
+		System.out.println(returnStr.toString());
+		
+		SystemTools.readConsoleInput("\nPlease, press return key to quit.");
+		System.exit(0);
+		
+		return "bye";
 	}
 	
 	

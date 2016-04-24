@@ -23,7 +23,6 @@ package test.test2components;
 
 import org.capcaval.c3.componentmanager.ComponentManager;
 
-import test.test2components.numberproducer.NumberProducerService;
 import test.test2components.numberproducer.impl.NumberProducerImpl;
 import test.test2components.numberreceiver.impl.NumberReceiverImpl;
 

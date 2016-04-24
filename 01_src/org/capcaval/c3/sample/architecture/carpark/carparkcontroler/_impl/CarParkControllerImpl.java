@@ -24,7 +24,6 @@ package org.capcaval.c3.sample.architecture.carpark.carparkcontroler._impl;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import org.capcaval.c3.component.ComponentState;
 import org.capcaval.c3.component.ComponentStateAdaptor;
 import org.capcaval.c3.component.annotation.ConsumedEvent;
 import org.capcaval.c3.sample.architecture.carpark.carparkcomputer.CarParkComputer;

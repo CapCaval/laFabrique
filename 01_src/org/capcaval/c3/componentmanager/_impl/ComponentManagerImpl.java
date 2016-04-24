@@ -29,6 +29,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 import org.capcaval.c3.component.Component;
 import org.capcaval.c3.component.ComponentEvent;
@@ -42,12 +44,14 @@ import org.capcaval.c3.componentmanager._impl.tools.ComponentEventProxy;
 import org.capcaval.c3.componentmanager._impl.tools.ComponentEventSubscribeImpl;
 import org.capcaval.c3.componentmanager._impl.tools.ComponentItemDescription;
 import org.capcaval.c3.componentmanager._impl.tools.SubComponentDescription;
-import org.capcaval.c3.componentmanager._impl.tools.UsedEventSubscribeDescription;
-import org.capcaval.c3.componentmanager._impl.tools.UsedServicesDescription;
-import org.capcaval.c3.componentmanager.tools.ComponentAnalyserTool;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription;
 import org.capcaval.c3.componentmanager.tools.ComponentDescription.ComponentDescriptionFactory;
-import org.capcaval.ccoutils.pair.Pair;
+import org.capcaval.c3.componentmanager.tools.ComponentTools;
+import org.capcaval.c3.componentmanager.tools.Task;
+import org.capcaval.c3.componentmanager.tools.UsedEventSubscribeDescription;
+import org.capcaval.c3.componentmanager.tools.UsedServicesDescription;
+import org.capcaval.lafabrique.pair.Pair;
+import org.capcaval.lafabrique.thread.SchedulerFactory;
 
 public class ComponentManagerImpl implements ComponentManager, ComponentManagerController {
 	// List<Component> componentList = new ArrayList<Component>();
@@ -123,7 +127,34 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 				cs.componentStarted();
 			}
 		}
-
+		
+		// create all the component thread
+		for (final ComponentDescription componentDesc : cdList) {
+			String threadName = componentDesc.getThread();
+			if(threadName!=null){
+				// create the thread
+				ScheduledExecutorService ses =SchedulerFactory.factory.newSingleThreadScheduledExecutor(threadName);
+				// keep it gonna be used by proxies
+				componentDesc.setScheduledExecutorService(ses);
+				
+				// get all the tasks
+				Task[] taskArray = ComponentTools.getAllTasks(componentDesc.getComponentImplementationType());
+				
+				for(final Task task : taskArray){
+					ses.scheduleAtFixedRate(new Runnable(){
+						@Override
+						public void run() {
+							try {
+								task.getMethod().invoke(componentDesc.getComponentInstance());
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+							
+						}}, 0, 1, TimeUnit.SECONDS);
+				}
+				
+			}
+		}		
 	}
 
 	@Override
@@ -184,7 +215,6 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 				e.printStackTrace();
 			} 
 		}
-		
 	}
 
 	private void assembleAllSubComponent(ComponentDescriptionContainer cdc,
@@ -366,7 +396,7 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 		cd.setComponentLevel(componentLevel);
 		
 		// seek any sub component
-		SubComponentDescription[] subComponentList = ComponentAnalyserTool.getSubComponentList(cmpnClass);
+		SubComponentDescription[] subComponentList = ComponentTools.getSubComponentList(cmpnClass);
 		
 		for(SubComponentDescription scDesc:subComponentList){
 			// recursive discover
@@ -374,8 +404,7 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 			cd.addSubComponent(scDesc);
 		}
 		
-		Class<?> cmpType = ComponentAnalyserTool
-				.getComponentType(cmpnClass);
+		Class<?> cmpType = ComponentTools.getComponentType(cmpnClass);
 
 		cd.setComponentType(cmpType);
 		cd.setComponentImplementationType(cmpnClass);
@@ -386,7 +415,7 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 		
 		
 		// seek all component items
-		ComponentItemDescription[] cmpItemList = ComponentAnalyserTool.getComponentItemList(cmpnClass);
+		ComponentItemDescription[] cmpItemList = ComponentTools.getComponentItemList(cmpnClass);
 		for(ComponentItemDescription itemDesc : cmpItemList){
 			cd.addItem(itemDesc);
 			// get all the abstraction for the items
@@ -400,8 +429,7 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 
 	protected void seekComponentAbstractions(final Class<?> cmpnClass, final ComponentDescription cd){
 		// seek provided services
-		Class<? extends ComponentService>[] serviceList = ComponentAnalyserTool
-				.getProvidedServiceList(cmpnClass);
+		Class<? extends ComponentService>[] serviceList = ComponentTools.getProvidedServiceList(cmpnClass);
 		for(Class<? extends ComponentService> serviceType : serviceList){
 			// create a new pair
 			//Pair<Class<? extends ComponentService>, Class<?>> serviceDesc = (Pair<Class<? extends ComponentService>, Class<?>>)PairFactory.factory.newPair(serviceType, cmpnClass);
@@ -409,28 +437,34 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 			cd.addProvidedServices(serviceType, cmpnClass);}
 
 		// seek produced event
-		Class<? extends ComponentEvent>[] eventList = ComponentAnalyserTool
-				.getProvidedEventList(cmpnClass);
+		Class<? extends ComponentEvent>[] eventList = ComponentTools.getProvidedEventList(cmpnClass);
 		cd.addProvidedEventList(eventList);
 
 		// seek any used services
-		UsedServicesDescription[] usedServiceFieldList = ComponentAnalyserTool
+		UsedServicesDescription[] usedServiceFieldList = ComponentTools
 				.getUsedServiceFieldList(cmpnClass);
 		cd.addUsedComponentServiceFieldList(usedServiceFieldList);
 
 		// seek any consumed event subscribe
-		UsedEventSubscribeDescription[] cmpEventSubscribeList = ComponentAnalyserTool
-				.getUsedEventSubscribeList(cmpnClass);
+		UsedEventSubscribeDescription[] cmpEventSubscribeList = ComponentTools.getUsedEventSubscribeList(cmpnClass);
 		cd.addUsedComponentEventSubscribeFieldList(cmpEventSubscribeList);
 
 		// seek any consumed events from implementation
-		Class<?>[] consumedEventlist = ComponentAnalyserTool.getInterfaceList(cmpnClass, ComponentEvent.class);
+		Class<?>[] consumedEventlist = ComponentTools.getInterfaceList(cmpnClass, ComponentEvent.class);
 		
 		// seek any consumed events from factory
-		Method[] consumeEventList = ComponentAnalyserTool
+		Method[] consumeEventList = ComponentTools
 				.getConsumeEventList(cmpnClass);
 		cd.addConsumedEventMethodList(consumeEventList);
 		cd.addConsumedEventList(consumedEventlist);
+		
+		//seek if the component has its own Tread
+		String threadName = ComponentTools.getOwnThreadName(cmpnClass);
+		cd.setThread(threadName);
+		
+		// seek all the task
+		Task[] taskArray = ComponentTools.getAllTasks(cmpnClass);
+		cd.setTaskArray(taskArray);
 	}
 	
 	@Override
@@ -543,7 +577,6 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 			field.setAccessible(true);
 			field.set(instance, cesProxy);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 
@@ -636,5 +669,15 @@ public class ComponentManagerImpl implements ComponentManager, ComponentManagerC
 	public void reset() {
 		// clean the list
 		this.componentImplTypeList.clear();
+	}
+
+	@Override
+	public void injectServicesAndEvents(Object obj) {
+		// inject services
+		ComponentTools.injectServices(this, obj);
+		
+		// inject event subscriber
+		ComponentTools.injectEventSubscribe(this, obj);
+		
 	}
 }

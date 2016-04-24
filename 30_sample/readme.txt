@@ -1,20 +1,44 @@
-ccOutils sample
-===============
+                          ,@@@@                            @@@   @@@            
+                        .@@@@@@@@                  @@@     @@@   @@@            
+                        @@@@@@@@@@                 @@@     @@@   @@@            
+                       @@@@   @@@@                 @@@           @@@            
+    @@@@@     @@@@@@  .@@@     @@@@   @@@   @@@  @@@@@@@@  @@@   @@@    @@@@@@  
+  @@@@@@@    @@@@@@@  @@@@     .@@@   @@@   @@@  @@@@@@@@  @@@   @@@   @@@@@@@@ 
+  @@@@@@@   @@@@@@@@  @@@@      @@@   @@@   @@@  @@@@@@@@  @@@   @@@  @@@@  @@@ 
+ @@@@       @@@       @@@       @@@   @@@   @@@    @@@     @@@   @@@  @@@       
+ @@@       @@@@       @@@       @@@   @@@   @@@    @@@     @@@   @@@  @@@@@     
+ @@@       @@@@       @@@@      @@@   @@@   @@@    @@@     @@@   @@@   @@@@@@@  
+ @@@       @@@@       @@@@     .@@@   @@@   @@@    @@@     @@@   @@@    @@@@@@@ 
+ @@@       @@@@       @@@@     @@@@   @@@   @@@    @@@     @@@   @@@        @@@ 
+ @@@@       @@@        @@@@   @@@@    @@@  @@@@    @@@     @@@   @@@        @@@ 
+  @@@@@@@   @@@@@@@@    @@@@@@@@@@    @@@@@@@@@    @@@@@@  @@@   @@@   @@@@@@@@ 
+  .@@@@@@    @@@@@@@    .@@@@@@@@     @@@@@@@@@    @@@@@@  @@@   @@@   @@@@@@@. 
+    @@@@@      @@@@       @@@@@        @@@, @@@      @@@@  @@@   @@@    @@@@@   
 
 
-Here you will be able to find some samples of ccOutils library. Several executable are provided. For each one an help is provided by adding as parameter the help command. The available executables are :
+Overview
+========
 
-laFab : 
-This is an automation tool for managing your projects. Here it can be used to create an eclipse project or to compile the java sample source. The sample project is defined inside a 100% java file : 00_prj/Sample.
-If you want to compile the sample just execute the command "laFab build Sample" for Windows and the similar "./laFab build Sample" for linux.
-For creating of updating an eclipse project 
+Thanks for having downloaded ccOutils. You can unzip the archive anywhere. It has been created for Java developer and provides two main features:
 
-runSample :
-This is an aggregation of several sample. In order to see all the samples provided, just use the help through the following command : "runSample help" for windows or "./runSample help". At last you have only to launch one of the listed sample.
+  - laFabrique tool which help java development. It is a simple script, to see the available functionalities, you have to execute the help command "./laFab help" inside the ccOutils installation directory. After that, for instance if you want to use the samples inside an eclipse project just execute "./lafab updateEclipseProject Sample" in order to generate ".project" and ".classpath" files to import them inside Eclipse. "laFabrique" is light as it does not have dependency except to JDK7 or above.
 
-runAppSample :
-It is just a sample how to use the "org.capcaval.ccoutils.application.ApplicationTools" class. 
+  - Standard Java library classes. The simplest is to have a look to the samples. Launch the command "./runSample help" to list the available ones. For instance if you want to see how to write an "Application", you just have to launch the command "./runSample appSample". This will show you the source sample with its execution and informations. The ccoutils library is available inside 02_lib directory and it does not need other dependency than a JRE 7 or above.
 
-runAppSampleDebug :
-It is an exemple how to debug ccOutils Application.
-It is 
+
+
+
+laFab samples
+=============
+/00_prj/prj/Sample.java             => project description
+./laFab build Sample                => compile the sample
+./laFab updateEclipseProject Sample => create or update an eclispe project
+ 
+
+
+
+
+=================================================================================
+CapCaval.org    2014
+http://ccoutils.capcaval.org
+=================================================================================
