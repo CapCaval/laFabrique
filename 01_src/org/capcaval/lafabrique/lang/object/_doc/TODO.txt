@@ -1,0 +1,12 @@
+TODO 
+
+- Finish the bin to object with list
+- add pointer management. Now aggregated object can not be null.
+- optimize size by using byte[] with unsigned value and bit values for pointer
+- optimize performances with caches
+
+
+
+list&array  ==> 3 bytes for size and pointer, max size 2^23
+other Object ==> 1 byte for null pointer
+primitive ==> nothing as it can not be null

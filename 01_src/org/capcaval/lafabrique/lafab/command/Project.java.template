@@ -1,0 +1,27 @@
+package prj;
+
+import org.capcaval.lafabrique.project.Project;
+
+public class {projectName} extends Project{
+	
+	@Override
+	public void defineProject(){
+		name("{projectName}");
+		version("0.0.1");
+		author("CapCaval.org");
+		url("http://capcaval.org");
+
+		// default directories
+		// prjDir("00_prj");
+		// srcDir("01_src");
+		// libDir("02_lib");
+		// prodDir("20_prod");
+		
+		lib("laFabrique.jar");
+		
+		// if you want a jar can be created for building
+		//jar.name("{projectName}.jar");
+		//jar.includeSource(true);
+		//jar.excludeDirectoryName("_test");
+	}
+}

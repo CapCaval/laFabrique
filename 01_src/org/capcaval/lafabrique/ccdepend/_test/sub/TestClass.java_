@@ -1,0 +1,24 @@
+package org.capcaval.lafabrique.ccdepend._test.sub;
+
+import java.awt.image.BufferedImage;
+import java.net.Socket;
+
+import javax.swing.JPanel;
+	// import toto
+	/*
+
+	 import titi; 
+	 import tutu;
+	 
+	 
+	 */
+
+import org.capcaval.lafabrique.ccdepend._test.sub.child2.child21.ClassChild211;
+
+public class TestClass {
+	BufferedImage bi;
+	JPanel pane;
+	Socket socket;
+	ClassChild211 child;
+
+}

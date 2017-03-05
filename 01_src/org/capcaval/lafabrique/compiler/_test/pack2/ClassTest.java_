@@ -1,0 +1,10 @@
+package org.capcaval.lafabrique.compiler._test.pack2;
+
+
+public class ClassTest {
+
+	public static void hello(String string) {
+		System.out.println("Version " + SystemTools.getCurrentJavaVersion());
+	}
+
+}

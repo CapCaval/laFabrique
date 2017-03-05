@@ -1,0 +1,9 @@
+package org.capcaval.lafabrique.compiler._test;
+
+public class ErrorClass {
+
+	public static void main(String[] args) {
+		thisMethodDoesNotExist(1, "2", 3.0);
+	}
+
+}

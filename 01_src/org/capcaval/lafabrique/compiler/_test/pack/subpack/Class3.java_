@@ -1,0 +1,9 @@
+package pack.subpack;
+
+public class Class3 {
+
+	public static String getName() {
+		return "Class3";
+	}
+
+}

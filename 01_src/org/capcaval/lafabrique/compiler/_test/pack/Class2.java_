@@ -1,0 +1,12 @@
+package pack;
+
+import pack.subpack.Class3;
+
+public class Class2 {
+
+	public static void hello(String string) {
+		System.out.println("hello " + string);
+		System.out.println( "  - call from : " + Class3.getName());
+	}
+
+}

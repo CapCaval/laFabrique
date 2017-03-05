@@ -1,0 +1,7 @@
+package org.capcaval.lafabrique.ccdepend._test.sub.child1.child11;
+
+import org.capcaval.lafabrique.ccdepend._test.sub.child2.child21.ClassChild211;
+
+public class ClassChild111 {
+	ClassChild211 child;
+}
